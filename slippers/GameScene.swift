@@ -1,9 +1,8 @@
 import SpriteKit
 
-final class GameScene: SKScene {
+final class GameScene: SKScene, SKPhysicsContactDelegate {
     
     private let stateMachine: GameStateMachine
-    
     private lazy var game = Game(scene: self)
     
     private var lastTime: TimeInterval?
@@ -11,6 +10,7 @@ final class GameScene: SKScene {
     init(stateMachine: GameStateMachine) {
         self.stateMachine = stateMachine
         super.init(size: .zero)
+        physicsWorld.contactDelegate = self
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -29,6 +29,10 @@ final class GameScene: SKScene {
         defer { self.lastTime = currentTime }
         let deltaTime = currentTime - lastTime
         game.update(deltaTime: deltaTime)
+    }
+    
+    func didBegin(_ contact: SKPhysicsContact) {
+        game.handle(contact: contact)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

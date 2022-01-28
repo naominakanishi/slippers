@@ -41,7 +41,7 @@ class GameViewController: UIViewController {
         stateMachine.addRenderer(renderer: scene)
         stateMachine.addRenderer(renderer: self)
         
-        stateMachine.currentState = .initialScreen
+        stateMachine.currentState = .playing
     }
     
     override func viewWillAppear(_ animated: Bool) {
