@@ -12,7 +12,13 @@ class Ground: Entity <SKSpriteNode> {
     }
     
     override func configurePhysicsBody() -> SKPhysicsBody? {
-        let body = SKPhysicsBody(rectangleOf: .init(width: node.frame.width, height: groundHeight), center: .init(x: node.frame.midX, y: node.frame.midY))
+        let body = SKPhysicsBody(
+            rectangleOf: .init(
+                width: node.frame.width,
+                height: groundHeight),
+            center: .init(
+                x: node.frame.midX,
+                y: node.frame.midY))
         
         body.isDynamic = false
         body.categoryBitMask = CollisionMasks.ground

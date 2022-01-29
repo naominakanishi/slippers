@@ -10,7 +10,7 @@ class Star: Entity <SKSpriteNode> {
     }
     
     override func configurePhysicsBody() -> SKPhysicsBody? {
-        let body = SKPhysicsBody(rectangleOf: node.size)
+        let body = SKPhysicsBody(texture: node.texture!, size: node.size)
         body.affectedByGravity = false
         body.categoryBitMask = CollisionMasks.star
         body.contactTestBitMask = CollisionMasks.player
@@ -23,5 +23,13 @@ class Star: Entity <SKSpriteNode> {
         node.zPosition = Depth.star
         node.xScale = 0.2
         node.yScale = 0.2
+    }
+    
+    func die() {
+//        node.physicsBody = nil
+//        let fadeOut = SKAction.fadeOut(withDuration: 0.3)
+//        node.run(fadeOut) {
+//            self.node.removeFromParent()
+//        }
     }
 }

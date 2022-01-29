@@ -1,17 +1,23 @@
 import SpriteKit
 
 final class Game {
+
+    private let scene: SKScene
     private let camera = SKCameraNode()
     
     private lazy var background = Background(imageName: "background")
-    
     private lazy var player = Player(imageName: "player-standing")
-    
     private lazy var ground = Ground(imageName: "ground")
+    private lazy var starManager: StarManager = {
+        let node = SKNode()
+        player.node.addChild(node)
+        node.position.y += scene.frame.height / 2
+        return StarManager(
+            scene: self.scene,
+            node: node)
+    }()
     
-    private lazy var starManager = StarManager(scene: self.scene, starYThreshold: scene.frame.minY + player.node.frame.height + 20)
-    
-    private let scene: SKScene
+    private var starCount: Int = 0
     
     init(scene: SKScene) {
         self.scene = scene
@@ -28,36 +34,45 @@ final class Game {
         
         scene.camera = camera
         scene.addChild(camera)
+        starManager.spawnInitialBatch()
     }
     
     func update(deltaTime: TimeInterval) {
         background.update(deltaTime: deltaTime)
         starManager.update(deltaTime: deltaTime)
+        if player.node.physicsBody?.velocity.dy != 0 {
+            camera.position.y = max(player.node.position.y, 0)
+        }
     }
     
-    func touchUp(at location: CGPoint) {
-        player.jump()
+    func didSimulatePhysics() {
+        player.didSimulatePhysics()
     }
+    
+    func touchUp(at location: CGPoint) {}
     
     func touchMoved(to location: CGPoint) {
         player.move(to: location)
     }
     
     func touchDown(at location: CGPoint) {
-        
+        player.jump()
     }
     
     func handle(contact: SKPhysicsContact) {
-        if contact.bodyA.categoryBitMask == CollisionMasks.player && contact.bodyB.categoryBitMask == CollisionMasks.star {
-            contact.bodyB.node?.physicsBody = nil
-            player.impulse()
-            return
+        processContact(playerBody: contact.bodyA, starBody: contact.bodyB)
+        processContact(playerBody: contact.bodyB, starBody: contact.bodyA)
+    }
+    
+    private func processContact(playerBody: SKPhysicsBody, starBody: SKPhysicsBody) {
+        guard playerBody.categoryBitMask == CollisionMasks.player &&
+                starBody.categoryBitMask == CollisionMasks.star
+        else { return }
+        DispatchQueue.main.async {
+            if let node = starBody.node as? SKSpriteNode {
+                self.starManager.handleHit(on: node)
+            }
+            self.player.impulse()
         }
-        if contact.bodyA.categoryBitMask == CollisionMasks.star && contact.bodyB.categoryBitMask == CollisionMasks.player {
-            contact.bodyA.node?.physicsBody = nil
-            player.impulse()
-            return
-        }
-        
     }
 }

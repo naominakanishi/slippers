@@ -2,7 +2,9 @@ import SpriteKit
 
 class Player: Entity <SKSpriteNode> {
     
-    let playerScale = CGFloat(0.27)
+    private let playerScale = CGFloat(0.27)
+    private var streakCount = 0
+    private var lastStarTimestamp: Date = .now
     
     override func configureNode() {
         node.xScale = playerScale
@@ -13,11 +15,19 @@ class Player: Entity <SKSpriteNode> {
     
     override func configurePhysicsBody() -> SKPhysicsBody? {
         let body = SKPhysicsBody(texture: node.texture!, size: node.size)
-        body.mass = 0.02
+        body.mass = 10
         body.allowsRotation = false
         body.categoryBitMask = CollisionMasks.player
         body.collisionBitMask = CollisionMasks.ground
         return body
+    }
+    
+    override func update(deltaTime: TimeInterval) {
+        
+    }
+    
+    override func didSimulatePhysics() {
+        node.physicsBody?.velocity.dy = min(node.physicsBody!.velocity.dy, 1000)
     }
     
     func move(to position: CGPoint) {
@@ -31,11 +41,17 @@ class Player: Entity <SKSpriteNode> {
     }
     
     func impulse() {
-        node.physicsBody?.velocity = .zero
-        
-        node.physicsBody?.applyImpulse(.init(
-            dx: 0,
-            dy: 10))
+        defer { lastStarTimestamp = .now }
+        let deltaTime = lastStarTimestamp.timeIntervalSinceNow
+        if deltaTime < 0.5 {
+            streakCount += 1
+        } else {
+            streakCount = 0
+        }
+        node.physicsBody?.velocity.dy = CGFloat(750 + min(streakCount * 25, 750))
+    }
+    
+    func die(state: GameStateMachine) {
         
     }
 }

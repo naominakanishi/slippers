@@ -24,6 +24,8 @@ class Entity<T> where T: SKNode {
     func update(deltaTime: TimeInterval) {
         
     }
+    
+    func didSimulatePhysics() {}
 }
 
 extension Entity where T == SKSpriteNode {

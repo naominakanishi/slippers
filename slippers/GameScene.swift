@@ -31,6 +31,12 @@ final class GameScene: SKScene, SKPhysicsContactDelegate {
         game.update(deltaTime: deltaTime)
     }
     
+    override func didSimulatePhysics() {
+        game.didSimulatePhysics()
+    }
+    
+
+    
     func didBegin(_ contact: SKPhysicsContact) {
         game.handle(contact: contact)
     }
