@@ -6,7 +6,11 @@ final class Game {
     private let camera = SKCameraNode()
     
     
-    private lazy var background = Background(imageName: "background")
+    private lazy var background: Background = {
+        let node = SKSpriteNode(imageNamed: "background")
+        return Background(playerNode: player.node, node: node)
+    }()
+    
     private lazy var player = Player(imageName: "player-standing")
     private lazy var ground = Ground(imageName: "ground")
     private lazy var starManager: StarManager = {

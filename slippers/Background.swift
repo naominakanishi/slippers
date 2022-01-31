@@ -2,17 +2,33 @@ import SpriteKit
 
 class Background: Entity<SKSpriteNode> {
     
+    
+    private let upperNode = SKSpriteNode(imageNamed: "background")
+    private let lowerNode = SKSpriteNode(imageNamed: "background")
+    private let playerNode: SKSpriteNode
+    
+    private lazy var currentNode = node
+    
     override func configureNode() {
-        let secondNode = SKSpriteNode(imageNamed: "background")
-        node.addChild(secondNode)
-        secondNode.position.y = -node.frame.height
+        node.addChild(upperNode)
+        node.addChild(lowerNode)
+        upperNode.position.y = node.frame.height
+        lowerNode.position.y = -node.frame.height
         node.zPosition = Depth.background
     }
-//    override func update(deltaTime: TimeInterval) {
-//        node.position.y -= deltaTime * 50
-//        
-//        if node.position.y <= 0 {
-//            node.position.y += node.frame.height
-//        }
-//    }
+    
+    init(playerNode: SKSpriteNode, node: SKSpriteNode) {
+        self.playerNode = playerNode
+        super.init(node: node)
+    }
+    
+    
+    override func update(deltaTime: TimeInterval) {
+        print(node.position, playerNode.position)
+        let distance = abs(playerNode.position.y - node.position.y)
+        if distance > node.frame.height {
+            node.position.y = playerNode.position.y
+        }
+    }
+    
 }
