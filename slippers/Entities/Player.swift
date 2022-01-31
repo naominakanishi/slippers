@@ -50,3 +50,9 @@ class Player: Entity <SKSpriteNode> {
         
     }
 }
+
+extension Player: Colorize {
+    func apply(color: UIColor) {
+        node.run(action())
+    }
+}

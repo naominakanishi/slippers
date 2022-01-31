@@ -59,6 +59,49 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		11329CF627A88D4A00E0C7D7 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				11737CE027A33A77001BCF8E /* AppDelegate.swift */,
+				11737CE227A33A77001BCF8E /* SceneDelegate.swift */,
+				11737CEE27A33A7B001BCF8E /* Info.plist */,
+				11737CE927A33A7B001BCF8E /* Assets.xcassets */,
+				11737CEB27A33A7B001BCF8E /* LaunchScreen.storyboard */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		11329CF827A88D7000E0C7D7 /* HUD */ = {
+			isa = PBXGroup;
+			children = (
+				11737CF927A33E5F001BCF8E /* GameState.swift */,
+				11737CE427A33A78001BCF8E /* GameViewController.swift */,
+			);
+			path = HUD;
+			sourceTree = "<group>";
+		};
+		11329CF927A88D8500E0C7D7 /* Game */ = {
+			isa = PBXGroup;
+			children = (
+				1143A79627A34A4B00075EE6 /* Game.swift */,
+				11737CF727A33C57001BCF8E /* GameScene.swift */,
+				1143A7A227A362AC00075EE6 /* StarManager.swift */,
+			);
+			path = Game;
+			sourceTree = "<group>";
+		};
+		11329CFA27A88D9600E0C7D7 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				1143A79427A349CC00075EE6 /* Background.swift */,
+				1143A79827A34A7400075EE6 /* Entity.swift */,
+				1143A79A27A3539800075EE6 /* Player.swift */,
+				1143A79C27A35A0000075EE6 /* Ground.swift */,
+				1143A7A027A3623900075EE6 /* Star.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
 		11737CD427A33A77001BCF8E = {
 			isa = PBXGroup;
 			children = (
@@ -78,34 +121,23 @@
 		11737CDF27A33A77001BCF8E /* slippers */ = {
 			isa = PBXGroup;
 			children = (
-				11737CF427A33B84001BCF8E /* UI */,
-				11737CE027A33A77001BCF8E /* AppDelegate.swift */,
-				11737CE227A33A77001BCF8E /* SceneDelegate.swift */,
-				11737CE427A33A78001BCF8E /* GameViewController.swift */,
-				11737CE927A33A7B001BCF8E /* Assets.xcassets */,
-				11737CEB27A33A7B001BCF8E /* LaunchScreen.storyboard */,
-				11737CEE27A33A7B001BCF8E /* Info.plist */,
-				11737CF727A33C57001BCF8E /* GameScene.swift */,
-				11737CF927A33E5F001BCF8E /* GameState.swift */,
-				1143A79427A349CC00075EE6 /* Background.swift */,
-				1143A79627A34A4B00075EE6 /* Game.swift */,
-				1143A79827A34A7400075EE6 /* Entity.swift */,
-				1143A79A27A3539800075EE6 /* Player.swift */,
-				1143A79C27A35A0000075EE6 /* Ground.swift */,
-				1143A79E27A3615B00075EE6 /* Depth.swift */,
-				1143A7A027A3623900075EE6 /* Star.swift */,
-				1143A7A227A362AC00075EE6 /* StarManager.swift */,
-				11CC1B4C27A462FD00300723 /* CollisionMasks.swift */,
+				11329CFA27A88D9600E0C7D7 /* Entities */,
+				11329CF927A88D8500E0C7D7 /* Game */,
+				11329CF827A88D7000E0C7D7 /* HUD */,
+				11329CF627A88D4A00E0C7D7 /* Application */,
+				11737CF427A33B84001BCF8E /* Utils */,
 			);
 			path = slippers;
 			sourceTree = "<group>";
 		};
-		11737CF427A33B84001BCF8E /* UI */ = {
+		11737CF427A33B84001BCF8E /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				1143A79E27A3615B00075EE6 /* Depth.swift */,
+				11CC1B4C27A462FD00300723 /* CollisionMasks.swift */,
 				11737CF527A33B97001BCF8E /* Autolayout+Extensions.swift */,
 			);
-			path = UI;
+			path = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -336,6 +368,7 @@
 				DEVELOPMENT_TEAM = UL74FQ825B;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = slippers/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Niji Jump";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -345,7 +378,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = cc.nimidesign.slippers;
+				PRODUCT_BUNDLE_IDENTIFIER = cc.nimidesign.nijijump;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -363,6 +396,7 @@
 				DEVELOPMENT_TEAM = UL74FQ825B;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = slippers/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Niji Jump";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -372,7 +406,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = cc.nimidesign.slippers;
+				PRODUCT_BUNDLE_IDENTIFIER = cc.nimidesign.nijijump;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

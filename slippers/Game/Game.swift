@@ -1,15 +1,18 @@
 import SpriteKit
 
-final class Game {
+protocol Colorize {
+    func apply(color: UIColor)
+}
 
+extension Colorize {
+    func action() -> SKAction {
+        SKAction.colorize(with: .random(), colorBlendFactor: 0.5, duration: 5)
+    }
+}
+
+final class Game {
     private let scene: SKScene
     private let camera = SKCameraNode()
-    
-    
-    private lazy var background: Background = {
-        let node = SKSpriteNode(imageNamed: "background")
-        return Background(playerNode: player.node, node: node)
-    }()
     
     private lazy var player = Player(imageName: "player-standing")
     private lazy var ground = Ground(imageName: "ground")
@@ -23,8 +26,18 @@ final class Game {
             node: node)
     }()
     
+    private lazy var background: Background = {
+        let node = SKSpriteNode(imageNamed: "background")
+        return Background(playerNode: player.node, node: node)
+    }()
     
     private var starCount: Int = 0
+    
+    private var colorizables: [Colorize] {
+        [
+            starManager, background, player
+        ]
+    }
     
     init(scene: SKScene) {
         self.scene = scene
@@ -56,7 +69,11 @@ final class Game {
         player.didSimulatePhysics()
     }
     
-    func touchUp(at location: CGPoint) {}
+    func touchUp(at location: CGPoint) {
+        colorizables.forEach {
+            $0.apply(color: .blue)
+        }
+    }
     
     func touchMoved(to location: CGPoint) {
         player.move(to: location)
@@ -83,5 +100,11 @@ final class Game {
             self.starCount += 1
             print(self.starCount)
         }
+    }
+}
+
+extension UIColor {
+    static func random() -> UIColor {
+        .init(hue: .random(in: 0...1), saturation: .random(in: 0...1), brightness: 1, alpha: 1)
     }
 }

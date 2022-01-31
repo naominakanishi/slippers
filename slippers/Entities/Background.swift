@@ -1,7 +1,6 @@
 import SpriteKit
 
-class Background: Entity<SKSpriteNode> {
-    
+final class Background: Entity<SKSpriteNode> {
     
     private let upperNode = SKSpriteNode(imageNamed: "background")
     private let lowerNode = SKSpriteNode(imageNamed: "background")
@@ -20,6 +19,10 @@ class Background: Entity<SKSpriteNode> {
     init(playerNode: SKSpriteNode, node: SKSpriteNode) {
         self.playerNode = playerNode
         super.init(node: node)
+        
+        let lightNode = SKLightNode()
+        lightNode.lightColor = .blue
+        playerNode.addChild(lightNode)
     }
     
     
@@ -30,5 +33,10 @@ class Background: Entity<SKSpriteNode> {
             node.position.y = playerNode.position.y
         }
     }
-    
+}
+
+extension Background: Colorize {
+    func apply(color: UIColor) {
+        [node, upperNode, lowerNode].forEach { $0.run(action()) }
+    }
 }

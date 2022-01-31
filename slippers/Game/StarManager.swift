@@ -97,3 +97,12 @@ final class StarManager: Entity <SKNode> {
         })
     }
 }
+
+
+extension StarManager: Colorize {
+    func apply(color: UIColor) {
+        stars
+            .map { $0.node }
+            .forEach { $0.run(action()) }
+    }
+}
