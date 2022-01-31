@@ -5,6 +5,7 @@ final class Game {
     private let scene: SKScene
     private let camera = SKCameraNode()
     
+    
     private lazy var background = Background(imageName: "background")
     private lazy var player = Player(imageName: "player-standing")
     private lazy var ground = Ground(imageName: "ground")
@@ -14,8 +15,10 @@ final class Game {
         node.position.y += scene.frame.height / 2
         return StarManager(
             scene: self.scene,
+            playerNode: player.node,
             node: node)
     }()
+    
     
     private var starCount: Int = 0
     
@@ -69,10 +72,12 @@ final class Game {
                 starBody.categoryBitMask == CollisionMasks.star
         else { return }
         DispatchQueue.main.async {
-            if let node = starBody.node as? SKSpriteNode {
-                self.starManager.handleHit(on: node)
-            }
+            guard let node = starBody.node as? SKSpriteNode,
+                  self.starManager.handleHit(on: node)
+            else { return }
             self.player.impulse()
+            self.starCount += 1
+            print(self.starCount)
         }
     }
 }

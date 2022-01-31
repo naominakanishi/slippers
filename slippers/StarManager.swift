@@ -4,9 +4,10 @@ final class StarManager: Entity <SKNode> {
     
     private let scene: SKScene
     private let originNode = SKSpriteNode(imageNamed: "star")
-    private let spawnCount = 100
-    private lazy var interStarDistance: CGFloat = 20
-    private let newStarOffset: CGFloat = 100
+    private let spawnCount = 50
+    private lazy var interStarDistance: CGFloat = originNode.frame.height/2
+    private let newStarOffset: CGFloat = 20
+    private let playerNode: SKNode
     private var startHeight: CGFloat {
         originNode.frame.height
     }
@@ -15,13 +16,16 @@ final class StarManager: Entity <SKNode> {
     private var starYThreshold: CGFloat {
         node.parent?.position.y ?? 0
     }
+
+    private var lastlyHitNodes: [SKSpriteNode : TimeInterval] = [:]
     
     private var lastSpawn: Star? {
         stars.last
     }
     
-    init(scene: SKScene, node: SKNode) {
+    init(scene: SKScene, playerNode: SKNode, node: SKNode) {
         self.scene = scene
+        self.playerNode = playerNode
         super.init(node: node)
         
     }
@@ -37,35 +41,39 @@ final class StarManager: Entity <SKNode> {
             scene.addEntity(newStar)
             newStar.node.position = .init(
                 x: .random(in: -180...180),
-                y: scene.frame.maxY + CGFloat(i) * interStarDistance)
+                y: CGFloat(i) * interStarDistance)
             stars.append(newStar)
+        }
+        stars.forEach{
+            print($0.node.position.y)
         }
     }
     
-    func handleHit(on node: SKSpriteNode) {
-        guard let star = star(for: node) else { return }
+    func handleHit(on node: SKSpriteNode) -> Bool {
+        guard let star = star(for: node),
+              !lastlyHitNodes.keys.contains(where: { $0 == node })
+        else { return false }
+        lastlyHitNodes[node] = Date.timeIntervalSinceReferenceDate
+        star.die()
         respawn(star: star)
+        return true
     }
     
     func cleanStars() {
-        guard let playerY = node.parent?.position.y
-        else { return }
-        stars.filter{
-            $0.node.position.y < playerY - 200
-        }
-        .forEach{
-//            respawn(star: $0)
-            _ in
+        let playerY = playerNode.position.y
+        stars.filter { $0.node.position.y < playerY - scene.frame.height / 2 }
+        .forEach { respawn(star: $0) }
+        
+        lastlyHitNodes.forEach { node, timestamp in
+            let now = Date.timeIntervalSinceReferenceDate
+            guard now - timestamp > 1 else { return }
+            lastlyHitNodes[node] = nil
         }
     }
     
     private func respawn(star: Star) {
-        
-        guard let lastSpawn = stars.max(by: {
-            $0.node.position.y < $1.node.position.y
-        }) else {
-            return
-        }
+        guard let lastSpawn = stars.max(by: { $0.node.position.y < $1.node.position.y })
+        else { return }
         let node = star.node
         node.position = .init(
             x: .random(in: -180...180),

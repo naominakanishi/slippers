@@ -10,7 +10,6 @@ class Player: Entity <SKSpriteNode> {
         node.xScale = playerScale
         node.yScale = playerScale
         node.zPosition = Depth.player
-        
     }
     
     override func configurePhysicsBody() -> SKPhysicsBody? {
@@ -20,10 +19,6 @@ class Player: Entity <SKSpriteNode> {
         body.categoryBitMask = CollisionMasks.player
         body.collisionBitMask = CollisionMasks.ground
         return body
-    }
-    
-    override func update(deltaTime: TimeInterval) {
-        
     }
     
     override func didSimulatePhysics() {
