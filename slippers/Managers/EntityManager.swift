@@ -7,8 +7,8 @@ struct ManagerDescriptor {
 
 class EntityManager<E>: Entity<SKNode> where E: Entity<SKSpriteNode> {
     
-    private let scene: GameScene
-    private let player: Player
+    let scene: GameScene
+    let player: Player
     private let spawnCount: Int
     
     private var entities: [E] = []
@@ -37,6 +37,10 @@ class EntityManager<E>: Entity<SKNode> where E: Entity<SKSpriteNode> {
     
     func interStarDistance() -> CGFloat {
         fatalError()
+    }
+    
+    func didRespawn(_ entity: E) {
+        // Optional implementation
     }
     
     func spawnInitialBatch() {
@@ -72,6 +76,7 @@ class EntityManager<E>: Entity<SKNode> where E: Entity<SKSpriteNode> {
         let ref = entities[index]
         entities.remove(at: index)
         entities.append(ref)
+        didRespawn(ref)
     }
     
     func entity(for node: SKSpriteNode) -> E? {

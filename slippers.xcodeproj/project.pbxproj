@@ -30,6 +30,14 @@
 		11737CF827A33C57001BCF8E /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11737CF727A33C57001BCF8E /* GameScene.swift */; };
 		11737CFA27A33E5F001BCF8E /* GameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11737CF927A33E5F001BCF8E /* GameState.swift */; };
 		11CC1B4D27A462FD00300723 /* CollisionMasks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11CC1B4C27A462FD00300723 /* CollisionMasks.swift */; };
+		11F6C27327A99CA7000D7687 /* Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F6C27227A99CA7000D7687 /* Point.swift */; };
+		11F6C27527A9A117000D7687 /* PointSpawner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F6C27427A9A117000D7687 /* PointSpawner.swift */; };
+		11F6C27827A9A8E5000D7687 /* DoubleScoreZoneSpawner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F6C27727A9A8E5000D7687 /* DoubleScoreZoneSpawner.swift */; };
+		11F6C27C27A9B5C9000D7687 /* AmaticSC-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 11F6C27A27A9B5C9000D7687 /* AmaticSC-Regular.ttf */; };
+		11F6C27D27A9B5C9000D7687 /* AmaticSC-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 11F6C27B27A9B5C9000D7687 /* AmaticSC-Bold.ttf */; };
+		11F6C27F27A9B5D4000D7687 /* DepotNewCondensed-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 11F6C27E27A9B5D4000D7687 /* DepotNewCondensed-Regular.otf */; };
+		11F6C28327A9B820000D7687 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F6C28227A9B820000D7687 /* Colors.swift */; };
+		11F6C28727A9BE5E000D7687 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F6C28627A9BE5E000D7687 /* Fonts.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +66,14 @@
 		11737CF727A33C57001BCF8E /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		11737CF927A33E5F001BCF8E /* GameState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameState.swift; sourceTree = "<group>"; };
 		11CC1B4C27A462FD00300723 /* CollisionMasks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollisionMasks.swift; sourceTree = "<group>"; };
+		11F6C27227A99CA7000D7687 /* Point.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Point.swift; sourceTree = "<group>"; };
+		11F6C27427A9A117000D7687 /* PointSpawner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointSpawner.swift; sourceTree = "<group>"; };
+		11F6C27727A9A8E5000D7687 /* DoubleScoreZoneSpawner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleScoreZoneSpawner.swift; sourceTree = "<group>"; };
+		11F6C27A27A9B5C9000D7687 /* AmaticSC-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "AmaticSC-Regular.ttf"; sourceTree = "<group>"; };
+		11F6C27B27A9B5C9000D7687 /* AmaticSC-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "AmaticSC-Bold.ttf"; sourceTree = "<group>"; };
+		11F6C27E27A9B5D4000D7687 /* DepotNewCondensed-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "DepotNewCondensed-Regular.otf"; sourceTree = "<group>"; };
+		11F6C28227A9B820000D7687 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		11F6C28627A9BE5E000D7687 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +126,7 @@
 				1143A79C27A35A0000075EE6 /* Ground.swift */,
 				1143A7A027A3623900075EE6 /* Star.swift */,
 				11329CFD27A890C900E0C7D7 /* Portal.swift */,
+				11F6C27227A99CA7000D7687 /* Point.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -152,9 +169,11 @@
 		11737CDF27A33A77001BCF8E /* slippers */ = {
 			isa = PBXGroup;
 			children = (
+				11F6C28027A9B805000D7687 /* DesignSystem */,
 				11329D0827A8B70D00E0C7D7 /* Managers */,
 				11329D0127A898E700E0C7D7 /* ContactHandler */,
 				11737CEE27A33A7B001BCF8E /* Info.plist */,
+				11F6C27627A9A8CD000D7687 /* Spawners */,
 				11329CFA27A88D9600E0C7D7 /* Entities */,
 				11329CF927A88D8500E0C7D7 /* Game */,
 				11329CF827A88D7000E0C7D7 /* HUD */,
@@ -172,6 +191,35 @@
 				11737CF527A33B97001BCF8E /* Autolayout+Extensions.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		11F6C27627A9A8CD000D7687 /* Spawners */ = {
+			isa = PBXGroup;
+			children = (
+				11F6C27427A9A117000D7687 /* PointSpawner.swift */,
+				11F6C27727A9A8E5000D7687 /* DoubleScoreZoneSpawner.swift */,
+			);
+			path = Spawners;
+			sourceTree = "<group>";
+		};
+		11F6C27927A9B590000D7687 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				11F6C27E27A9B5D4000D7687 /* DepotNewCondensed-Regular.otf */,
+				11F6C27B27A9B5C9000D7687 /* AmaticSC-Bold.ttf */,
+				11F6C27A27A9B5C9000D7687 /* AmaticSC-Regular.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		11F6C28027A9B805000D7687 /* DesignSystem */ = {
+			isa = PBXGroup;
+			children = (
+				11F6C27927A9B590000D7687 /* Fonts */,
+				11F6C28227A9B820000D7687 /* Colors.swift */,
+				11F6C28627A9BE5E000D7687 /* Fonts.swift */,
+			);
+			path = DesignSystem;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -232,8 +280,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				11F6C27D27A9B5C9000D7687 /* AmaticSC-Bold.ttf in Resources */,
 				11737CED27A33A7B001BCF8E /* LaunchScreen.storyboard in Resources */,
 				11737CEA27A33A7B001BCF8E /* Assets.xcassets in Resources */,
+				11F6C27F27A9B5D4000D7687 /* DepotNewCondensed-Regular.otf in Resources */,
+				11F6C27C27A9B5C9000D7687 /* AmaticSC-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -246,15 +297,19 @@
 			files = (
 				11329D0327A898F900E0C7D7 /* StarContactHandler.swift in Sources */,
 				11329D0527A8998700E0C7D7 /* PortalContactHandler.swift in Sources */,
+				11F6C28727A9BE5E000D7687 /* Fonts.swift in Sources */,
 				11329CFC27A88DE600E0C7D7 /* Colorize.swift in Sources */,
 				11329D0027A890D300E0C7D7 /* PortalManager.swift in Sources */,
 				11737CF827A33C57001BCF8E /* GameScene.swift in Sources */,
 				1143A7A127A3623900075EE6 /* Star.swift in Sources */,
+				11F6C28327A9B820000D7687 /* Colors.swift in Sources */,
 				11329CFE27A890C900E0C7D7 /* Portal.swift in Sources */,
 				1143A79527A349CC00075EE6 /* Background.swift in Sources */,
 				11329D0727A8B70A00E0C7D7 /* EntityManager.swift in Sources */,
 				11737CF627A33B97001BCF8E /* Autolayout+Extensions.swift in Sources */,
+				11F6C27827A9A8E5000D7687 /* DoubleScoreZoneSpawner.swift in Sources */,
 				11737CE527A33A78001BCF8E /* GameViewController.swift in Sources */,
+				11F6C27527A9A117000D7687 /* PointSpawner.swift in Sources */,
 				11737CFA27A33E5F001BCF8E /* GameState.swift in Sources */,
 				1143A79927A34A7400075EE6 /* Entity.swift in Sources */,
 				1143A7A327A362AC00075EE6 /* StarManager.swift in Sources */,
@@ -262,6 +317,7 @@
 				11737CE327A33A77001BCF8E /* SceneDelegate.swift in Sources */,
 				1143A79B27A3539800075EE6 /* Player.swift in Sources */,
 				1143A79727A34A4B00075EE6 /* Game.swift in Sources */,
+				11F6C27327A99CA7000D7687 /* Point.swift in Sources */,
 				1143A79D27A35A0000075EE6 /* Ground.swift in Sources */,
 				11CC1B4D27A462FD00300723 /* CollisionMasks.swift in Sources */,
 				1143A79F27A3615B00075EE6 /* Depth.swift in Sources */,

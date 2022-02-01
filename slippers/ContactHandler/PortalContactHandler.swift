@@ -5,11 +5,20 @@ class PortalContactHandler: ContactHandler {
     private let player: Player
     private let scene: Colorize
     private let portalManager: PortalManager
+    private let doubleScoreSpawner: DoubleScoreZoneSpawner
     
-    init(player: Player, scene: Colorize, portalManager: PortalManager) {
+    private let scoreTracker: ScoreTracker
+    
+    init(player: Player,
+         scene: Colorize,
+         portalManager: PortalManager,
+         doubleScoreSpawner: DoubleScoreZoneSpawner,
+         scoreTracker: ScoreTracker) {
         self.player = player
         self.scene = scene
         self.portalManager = portalManager
+        self.doubleScoreSpawner = doubleScoreSpawner
+        self.scoreTracker = scoreTracker
     }
     
     func handle(contact: SKPhysicsContact) {
@@ -21,12 +30,13 @@ class PortalContactHandler: ContactHandler {
         guard playerBody.categoryBitMask == CollisionMasks.player &&
                 portalBody.categoryBitMask == CollisionMasks.portal
         else { return }
-        print("cu da pantufa")
         DispatchQueue.main.async {
             guard let node = portalBody.node as? SKSpriteNode,
                   self.portalManager.handleHit(on: node)
             else { return }
             self.player.impulse()
+            self.scoreTracker.didEnterDoubleScore()
+            self.doubleScoreSpawner.spawn()
             self.scene.apply(color: self.portalManager.currentColor)
             self.portalManager.nextColor()
         }

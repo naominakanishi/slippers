@@ -6,9 +6,9 @@ class Star: Entity <SKSpriteNode> {
         node.position.y -= 100 * deltaTime
     }
     
-    func removeFromParent() {
-        node.removeFromParent()
-    }
+//    func removeFromParent() {
+//        node.removeFromParent()
+//    }
     
     override func configurePhysicsBody() -> SKPhysicsBody? {
         let body = SKPhysicsBody(texture: node.texture!, size: node.size)

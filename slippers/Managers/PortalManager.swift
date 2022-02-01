@@ -2,10 +2,17 @@ import SpriteKit
 
 final class PortalManager: EntityManager<Portal> {
     private let originNode = SKSpriteNode(imageNamed: "portal")
+    private let scoreTracker: ScoreTracker
     
     private(set) var currentColor: UIColor = .random()
     
-    override init(scene: GameScene, player: Player, node: SKNode, spawnCount: Int) {
+    init(scene: GameScene,
+                  player: Player,
+                  node: SKNode,
+                  spawnCount: Int,
+                  scoreTracker: ScoreTracker
+    ) {
+        self.scoreTracker = scoreTracker
         super.init(scene: scene, player: player, node: node, spawnCount: spawnCount)
         apply(color: currentColor)
     }
@@ -21,5 +28,10 @@ final class PortalManager: EntityManager<Portal> {
     func nextColor() {
         currentColor = .random()
         self.apply(color: currentColor)
+    }
+    
+    override func didRespawn(_ entity: Portal) {
+        scoreTracker.didExitDoubleScore()
+        scene.apply(color: .white)
     }
 }

@@ -25,15 +25,13 @@ class Player: Entity <SKSpriteNode> {
         node.position.x = position.x
     }
     
+    override func didSimulatePhysics() {
+        guard let body = node.physicsBody else { return }
+//        body.velocity.dy = min(body.velocity.dy, 1500)
+    }
+    
     func impulse() {
-        defer { lastStarTimestamp = .now }
-        let deltaTime = lastStarTimestamp.timeIntervalSinceNow
-        if deltaTime < 0.5 {
-            streakCount += 1
-        } else {
-            streakCount = 0
-        }
-        node.physicsBody?.velocity.dy = CGFloat(750 + min(streakCount * 25, 750))
+        node.physicsBody?.velocity.dy = 800
     }
 }
 

@@ -1,11 +1,23 @@
 import SpriteKit
 
-final class Game {
+protocol ScoreTracker {
+    var points: Int { get }
+    func score()
+    func didEnterDoubleScore()
+    func didExitDoubleScore()
+}
+
+final class Game: ScoreTracker {
     private let scene: GameScene
     private let camera = SKCameraNode()
     
     private lazy var player = Player(imageName: "player-standing")
     private lazy var ground = Ground(imageName: "ground")
+    private lazy var point = PointSpawner(scene: scene, scoreTracker: self)
+    private lazy var doubleScoreMessage = DoubleScoreZoneSpawner(scene: scene)
+    private(set) var points: Int = 0
+    private var scoreMultiplier = 1
+    
     private lazy var starManager: StarManager = {
         let node = SKNode()
         return StarManager(
@@ -18,10 +30,11 @@ final class Game {
     private lazy var portalManager: PortalManager = {
         let node = SKNode()
         return PortalManager(
-            scene: self.scene,
+            scene: scene,
             player: player,
             node: node,
-            spawnCount: 10)
+            spawnCount: 10,
+            scoreTracker: self)
     }()
     
     private lazy var background: Background = {
@@ -30,12 +43,33 @@ final class Game {
     }()
     
     private lazy var contactHandlers: [ContactHandler] = [
-        StarContactHandler(starManager: starManager, player: player),
-        PortalContactHandler(player: player, scene: self, portalManager: portalManager)
+        StarContactHandler(
+            starManager: starManager,
+            player: player,
+            pointSpawner: point,
+            scoreTracker: self),
+        PortalContactHandler(
+            player: player,
+            scene: self,
+            portalManager: portalManager,
+            doubleScoreSpawner: doubleScoreMessage,
+            scoreTracker: self)
     ]
     
     init(scene: GameScene) {
         self.scene = scene
+    }
+    
+    func score() {
+        points += scoreMultiplier
+    }
+    
+    func didEnterDoubleScore() {
+        scoreMultiplier = 2
+    }
+    
+    func didExitDoubleScore() {
+        scoreMultiplier = 1
     }
     
     func setup() {
@@ -47,6 +81,7 @@ final class Game {
         scene.addEntity(player)
         scene.addEntity(ground)
         
+        
         starManager.spawnInitialBatch()
         portalManager.spawnInitialBatch()
         
@@ -56,7 +91,6 @@ final class Game {
         scene.addEntity(starManager)
         starManager.node.position.y = scene.frame.height
         let debug = SKShapeNode(circleOfRadius: 10)
-        debug.fillColor = .red
         scene.addChild(debug)
         debug.position = starManager.node.position
         debug.zPosition = 1000
@@ -103,6 +137,6 @@ extension Game: Colorize {
 
 extension UIColor {
     static func random() -> UIColor {
-        .init(hue: .random(in: 0...1), saturation: .random(in: 0.2...1), brightness: 1, alpha: 1)
+        Colors.random()
     }
 }

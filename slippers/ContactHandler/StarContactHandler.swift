@@ -5,15 +5,20 @@ protocol ContactHandler {
 }
 
 class StarContactHandler: ContactHandler {
-    init(starManager: StarManager, player: Player) {
-        self.starManager = starManager
-        self.player = player
-    }
+
     
     private let starManager: StarManager
     private let player: Player
+    private let pointSpawner: PointSpawner
+    private let scoreTracker: ScoreTracker
     
-    private var starCount: Int = 0
+    
+    init(starManager: StarManager, player: Player, pointSpawner: PointSpawner, scoreTracker: ScoreTracker) {
+        self.starManager = starManager
+        self.player = player
+        self.pointSpawner = pointSpawner
+        self.scoreTracker = scoreTracker
+    }
     
     func handle(contact: SKPhysicsContact) {
         processContact(playerBody: contact.bodyA, starBody: contact.bodyB)
@@ -26,11 +31,12 @@ class StarContactHandler: ContactHandler {
         else { return }
         DispatchQueue.main.async {
             guard let node = starBody.node as? SKSpriteNode,
+                  let previousPosition = starBody.node?.position,
                   self.starManager.handleHit(on: node)
             else { return }
             self.player.impulse()
-            self.starCount += 1
-            print(self.starCount)
+            self.scoreTracker.score()
+            self.pointSpawner.spawn(at: previousPosition)
         }
     }
 }
