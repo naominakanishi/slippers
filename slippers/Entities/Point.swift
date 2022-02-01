@@ -12,7 +12,8 @@ class Point: Entity <SKNode> {
     
     override func configureNode() {
         node.addChild(image)
-        label.fontColor = .blue
+        label.fontColor = .black
+        label.font = .depot(size: 24)
         label.verticalAlignmentMode = .center
         label.horizontalAlignmentMode = .center
         node.addChild(label)

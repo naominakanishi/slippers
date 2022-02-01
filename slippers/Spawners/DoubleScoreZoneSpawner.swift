@@ -9,7 +9,8 @@ class DoubleScoreZoneSpawner {
     }
     
     func configure(label: SKLabelNode) {
-        label.fontColor = .blue
+        label.fontColor = .black
+        label.font = .amatic(style: .bold, size: 40)
         label.verticalAlignmentMode = .center
         label.horizontalAlignmentMode = .center
         
@@ -17,12 +18,12 @@ class DoubleScoreZoneSpawner {
     
     func spawn() {
         let label = SKLabelNode()
-        label.font = .amatic(style: .bold, size: 40)
+        
         
         configure(label: label)
         scene.camera?.addChild(label)
         label.text = "Double Score Zone"
-        label.run(.fadeOut(withDuration: 0.6)) {
+        label.run(.fadeOut(withDuration: 3)) {
             label.removeFromParent()
         }
     }
