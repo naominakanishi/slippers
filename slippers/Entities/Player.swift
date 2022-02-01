@@ -21,18 +21,8 @@ class Player: Entity <SKSpriteNode> {
         return body
     }
     
-    override func didSimulatePhysics() {
-        node.physicsBody?.velocity.dy = min(node.physicsBody!.velocity.dy, 1000)
-    }
-    
     func move(to position: CGPoint) {
         node.position.x = position.x
-    }
-    
-    func jump() {
-        if node.physicsBody?.velocity.dy == 0 {
-            impulse()
-        }
     }
     
     func impulse() {
@@ -44,10 +34,6 @@ class Player: Entity <SKSpriteNode> {
             streakCount = 0
         }
         node.physicsBody?.velocity.dy = CGFloat(750 + min(streakCount * 25, 750))
-    }
-    
-    func die(state: GameStateMachine) {
-        
     }
 }
 

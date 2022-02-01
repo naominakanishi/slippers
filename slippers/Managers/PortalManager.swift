@@ -5,12 +5,17 @@ final class PortalManager: EntityManager<Portal> {
     
     private(set) var currentColor: UIColor = .random()
     
+    override init(scene: GameScene, player: Player, node: SKNode, spawnCount: Int) {
+        super.init(scene: scene, player: player, node: node, spawnCount: spawnCount)
+        apply(color: currentColor)
+    }
+    
     override func makeEntity() -> Portal {
         .init(currentColor: currentColor, node: originNode.copy() as! SKSpriteNode)
     }
     
     override func interStarDistance() -> CGFloat {
-        20 * Star(imageName: "star").node.frame.height
+        50 * Star(imageName: "star").node.frame.height
     }
     
     func nextColor() {

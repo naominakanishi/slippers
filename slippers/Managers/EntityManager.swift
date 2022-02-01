@@ -45,7 +45,7 @@ class EntityManager<E>: Entity<SKNode> where E: Entity<SKSpriteNode> {
             scene.addEntity(newStar)
             newStar.node.position = .init(
                 x: .random(in: -180...180),
-                y: CGFloat(i) * interStarDistance())
+                y: CGFloat(i) * interStarDistance() + scene.frame.height)
             entities.append(newStar)
         }
     }
@@ -94,7 +94,7 @@ class EntityManager<E>: Entity<SKNode> where E: Entity<SKSpriteNode> {
         
         lastlyHitNodes.forEach { node, timestamp in
             let now = Date.timeIntervalSinceReferenceDate
-            guard now - timestamp > 1 else { return }
+            guard now - timestamp > 0.5 else { return }
             lastlyHitNodes[node] = nil
         }
     }

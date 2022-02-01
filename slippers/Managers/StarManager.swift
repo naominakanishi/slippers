@@ -8,6 +8,6 @@ final class StarManager: EntityManager<Star> {
     }
     
     override func interStarDistance() -> CGFloat {
-        makeEntity().node.frame.height + 50
+        makeEntity().node.frame.height + 100
     }
 }

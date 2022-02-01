@@ -11,21 +11,18 @@ final class GameScene: SKScene, SKPhysicsContactDelegate {
         self.stateMachine = stateMachine
         super.init(size: .zero)
         physicsWorld.contactDelegate = self
+        isPaused = true
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func didMove(to view: SKView) {
-        backgroundColor = .red
-    }
-    
     override func update(_ currentTime: TimeInterval) {
-        isPaused = true
-        return
         guard let lastTime = self.lastTime else {
+            game.setup()
             lastTime = currentTime
+            isPaused = false
             return
         }
         defer { self.lastTime = currentTime }
@@ -36,7 +33,6 @@ final class GameScene: SKScene, SKPhysicsContactDelegate {
     override func didSimulatePhysics() {
         game.didSimulatePhysics()
     }
-    
     
     func didBegin(_ contact: SKPhysicsContact) {
         game.handle(contact: contact)

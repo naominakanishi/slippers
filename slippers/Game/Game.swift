@@ -8,19 +8,15 @@ final class Game {
     private lazy var ground = Ground(imageName: "ground")
     private lazy var starManager: StarManager = {
         let node = SKNode()
-        player.node.addChild(node)
-        node.position.y += scene.frame.height / 2
         return StarManager(
             scene: self.scene,
             player: player,
             node: node,
-            spawnCount: 50)
+            spawnCount: 10)
     }()
     
     private lazy var portalManager: PortalManager = {
         let node = SKNode()
-        player.node.addChild(node)
-        node.position.y += scene.frame.height / 2
         return PortalManager(
             scene: self.scene,
             player: player,
@@ -40,22 +36,30 @@ final class Game {
     
     init(scene: GameScene) {
         self.scene = scene
-        setup()
     }
     
-    private func setup() {
+    func setup() {
+        scene.camera = camera
+        scene.addChild(camera)
+        camera.position = .zero
+        
         scene.addEntity(background)
         scene.addEntity(player)
         scene.addEntity(ground)
-        ground.node.position.y = scene.frame.minY + ground.node.frame.height / 6
-        
-        ground.configurePlayer(player: player.node)
-        
-        scene.camera = camera
-        scene.addChild(camera)
         
         starManager.spawnInitialBatch()
         portalManager.spawnInitialBatch()
+        
+        ground.node.position.y = scene.frame.minY + ground.node.frame.height / 6
+        ground.configurePlayer(player: player.node)
+        
+        scene.addEntity(starManager)
+        starManager.node.position.y = scene.frame.height
+        let debug = SKShapeNode(circleOfRadius: 10)
+        debug.fillColor = .red
+        scene.addChild(debug)
+        debug.position = starManager.node.position
+        debug.zPosition = 1000
     }
     
     func update(deltaTime: TimeInterval) {
@@ -69,17 +73,14 @@ final class Game {
         player.didSimulatePhysics()
     }
     
-    func touchUp(at location: CGPoint) {
-        
-    }
+    
+    func touchDown(at location: CGPoint) {}
     
     func touchMoved(to location: CGPoint) {
         player.move(to: location)
     }
     
-    func touchDown(at location: CGPoint) {
-        player.jump()
-    }
+    func touchUp(at location: CGPoint) {}
     
     func handle(contact: SKPhysicsContact) {
         contactHandlers.forEach{

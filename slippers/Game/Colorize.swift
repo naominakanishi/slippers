@@ -13,6 +13,6 @@ extension Colorize {
                           duration: duration)
     }
     
-    var blendFactor: CGFloat { 0.5 }
-    var duration: TimeInterval { 4 }
+    var blendFactor: CGFloat { 0.3 }
+    var duration: TimeInterval { 1 }
 }

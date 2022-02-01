@@ -19,10 +19,6 @@ final class Background: Entity<SKSpriteNode> {
     init(playerNode: SKSpriteNode, node: SKSpriteNode) {
         self.playerNode = playerNode
         super.init(node: node)
-        
-        let lightNode = SKLightNode()
-        lightNode.lightColor = .blue
-        playerNode.addChild(lightNode)
     }
     
     

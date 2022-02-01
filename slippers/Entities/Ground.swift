@@ -1,14 +1,15 @@
 import SpriteKit
 
-class Ground: Entity <SKSpriteNode> {
+final class Ground: Entity<SKSpriteNode> {
     
-    let groundScale = CGFloat(0.9)
-    let groundHeight = CGFloat(20)
+    private let groundScale = CGFloat(0.9)
+    private let groundHeight = CGFloat(20)
     
     override func configureNode() {
         node.xScale = groundScale
         node.yScale = groundScale
         node.zPosition = Depth.ground
+        node.name = "ground"
     }
     
     override func configurePhysicsBody() -> SKPhysicsBody? {
@@ -18,7 +19,7 @@ class Ground: Entity <SKSpriteNode> {
                 height: groundHeight),
             center: .init(
                 x: node.frame.midX,
-                y: node.frame.midY))
+                y: (node.frame.maxY + node.frame.midY) / 2))
         
         body.isDynamic = false
         body.categoryBitMask = CollisionMasks.ground
@@ -29,7 +30,7 @@ class Ground: Entity <SKSpriteNode> {
     
     func configurePlayer(player: SKSpriteNode) {
         player.position = .init(
-            x: 0,
-            y: 0) // node.position.y - node.frame.height / 2 + player.frame.height / 2  + groundHeight
+            x: node.position.x,
+            y: node.frame.maxY)
     }
 }
