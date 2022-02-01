@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		11329CFC27A88DE600E0C7D7 /* Colorize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11329CFB27A88DE600E0C7D7 /* Colorize.swift */; };
+		11329CFE27A890C900E0C7D7 /* Portal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11329CFD27A890C900E0C7D7 /* Portal.swift */; };
+		11329D0027A890D300E0C7D7 /* PortalManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11329CFF27A890D300E0C7D7 /* PortalManager.swift */; };
+		11329D0327A898F900E0C7D7 /* StarContactHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11329D0227A898F900E0C7D7 /* StarContactHandler.swift */; };
+		11329D0527A8998700E0C7D7 /* PortalContactHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11329D0427A8998700E0C7D7 /* PortalContactHandler.swift */; };
+		11329D0727A8B70A00E0C7D7 /* EntityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11329D0627A8B70A00E0C7D7 /* EntityManager.swift */; };
 		1143A79527A349CC00075EE6 /* Background.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1143A79427A349CC00075EE6 /* Background.swift */; };
 		1143A79727A34A4B00075EE6 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1143A79627A34A4B00075EE6 /* Game.swift */; };
 		1143A79927A34A7400075EE6 /* Entity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1143A79827A34A7400075EE6 /* Entity.swift */; };
@@ -27,6 +33,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		11329CFB27A88DE600E0C7D7 /* Colorize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colorize.swift; sourceTree = "<group>"; };
+		11329CFD27A890C900E0C7D7 /* Portal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Portal.swift; sourceTree = "<group>"; };
+		11329CFF27A890D300E0C7D7 /* PortalManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortalManager.swift; sourceTree = "<group>"; };
+		11329D0227A898F900E0C7D7 /* StarContactHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarContactHandler.swift; sourceTree = "<group>"; };
+		11329D0427A8998700E0C7D7 /* PortalContactHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortalContactHandler.swift; sourceTree = "<group>"; };
+		11329D0627A8B70A00E0C7D7 /* EntityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityManager.swift; sourceTree = "<group>"; };
 		1143A79427A349CC00075EE6 /* Background.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Background.swift; sourceTree = "<group>"; };
 		1143A79627A34A4B00075EE6 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		1143A79827A34A7400075EE6 /* Entity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entity.swift; sourceTree = "<group>"; };
@@ -64,7 +76,6 @@
 			children = (
 				11737CE027A33A77001BCF8E /* AppDelegate.swift */,
 				11737CE227A33A77001BCF8E /* SceneDelegate.swift */,
-				11737CEE27A33A7B001BCF8E /* Info.plist */,
 				11737CE927A33A7B001BCF8E /* Assets.xcassets */,
 				11737CEB27A33A7B001BCF8E /* LaunchScreen.storyboard */,
 			);
@@ -85,7 +96,7 @@
 			children = (
 				1143A79627A34A4B00075EE6 /* Game.swift */,
 				11737CF727A33C57001BCF8E /* GameScene.swift */,
-				1143A7A227A362AC00075EE6 /* StarManager.swift */,
+				11329CFB27A88DE600E0C7D7 /* Colorize.swift */,
 			);
 			path = Game;
 			sourceTree = "<group>";
@@ -98,8 +109,28 @@
 				1143A79A27A3539800075EE6 /* Player.swift */,
 				1143A79C27A35A0000075EE6 /* Ground.swift */,
 				1143A7A027A3623900075EE6 /* Star.swift */,
+				11329CFD27A890C900E0C7D7 /* Portal.swift */,
 			);
 			path = Entities;
+			sourceTree = "<group>";
+		};
+		11329D0127A898E700E0C7D7 /* ContactHandler */ = {
+			isa = PBXGroup;
+			children = (
+				11329D0227A898F900E0C7D7 /* StarContactHandler.swift */,
+				11329D0427A8998700E0C7D7 /* PortalContactHandler.swift */,
+			);
+			path = ContactHandler;
+			sourceTree = "<group>";
+		};
+		11329D0827A8B70D00E0C7D7 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				11329D0627A8B70A00E0C7D7 /* EntityManager.swift */,
+				1143A7A227A362AC00075EE6 /* StarManager.swift */,
+				11329CFF27A890D300E0C7D7 /* PortalManager.swift */,
+			);
+			path = Managers;
 			sourceTree = "<group>";
 		};
 		11737CD427A33A77001BCF8E = {
@@ -121,6 +152,9 @@
 		11737CDF27A33A77001BCF8E /* slippers */ = {
 			isa = PBXGroup;
 			children = (
+				11329D0827A8B70D00E0C7D7 /* Managers */,
+				11329D0127A898E700E0C7D7 /* ContactHandler */,
+				11737CEE27A33A7B001BCF8E /* Info.plist */,
 				11329CFA27A88D9600E0C7D7 /* Entities */,
 				11329CF927A88D8500E0C7D7 /* Game */,
 				11329CF827A88D7000E0C7D7 /* HUD */,
@@ -210,9 +244,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				11329D0327A898F900E0C7D7 /* StarContactHandler.swift in Sources */,
+				11329D0527A8998700E0C7D7 /* PortalContactHandler.swift in Sources */,
+				11329CFC27A88DE600E0C7D7 /* Colorize.swift in Sources */,
+				11329D0027A890D300E0C7D7 /* PortalManager.swift in Sources */,
 				11737CF827A33C57001BCF8E /* GameScene.swift in Sources */,
 				1143A7A127A3623900075EE6 /* Star.swift in Sources */,
+				11329CFE27A890C900E0C7D7 /* Portal.swift in Sources */,
 				1143A79527A349CC00075EE6 /* Background.swift in Sources */,
+				11329D0727A8B70A00E0C7D7 /* EntityManager.swift in Sources */,
 				11737CF627A33B97001BCF8E /* Autolayout+Extensions.swift in Sources */,
 				11737CE527A33A78001BCF8E /* GameViewController.swift in Sources */,
 				11737CFA27A33E5F001BCF8E /* GameState.swift in Sources */,

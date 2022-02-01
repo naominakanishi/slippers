@@ -26,6 +26,8 @@ class Entity<T> where T: SKNode {
     }
     
     func didSimulatePhysics() {}
+    
+    func die() {}
 }
 
 extension Entity where T == SKSpriteNode {

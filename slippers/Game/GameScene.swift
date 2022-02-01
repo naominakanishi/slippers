@@ -22,6 +22,8 @@ final class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     override func update(_ currentTime: TimeInterval) {
+        isPaused = true
+        return
         guard let lastTime = self.lastTime else {
             lastTime = currentTime
             return
@@ -35,7 +37,6 @@ final class GameScene: SKScene, SKPhysicsContactDelegate {
         game.didSimulatePhysics()
     }
     
-
     
     func didBegin(_ contact: SKPhysicsContact) {
         game.handle(contact: contact)
@@ -79,5 +80,11 @@ extension GameScene: StateRenderer {
 extension SKScene {
     func addEntity<T>(_ entity: Entity<T>) {
         addChild(entity.node)
+    }
+}
+
+extension GameScene: Colorize {
+    func apply(color: UIColor) {
+        game.apply(color: color)
     }
 }

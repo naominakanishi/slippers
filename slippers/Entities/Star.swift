@@ -2,8 +2,6 @@ import SpriteKit
 
 class Star: Entity <SKSpriteNode> {
     
-    private(set) var canHit = true
-    
     override func update(deltaTime: TimeInterval) {
         node.position.y -= 100 * deltaTime
     }
@@ -28,11 +26,6 @@ class Star: Entity <SKSpriteNode> {
         node.yScale = 0.2
     }
     
-    func die() {
-        canHit = false
-    }
-    
     func respawn() {
-        canHit = true
     }
 }

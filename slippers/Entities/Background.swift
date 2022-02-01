@@ -27,7 +27,6 @@ final class Background: Entity<SKSpriteNode> {
     
     
     override func update(deltaTime: TimeInterval) {
-        print(node.position, playerNode.position)
         let distance = abs(playerNode.position.y - node.position.y)
         if distance > node.frame.height {
             node.position.y = playerNode.position.y
@@ -37,6 +36,7 @@ final class Background: Entity<SKSpriteNode> {
 
 extension Background: Colorize {
     func apply(color: UIColor) {
-        [node, upperNode, lowerNode].forEach { $0.run(action()) }
+        [node, upperNode, lowerNode]
+            .forEach { $0.run(action(for: color)) }
     }
 }
