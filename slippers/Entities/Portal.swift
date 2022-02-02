@@ -3,13 +3,15 @@ import SpriteKit
 class Portal: Entity <SKSpriteNode> {
     
     private let portalScale = CGFloat(0.2)
+    private let currentColor: UIColor
+    private let player: Player
     
     private var rightDirection = true
+    private var isSeenByPlayer = false
     
-    private let currentColor: UIColor
-    
-    init(currentColor: UIColor, node: SKSpriteNode) {
+    init(currentColor: UIColor, player: Player,  node: SKSpriteNode) {
         self.currentColor = currentColor
+        self.player = player
         super.init(node: node)
         apply(color: currentColor)
     }
@@ -23,6 +25,10 @@ class Portal: Entity <SKSpriteNode> {
     
     override func update(deltaTime: TimeInterval) {
         guard let scene = node.scene else { return }
+        moveHorizontally(using: scene, deltaTime: deltaTime)
+    }
+    
+    private func moveHorizontally(using scene: SKScene, deltaTime : TimeInterval) {
         if node.position.x >= scene.frame.maxX {
             rightDirection = false
         } else if node.position.x <= scene.frame.minX {
@@ -33,7 +39,6 @@ class Portal: Entity <SKSpriteNode> {
         } else {
             node.position.x -= 100 * deltaTime
         }
-        
     }
 
     override func configurePhysicsBody() -> SKPhysicsBody? {

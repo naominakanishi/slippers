@@ -6,10 +6,6 @@ class Star: Entity <SKSpriteNode> {
         node.position.y -= 100 * deltaTime
     }
     
-//    func removeFromParent() {
-//        node.removeFromParent()
-//    }
-    
     override func configurePhysicsBody() -> SKPhysicsBody? {
         let body = SKPhysicsBody(texture: node.texture!, size: node.size)
         body.affectedByGravity = false
@@ -17,15 +13,9 @@ class Star: Entity <SKSpriteNode> {
         body.contactTestBitMask = CollisionMasks.player
         body.collisionBitMask = CollisionMasks.none
         return body
-        
     }
     
     override func configureNode() {
         node.zPosition = Depth.star
-        node.xScale = 0.2
-        node.yScale = 0.2
-    }
-    
-    func respawn() {
     }
 }

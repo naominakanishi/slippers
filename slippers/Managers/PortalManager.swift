@@ -7,10 +7,10 @@ final class PortalManager: EntityManager<Portal> {
     private(set) var currentColor: UIColor = .random()
     
     init(scene: GameScene,
-                  player: Player,
-                  node: SKNode,
-                  spawnCount: Int,
-                  scoreTracker: ScoreTracker
+            player: Player,
+            node: SKNode,
+            spawnCount: Int,
+            scoreTracker: ScoreTracker
     ) {
         self.scoreTracker = scoreTracker
         super.init(
@@ -24,20 +24,16 @@ final class PortalManager: EntityManager<Portal> {
     override func makeEntity() -> Portal {
         .init(
             currentColor: currentColor,
+            player: player,
             node: originNode.copy() as! SKSpriteNode)
     }
     
     override func interStarDistance() -> CGFloat {
-        50 * Star(imageName: "star").node.frame.height
+        10 * Star(imageName: "star").node.frame.height
     }
     
     func nextColor() {
         currentColor = .random()
         self.apply(color: currentColor)
-    }
-    
-    override func didRespawn(_ entity: Portal) {
-        scoreTracker.didExitDoubleScore()
-//        scene.apply(color: .white) // TODO fix when portal is not picked up
     }
 }

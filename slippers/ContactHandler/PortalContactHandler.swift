@@ -35,10 +35,25 @@ class PortalContactHandler: ContactHandler {
                   self.portalManager.handleHit(on: node)
             else { return }
             self.player.impulse()
-            self.scoreTracker.didEnterDoubleScore()
+            self.scoreTracker.multiply()
             self.doubleScoreSpawner.spawn()
             self.scene.apply(color: self.portalManager.currentColor)
             self.portalManager.nextColor()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                self.reversePortal()
+            }
         }
+       
+    }
+    
+    private func reversePortal() {
+        self.scene.apply(color: UIColor.white)
+        self.scoreTracker.endMultiplication()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            self.portalManager.nextColor()
+
+        }
+        
+        //todo desfazer toda a lógica do portal
     }
 }

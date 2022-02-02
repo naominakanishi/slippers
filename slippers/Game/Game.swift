@@ -3,8 +3,8 @@ import SpriteKit
 protocol ScoreTracker {
     var points: Int { get }
     func score()
-    func didEnterDoubleScore()
-    func didExitDoubleScore()
+    func multiply()
+    func endMultiplication()
 }
 
 final class Game: ScoreTracker {
@@ -21,6 +21,7 @@ final class Game: ScoreTracker {
     private lazy var starManager: StarManager = {
         let node = SKNode()
         return StarManager(
+            scoreTracker: self,
             scene: self.scene,
             player: player,
             node: node,
@@ -64,11 +65,11 @@ final class Game: ScoreTracker {
         points += scoreMultiplier
     }
     
-    func didEnterDoubleScore() {
+    func multiply() {
         scoreMultiplier = 2
     }
     
-    func didExitDoubleScore() {
+    func endMultiplication() {
         scoreMultiplier = 1
     }
     

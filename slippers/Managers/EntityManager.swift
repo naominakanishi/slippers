@@ -11,7 +11,7 @@ class EntityManager<E>: Entity<SKNode> where E: Entity<SKSpriteNode> {
     let player: Player
     private let spawnCount: Int
     
-    private var entities: [E] = []
+    private(set) var entities: [E] = []
     private var lastlyHitNodes: [SKSpriteNode : TimeInterval] = [:]
     private var playerNode: SKNode { player.node }
     
