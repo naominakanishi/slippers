@@ -11,6 +11,7 @@ class Portal: Entity <SKSpriteNode> {
     init(currentColor: UIColor, node: SKSpriteNode) {
         self.currentColor = currentColor
         super.init(node: node)
+        apply(color: currentColor)
     }
     
     override func configureNode() {

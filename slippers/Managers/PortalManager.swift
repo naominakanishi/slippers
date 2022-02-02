@@ -13,12 +13,18 @@ final class PortalManager: EntityManager<Portal> {
                   scoreTracker: ScoreTracker
     ) {
         self.scoreTracker = scoreTracker
-        super.init(scene: scene, player: player, node: node, spawnCount: spawnCount)
+        super.init(
+            scene: scene,
+            player: player,
+            node: node,
+            spawnCount: spawnCount)
         apply(color: currentColor)
     }
     
     override func makeEntity() -> Portal {
-        .init(currentColor: currentColor, node: originNode.copy() as! SKSpriteNode)
+        .init(
+            currentColor: currentColor,
+            node: originNode.copy() as! SKSpriteNode)
     }
     
     override func interStarDistance() -> CGFloat {
@@ -32,6 +38,6 @@ final class PortalManager: EntityManager<Portal> {
     
     override func didRespawn(_ entity: Portal) {
         scoreTracker.didExitDoubleScore()
-        scene.apply(color: .white)
+//        scene.apply(color: .white) // TODO fix when portal is not picked up
     }
 }

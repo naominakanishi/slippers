@@ -18,7 +18,19 @@ final class GameScene: SKScene, SKPhysicsContactDelegate {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func didMove(to view: SKView) {
+//        var currentY: CGFloat = -250
+//        Colors.allColors.forEach {
+//            let node = Portal(currentColor: $0, node: .init(imageNamed: "portal"))
+//            node.node.position.y = currentY
+//            addChild(node.node)
+//            
+//            currentY += 50
+//        }
+    }
+    
     override func update(_ currentTime: TimeInterval) {
+//        isPaused = true
         guard let lastTime = self.lastTime else {
             game.setup()
             lastTime = currentTime

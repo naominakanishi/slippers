@@ -6,7 +6,7 @@ final class StarManager: EntityManager<Star> {
     override func makeEntity() -> Star {
         let node = originNode.copy() as! SKSpriteNode
         let playerHeight = player.node.position.y
-        node.xScale = clamp(playerHeight * 0.01, min: 0.2, max: 1)
+        node.xScale = clamp(playerHeight * 0.01, min: 0.05, max: 1)
         return Star(node: node)
     }
     

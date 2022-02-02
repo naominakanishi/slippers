@@ -104,8 +104,11 @@ final class Game: ScoreTracker {
         player.didSimulatePhysics()
     }
     
-    
-    func touchDown(at location: CGPoint) {}
+    func touchDown(at location: CGPoint) {
+        if player.physicsBody?.velocity == .zero {
+            player.impulse()
+        }
+    }
     
     func touchMoved(to location: CGPoint) {
         player.move(to: location)

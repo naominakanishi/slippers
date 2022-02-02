@@ -9,16 +9,18 @@ enum Colors {
     static let purple: UIColor = .init(hex: 0x9260FB)
     static let orange: UIColor = .init(hex: 0xFF954B)
 
+    static var allColors: [UIColor] {[
+        Colors.green,
+        Colors.lightBlue,
+        Colors.darkBlue,
+        Colors.yellow,
+        Colors.red,
+        Colors.purple,
+        Colors.orange,
+    ]}
+    
     static func random() -> UIColor {
-        [
-            Colors.green,
-            Colors.lightBlue,
-            Colors.darkBlue,
-            Colors.yellow,
-            Colors.red,
-            Colors.purple,
-            Colors.orange,
-        ].randomElement()!
+        allColors.randomElement()!
     }
 }
  
