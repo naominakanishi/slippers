@@ -64,7 +64,7 @@ extension GameScene: StateRenderer {
             isPaused = true
         case .playing:
             isPaused = false
-            backgroundColor = .blue
+            backgroundColor = .white
         case .pending:
             break
         case .gameOver:

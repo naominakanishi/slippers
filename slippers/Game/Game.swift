@@ -90,16 +90,13 @@ final class Game: ScoreTracker {
         
         scene.addEntity(starManager)
         starManager.node.position.y = scene.frame.height
-        let debug = SKShapeNode(circleOfRadius: 10)
-        scene.addChild(debug)
-        debug.position = starManager.node.position
-        debug.zPosition = 1000
     }
     
     func update(deltaTime: TimeInterval) {
         background.update(deltaTime: deltaTime)
         starManager.update(deltaTime: deltaTime)
         portalManager.update(deltaTime: deltaTime)
+        player.update(deltaTime: deltaTime)
         camera.position.y = max(player.node.position.y, 0)
     }
     

@@ -14,6 +14,7 @@ final class Background: Entity<SKSpriteNode> {
         upperNode.position.y = node.frame.height
         lowerNode.position.y = -node.frame.height
         node.zPosition = Depth.background
+        node.alpha = 0.7
     }
     
     init(playerNode: SKSpriteNode, node: SKSpriteNode) {

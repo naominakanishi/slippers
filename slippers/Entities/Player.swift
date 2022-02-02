@@ -1,7 +1,20 @@
 import SpriteKit
 
 class Player: Entity <SKSpriteNode> {
+    private enum PlayerAnimation {
+        case up, down
+    }
     
+    private let fallAction: SKAction = .animate(with: [
+        SKTexture(imageNamed: "cape-char-jumping"),
+        SKTexture(imageNamed: "cape-char-jumping-mid"),
+        SKTexture(imageNamed: "cape-char-standing"),
+    ], timePerFrame: 0.1)
+    
+    private var lastAnimation: PlayerAnimation?
+    private var canAnimate = true
+    
+    private let capeNode = SKSpriteNode(imageNamed: "cape-char-standing")
     private let playerScale = CGFloat(0.27)
     private var streakCount = 0
     private var lastStarTimestamp: Date = .now
@@ -10,6 +23,9 @@ class Player: Entity <SKSpriteNode> {
         node.xScale = playerScale
         node.yScale = playerScale
         node.zPosition = Depth.player
+        node.addChild(capeNode)
+        capeNode.yScale = 0.5
+        capeNode.xScale = 0.5
     }
     
     override func configurePhysicsBody() -> SKPhysicsBody? {
@@ -21,13 +37,28 @@ class Player: Entity <SKSpriteNode> {
         return body
     }
     
-    func move(to position: CGPoint) {
-        node.position.x = position.x
+    override func update(deltaTime: TimeInterval) {
+        guard let body = node.physicsBody else {
+            return
+        }
+        
+        if body.velocity.dy > 0 && canAnimate && lastAnimation != .up {
+            lastAnimation = .up
+            canAnimate = false
+            capeNode.run(fallAction) {
+                self.canAnimate = true
+            }
+        } else if body.velocity.dy < 0 && canAnimate && lastAnimation != .down{
+            lastAnimation = .down
+            canAnimate = false
+            capeNode.run(fallAction.reversed()) {
+                self.canAnimate = true
+            }
+        }
     }
     
-    override func didSimulatePhysics() {
-        guard let body = node.physicsBody else { return }
-//        body.velocity.dy = min(body.velocity.dy, 1500)
+    func move(to position: CGPoint) {
+        node.position.x = position.x
     }
     
     func impulse() {
@@ -37,6 +68,6 @@ class Player: Entity <SKSpriteNode> {
 
 extension Player: Colorize {
     func apply(color: UIColor) {
-        node.run(action(for: color))
+        capeNode.run(action(for: color))
     }
 }
