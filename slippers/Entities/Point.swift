@@ -7,7 +7,6 @@ class Point: Entity <SKNode> {
     
     func setScore(to value: Int) {
         label.text = String(value)
-//        label.fontName = UIFont(name: "DepotNewCondensed-Regular", size: 24)
     }
     
     override func configureNode() {
@@ -20,7 +19,7 @@ class Point: Entity <SKNode> {
     }
     
     override func die() {
-        self.node.run(.fadeOut(withDuration: 0.3)) {
+        node.run(.sequence([.wait(forDuration: 0.5), .fadeOut(withDuration: 0.3)])) {
             self.node.removeFromParent()
         }
     }

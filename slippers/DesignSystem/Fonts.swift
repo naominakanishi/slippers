@@ -5,6 +5,12 @@ enum FontStyle {
     case bold, regular
 }
 
+enum CustomFont {
+    case amatic, depot
+    
+    
+}
+
 struct AppFont {
     let fontName: String
     let size: CGFloat
@@ -23,6 +29,12 @@ extension AppFont {
     static func depot(size: CGFloat) -> AppFont {
         .init(fontName: "DepotNewCondensed-Regular", size: size)
     }
+    
+    func uiFont() -> UIFont? {
+        .init(
+            name: fontName,
+            size: size)
+    }
 }
 
 extension SKLabelNode {
@@ -32,5 +44,15 @@ extension SKLabelNode {
             self.fontName = newValue.fontName
             self.fontSize = newValue.size
         }
+    }
+}
+
+extension UIFont {
+    static var amatic: (FontStyle, CGFloat) -> UIFont? = {
+        AppFont.amatic(style: $0, size: $1).uiFont()
+    }
+    
+    static var depot: (CGFloat) -> UIFont? = {
+        AppFont.depot(size: $0).uiFont()
     }
 }

@@ -7,13 +7,13 @@ class PortalContactHandler: ContactHandler {
     private let portalManager: PortalManager
     private let doubleScoreSpawner: DoubleScoreZoneSpawner
     
-    private let scoreTracker: ScoreTracker
+    private let scoreTracker: ScoreMultiplier
     
     init(player: Player,
          scene: Colorize,
          portalManager: PortalManager,
          doubleScoreSpawner: DoubleScoreZoneSpawner,
-         scoreTracker: ScoreTracker) {
+         scoreTracker: ScoreMultiplier) {
         self.player = player
         self.scene = scene
         self.portalManager = portalManager
@@ -39,7 +39,7 @@ class PortalContactHandler: ContactHandler {
             self.doubleScoreSpawner.spawn()
             self.scene.apply(color: self.portalManager.currentColor)
             self.portalManager.nextColor()
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
                 self.reversePortal()
             }
         }
@@ -49,11 +49,10 @@ class PortalContactHandler: ContactHandler {
     private func reversePortal() {
         self.scene.apply(color: UIColor.white)
         self.scoreTracker.endMultiplication()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
             self.portalManager.nextColor()
 
         }
         
-        //todo desfazer toda a lógica do portal
     }
 }

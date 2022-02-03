@@ -1,27 +1,23 @@
 import SpriteKit
 
-protocol ScoreTracker {
-    var points: Int { get }
-    func score()
-    func multiply()
-    func endMultiplication()
-}
-
-final class Game: ScoreTracker {
+final class Game {
+    private let scoreTracker: ScoreTrackerProtocol
     private let scene: GameScene
     private let camera = SKCameraNode()
     
     private lazy var player = Player(imageName: "player-standing")
     private lazy var ground = Ground(imageName: "ground")
-    private lazy var point = PointSpawner(scene: scene, scoreTracker: self)
+    private lazy var point = PointSpawner(
+        scene: scene,
+        scoreTracker: scoreTracker)
     private lazy var doubleScoreMessage = DoubleScoreZoneSpawner(scene: scene)
-    private(set) var points: Int = 0
-    private var scoreMultiplier = 1
+    private lazy var scoreEntity = Score(currentPoints: scoreTracker,
+                                         node: .init())
     
     private lazy var starManager: StarManager = {
         let node = SKNode()
         return StarManager(
-            scoreTracker: self,
+            scoreTracker: scoreTracker,
             scene: self.scene,
             player: player,
             node: node,
@@ -34,8 +30,7 @@ final class Game: ScoreTracker {
             scene: scene,
             player: player,
             node: node,
-            spawnCount: 10,
-            scoreTracker: self)
+            spawnCount: 10  )
     }()
     
     private lazy var background: Background = {
@@ -48,29 +43,18 @@ final class Game: ScoreTracker {
             starManager: starManager,
             player: player,
             pointSpawner: point,
-            scoreTracker: self),
+            scoreTracker: scoreTracker),
         PortalContactHandler(
             player: player,
             scene: self,
             portalManager: portalManager,
             doubleScoreSpawner: doubleScoreMessage,
-            scoreTracker: self)
+            scoreTracker: scoreTracker)
     ]
     
-    init(scene: GameScene) {
+    init(scene: GameScene, scoreTracker: ScoreTrackerProtocol) {
         self.scene = scene
-    }
-    
-    func score() {
-        points += scoreMultiplier
-    }
-    
-    func multiply() {
-        scoreMultiplier = 2
-    }
-    
-    func endMultiplication() {
-        scoreMultiplier = 1
+        self.scoreTracker = scoreTracker
     }
     
     func setup() {
@@ -82,7 +66,6 @@ final class Game: ScoreTracker {
         scene.addEntity(player)
         scene.addEntity(ground)
         
-        
         starManager.spawnInitialBatch()
         portalManager.spawnInitialBatch()
         
@@ -91,6 +74,9 @@ final class Game: ScoreTracker {
         
         scene.addEntity(starManager)
         starManager.node.position.y = scene.frame.height
+        camera.addChild(scoreEntity.node)
+        scoreEntity.node.position.x = scene.frame.minX + 60 + scoreEntity.node.frame.width / 2
+        scoreEntity.node.position.y = scene.frame.maxY - 50 + scoreEntity.node.frame.height / 2
     }
     
     func update(deltaTime: TimeInterval) {
@@ -98,6 +84,7 @@ final class Game: ScoreTracker {
         starManager.update(deltaTime: deltaTime)
         portalManager.update(deltaTime: deltaTime)
         player.update(deltaTime: deltaTime)
+        scoreEntity.update(deltaTime: deltaTime)
         camera.position.y = max(player.node.position.y, 0)
     }
     

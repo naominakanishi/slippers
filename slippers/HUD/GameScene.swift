@@ -1,14 +1,17 @@
 import SpriteKit
 
 final class GameScene: SKScene, SKPhysicsContactDelegate {
-    
+    private let scoreTracker: ScoreTrackerProtocol
     private let stateMachine: GameStateMachine
-    private lazy var game = Game(scene: self)
+    private lazy var game = Game(scene: self,
+                                 scoreTracker: scoreTracker)
     
+    private var canRun = true
     private var lastTime: TimeInterval?
         
-    init(stateMachine: GameStateMachine) {
+    init(stateMachine: GameStateMachine, scoreTracker: ScoreTrackerProtocol) {
         self.stateMachine = stateMachine
+        self.scoreTracker = scoreTracker
         super.init(size: .zero)
         physicsWorld.contactDelegate = self
         isPaused = true
@@ -19,30 +22,24 @@ final class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     override func didMove(to view: SKView) {
-//        var currentY: CGFloat = -250
-//        Colors.allColors.forEach {
-//            let node = Portal(currentColor: $0, node: .init(imageNamed: "portal"))
-//            node.node.position.y = currentY
-//            addChild(node.node)
-//            
-//            currentY += 50
-//        }
+        backgroundColor = .white
     }
     
     override func update(_ currentTime: TimeInterval) {
-//        isPaused = true
         guard let lastTime = self.lastTime else {
             game.setup()
             lastTime = currentTime
-            isPaused = false
+            canRun = true
             return
         }
         defer { self.lastTime = currentTime }
+        guard canRun else { return }
         let deltaTime = currentTime - lastTime
         game.update(deltaTime: deltaTime)
     }
     
     override func didSimulatePhysics() {
+        guard !isPaused else { return }
         game.didSimulatePhysics()
     }
     
@@ -73,10 +70,9 @@ extension GameScene: StateRenderer {
     func render(state: GameState){
         switch state {
         case .initialScreen:
-            isPaused = true
+            canRun = false
         case .playing:
-            isPaused = false
-            backgroundColor = .white
+            canRun = true
         case .pending:
             break
         case .gameOver:

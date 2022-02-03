@@ -2,17 +2,13 @@ import SpriteKit
 
 final class PortalManager: EntityManager<Portal> {
     private let originNode = SKSpriteNode(imageNamed: "portal")
-    private let scoreTracker: ScoreTracker
     
     private(set) var currentColor: UIColor = .random()
     
-    init(scene: GameScene,
+    override init(scene: GameScene,
             player: Player,
             node: SKNode,
-            spawnCount: Int,
-            scoreTracker: ScoreTracker
-    ) {
-        self.scoreTracker = scoreTracker
+            spawnCount: Int) {
         super.init(
             scene: scene,
             player: player,
@@ -29,7 +25,7 @@ final class PortalManager: EntityManager<Portal> {
     }
     
     override func interStarDistance() -> CGFloat {
-        10 * Star(imageName: "star").node.frame.height
+        50 * Star(imageName: "star").node.frame.height
     }
     
     func nextColor() {

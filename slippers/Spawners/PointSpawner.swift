@@ -3,9 +3,9 @@ import SpriteKit
 class PointSpawner {
     
     let scene: SKScene
-    private let scoreTracker: ScoreTracker
+    private let scoreTracker: ScoreKeeper
     
-    init(scene: SKScene, scoreTracker: ScoreTracker) {
+    init(scene: SKScene, scoreTracker: ScoreKeeper) {
         self.scene = scene
         self.scoreTracker = scoreTracker
     }

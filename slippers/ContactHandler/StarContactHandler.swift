@@ -10,10 +10,10 @@ class StarContactHandler: ContactHandler {
     private let starManager: StarManager
     private let player: Player
     private let pointSpawner: PointSpawner
-    private let scoreTracker: ScoreTracker
+    private let scoreTracker: Scorer
     
     
-    init(starManager: StarManager, player: Player, pointSpawner: PointSpawner, scoreTracker: ScoreTracker) {
+    init(starManager: StarManager, player: Player, pointSpawner: PointSpawner, scoreTracker: Scorer) {
         self.starManager = starManager
         self.player = player
         self.pointSpawner = pointSpawner
@@ -35,7 +35,7 @@ class StarContactHandler: ContactHandler {
                   self.starManager.handleHit(on: node)
             else { return }
             self.player.impulse()
-            self.scoreTracker.score()
+            self.scoreTracker.handleScore()
             self.pointSpawner.spawn(at: previousPosition)
         }
     }

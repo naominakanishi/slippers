@@ -2,9 +2,9 @@ import SpriteKit
 
 final class StarManager: EntityManager<Star> {
     private let originNode = SKSpriteNode(imageNamed: "star")
-    private let scoreTracker: ScoreTracker
+    private let scoreTracker: ScoreKeeper
     
-    init(scoreTracker: ScoreTracker, scene: GameScene, player: Player, node: SKNode, spawnCount: Int) {
+    init(scoreTracker: ScoreKeeper, scene: GameScene, player: Player, node: SKNode, spawnCount: Int) {
         self.scoreTracker = scoreTracker
         super.init(scene: scene, player: player, node: node, spawnCount: spawnCount)
     }
@@ -12,7 +12,7 @@ final class StarManager: EntityManager<Star> {
     private var currentScale: CGFloat {
         let mod50 = CGFloat(scoreTracker.points.quotientAndRemainder(dividingBy: 50).quotient)
         let min = 0.05
-        let scaleFactor = 0.01
+        let scaleFactor = 0.0005
         return max(0.2 - scaleFactor * mod50, min)
     }
     
