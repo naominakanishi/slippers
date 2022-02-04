@@ -52,7 +52,7 @@ class GameViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         Timer.scheduledTimer(withTimeInterval: 5, repeats: false) { _ in
-            self.stateMachine.currentState = .gameOver
+            self.stateMachine.currentState = .initialScreen
         }
     }
     
@@ -71,6 +71,7 @@ extension GameViewController: StateRenderer {
         [
             startScreenView
         ].forEach { $0.isHidden = true }
+        
         switch state {
         case .initialScreen:
             startScreenView.isHidden = false
