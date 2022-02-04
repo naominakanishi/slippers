@@ -73,14 +73,10 @@ final class StartScreenView: CodedView, CodedViewLifeCycle {
         }
         
         startButton.layout {
-            $0.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -150)
+            $0.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -200)
             $0.centerXAnchor.constraint(equalTo: centerXAnchor)
             $0.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.6)
         }
-    }
-    
-    private var text: String {
-        UUID().uuidString
     }
     
     func configureAdditionalSettings() {
@@ -88,22 +84,22 @@ final class StartScreenView: CodedView, CodedViewLifeCycle {
         fadeOut()
     }
     
-    private func fadeOut() {
-        let fadeIn = CABasicAnimation(keyPath: "opacity")
-        fadeIn.fromValue = 1
-        fadeIn.toValue = 0
-        fadeIn.duration = 1
-        fadeIn.delegate = self
-        instructionMessage.layer.add(fadeIn, forKey: "fadeOut")
+    private func fadeIn() {
+        UIView.animate(withDuration: 2) {
+            self.instructionMessage.alpha = 1
+        } completion: { _ in
+            self.fadeOut()
+        }
+
     }
     
-    private func fadeIn() {
-        let fadeIn = CABasicAnimation(keyPath: "opacity")
-        fadeIn.fromValue = 0
-        fadeIn.toValue = 1
-        fadeIn.duration = 3
-        fadeIn.delegate = self
-        instructionMessage.layer.add(fadeIn, forKey: "fadeIn")
+    private func fadeOut() {
+        UIView.animate(withDuration: 2) {
+            self.instructionMessage.alpha = 0
+        } completion: { _ in
+            self.changeMessage()
+            self.fadeIn()
+        }
     }
     
     private var currentMessageIndex = 0
@@ -126,22 +122,5 @@ final class StartScreenView: CodedView, CodedViewLifeCycle {
     @objc
     private func handleAudioSettingsTap() {
         actions.didTapOnAudioSettings()
-    }
-}
-
-extension StartScreenView: CAAnimationDelegate {
-    func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
-        guard let animation = anim as? CABasicAnimation,
-              let fromValue = animation.fromValue as? Int
-        else { return }
-        if fromValue == 1 {
-            changeMessage()
-            fadeIn()
-            return
-        }
-        
-        if fromValue == 0 {
-            fadeOut()
-        }
     }
 }

@@ -15,10 +15,16 @@ class GameViewController: UIViewController {
     
     private lazy var startScreenView = StartScreenView(actions: .init(
         didTapOnAudioSettings: { },
+        //changes current state to playing
         didTapOnStart: { [stateMachine] in
             stateMachine.currentState = .playing
         }))
-    private lazy var gameOverView = GameOverView()
+    private lazy var gameOverView = GameOverView(actions: .init(
+        startOver: {
+            self.scoreTracker.reset()
+            self.renderScene()
+            self.stateMachine.currentState = .playing
+        }))
     private let scoreTracker = ScoreTracker()
     
     
@@ -34,19 +40,23 @@ class GameViewController: UIViewController {
         addStateView(startScreenView)
         addStateView(gameOverView)
         
-        let scene = createScene()
-        gameView.presentScene(scene)
-        
-        stateMachine.addRenderer(renderer: scene)
         stateMachine.addRenderer(renderer: self)
         
+        renderScene()
+    }
+    
+    private func renderScene() {
+        let scene = createScene()
+        gameView.presentScene(scene)
+        stateMachine.addRenderer(renderer: scene)
     }
     
     
     // loads the first screen to be displayed
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        Timer.scheduledTimer(withTimeInterval: 5, repeats: false) { _ in
+        self.stateMachine.currentState = .playing
+        Timer.scheduledTimer(withTimeInterval: 0, repeats: false) { _ in
             self.stateMachine.currentState = .initialScreen
         }
     }
@@ -64,7 +74,8 @@ class GameViewController: UIViewController {
 extension GameViewController: StateRenderer {
     func render(state: GameState) {
         [
-            startScreenView
+            startScreenView,
+            gameOverView
         ].forEach { $0.isHidden = true }
         
         switch state {
@@ -84,7 +95,6 @@ extension GameViewController: StateRenderer {
                 highScore: scoreTracker.highScore))
             UIView.animate(withDuration: 0.4) {
                 self.gameOverView.alpha = 1
-                print("SHOWED")
             }
         }
     }

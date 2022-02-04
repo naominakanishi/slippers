@@ -1,6 +1,13 @@
 import UIKit
 
 final class GameOverView: CodedView, CodedViewLifeCycle {
+    
+    struct Actions {
+//        let buyLives: () -> Void
+//        let watchAd: () -> Void
+        let startOver: () -> Void
+    }
+    
     struct Model {
         let currentScore: Int
         let highScore: Int
@@ -55,8 +62,16 @@ final class GameOverView: CodedView, CodedViewLifeCycle {
     private lazy var startOverButton: UIButton = {
         let view = UIButton()
         view.configuration = .nijiCapsule(title: "START OVER", imageName: "restart-icon")
+        view.addTarget(self, action: #selector(handleStartOverTap), for: .touchUpInside)
         return view
     }()
+    
+    private let actions: Actions
+    
+    init(actions: Actions) {
+        self.actions = actions
+        super.init(frame: .zero)
+    }
     
     func addSubviews() {
         addSubview(cardView)
@@ -129,5 +144,10 @@ final class GameOverView: CodedView, CodedViewLifeCycle {
         currentScoreView.configure(using: .init(
             title: "YOUR SCORE",
             score: .init(model.currentScore)))
+    }
+    
+    @objc
+    private func handleStartOverTap() {
+        actions.startOver()
     }
 }

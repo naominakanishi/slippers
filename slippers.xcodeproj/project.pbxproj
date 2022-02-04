@@ -29,6 +29,7 @@
 		11737CF627A33B97001BCF8E /* Autolayout+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11737CF527A33B97001BCF8E /* Autolayout+Extensions.swift */; };
 		11737CF827A33C57001BCF8E /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11737CF727A33C57001BCF8E /* GameScene.swift */; };
 		11737CFA27A33E5F001BCF8E /* GameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11737CF927A33E5F001BCF8E /* GameState.swift */; };
+		11C3EDCA27ADD982004059B2 /* GroundContactHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C3EDC927ADD982004059B2 /* GroundContactHandler.swift */; };
 		11CC1B4D27A462FD00300723 /* CollisionMasks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11CC1B4C27A462FD00300723 /* CollisionMasks.swift */; };
 		11D6B86727AC47A100BD6303 /* Score.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D6B86627AC47A100BD6303 /* Score.swift */; };
 		11D6B86C27AC837100BD6303 /* StartScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D6B86B27AC837100BD6303 /* StartScreenView.swift */; };
@@ -72,6 +73,7 @@
 		11737CF527A33B97001BCF8E /* Autolayout+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Autolayout+Extensions.swift"; sourceTree = "<group>"; };
 		11737CF727A33C57001BCF8E /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		11737CF927A33E5F001BCF8E /* GameState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameState.swift; sourceTree = "<group>"; };
+		11C3EDC927ADD982004059B2 /* GroundContactHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroundContactHandler.swift; sourceTree = "<group>"; };
 		11CC1B4C27A462FD00300723 /* CollisionMasks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollisionMasks.swift; sourceTree = "<group>"; };
 		11D6B86627AC47A100BD6303 /* Score.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Score.swift; sourceTree = "<group>"; };
 		11D6B86B27AC837100BD6303 /* StartScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartScreenView.swift; sourceTree = "<group>"; };
@@ -152,6 +154,7 @@
 			children = (
 				11329D0227A898F900E0C7D7 /* StarContactHandler.swift */,
 				11329D0427A8998700E0C7D7 /* PortalContactHandler.swift */,
+				11C3EDC927ADD982004059B2 /* GroundContactHandler.swift */,
 			);
 			path = ContactHandler;
 			sourceTree = "<group>";
@@ -354,6 +357,7 @@
 				1143A79927A34A7400075EE6 /* Entity.swift in Sources */,
 				1143A7A327A362AC00075EE6 /* StarManager.swift in Sources */,
 				11D6B87127AC961600BD6303 /* ScoreTracker.swift in Sources */,
+				11C3EDCA27ADD982004059B2 /* GroundContactHandler.swift in Sources */,
 				11737CE127A33A77001BCF8E /* AppDelegate.swift in Sources */,
 				11737CE327A33A77001BCF8E /* SceneDelegate.swift in Sources */,
 				1143A79B27A3539800075EE6 /* Player.swift in Sources */,
@@ -504,7 +508,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = UL74FQ825B;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = slippers/Info.plist;
@@ -513,6 +517,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -532,7 +537,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = UL74FQ825B;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = slippers/Info.plist;
@@ -541,6 +546,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

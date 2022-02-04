@@ -48,6 +48,11 @@ final class ScoreTracker: ScoreTrackerProtocol {
         scoreMultiplier = 1
     }
     
+    func reset() {
+        score = 0
+        points = 0
+    }
+    
     private func saveHighScoreIfNeeded() {
         guard score > highScore
         else { return }

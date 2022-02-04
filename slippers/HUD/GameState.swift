@@ -10,7 +10,11 @@ protocol StateRenderer {
 
 final class GameStateMachine {
     private var renderers: [StateRenderer] = []
+    private var lastState: GameState = .initialScreen
     var currentState = GameState.initialScreen {
+        willSet {
+            lastState = currentState
+        }
         didSet {
             updateState()
         }
@@ -21,6 +25,7 @@ final class GameStateMachine {
     }
     
     private func updateState() {
+        guard currentState != lastState else { return }
         renderers.forEach{
             $0.render(state: currentState)
         }

@@ -24,6 +24,7 @@ final class Ground: Entity<SKSpriteNode> {
         body.isDynamic = false
         body.categoryBitMask = CollisionMasks.ground
         body.collisionBitMask = CollisionMasks.player
+        body.contactTestBitMask = CollisionMasks.player
         
         return body
     }

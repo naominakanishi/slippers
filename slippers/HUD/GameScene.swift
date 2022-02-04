@@ -15,6 +15,9 @@ final class GameScene: SKScene, SKPhysicsContactDelegate {
         super.init(size: .zero)
         physicsWorld.contactDelegate = self
         isPaused = true
+        game.onGameOver = { [weak self] in
+            self?.stateMachine.currentState = .gameOver
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -32,9 +35,10 @@ final class GameScene: SKScene, SKPhysicsContactDelegate {
             canRun = true
             return
         }
+        let deltaTime = currentTime - lastTime
+        game.syncCamera(deltaTime: deltaTime)
         defer { self.lastTime = currentTime }
         guard canRun else { return }
-        let deltaTime = currentTime - lastTime
         game.update(deltaTime: deltaTime)
     }
     

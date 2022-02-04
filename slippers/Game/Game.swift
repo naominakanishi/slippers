@@ -49,8 +49,13 @@ final class Game {
             scene: self,
             portalManager: portalManager,
             doubleScoreSpawner: doubleScoreMessage,
-            scoreTracker: scoreTracker)
+            scoreTracker: scoreTracker),
+        GroundContactHandler(scoreKeeper: scoreTracker) {
+            self.onGameOver?()
+        }
     ]
+    
+    var onGameOver: (() -> Void)?
     
     init(scene: GameScene, scoreTracker: ScoreTrackerProtocol) {
         self.scene = scene
@@ -80,12 +85,11 @@ final class Game {
     }
     
     func update(deltaTime: TimeInterval) {
-        background.update(deltaTime: deltaTime)
         starManager.update(deltaTime: deltaTime)
         portalManager.update(deltaTime: deltaTime)
         player.update(deltaTime: deltaTime)
         scoreEntity.update(deltaTime: deltaTime)
-        camera.position.y = max(player.node.position.y, 0)
+        checkIfGameIsOver()
     }
     
     func didSimulatePhysics() {
@@ -107,6 +111,19 @@ final class Game {
     func handle(contact: SKPhysicsContact) {
         contactHandlers.forEach{
             $0.handle(contact: contact)
+        }
+    }
+    
+    func syncCamera(deltaTime: TimeInterval) {
+        camera.position.y = max(player.node.position.y, 0)
+        background.update(deltaTime: deltaTime)
+    }
+    
+    private func checkIfGameIsOver() {
+        let yThreshold: CGFloat = -2000
+        if (player.physicsBody?.velocity.dy ?? 0) < yThreshold {
+            onGameOver?()
+            return
         }
     }
 }
