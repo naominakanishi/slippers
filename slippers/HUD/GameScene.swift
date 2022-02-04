@@ -73,10 +73,8 @@ extension GameScene: StateRenderer {
             canRun = false
         case .playing:
             canRun = true
-        case .pending:
-            break
         case .gameOver:
-            break
+            canRun = false
         }
     }
 }

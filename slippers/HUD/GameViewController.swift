@@ -25,7 +25,7 @@ class GameViewController: UIViewController {
         didTapOnStart: { [stateMachine] in
             stateMachine.currentState = .playing
         }))
-    
+    private lazy var gameOverView = GameOverView()
     private let scoreTracker = ScoreTracker()
     
     
@@ -39,6 +39,7 @@ class GameViewController: UIViewController {
         super.viewDidLoad()
         
         addStateView(startScreenView)
+        addStateView(gameOverView)
         
         let scene = createScene()
         gameView.presentScene(scene)
@@ -51,8 +52,7 @@ class GameViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         Timer.scheduledTimer(withTimeInterval: 5, repeats: false) { _ in
-            
-            self.stateMachine.currentState = .initialScreen
+            self.stateMachine.currentState = .gameOver
         }
     }
     
@@ -80,11 +80,16 @@ extension GameViewController: StateRenderer {
             }
         case .playing:
             break
-        case .pending:
-            break
         case .gameOver:
-            break
-            //todo: endgame screen layout
+            gameOverView.isHidden = false
+            gameOverView.alpha = 0
+            gameOverView.configure(using: .init(
+                currentScore: scoreTracker.score,
+                highScore: scoreTracker.highScore))
+            UIView.animate(withDuration: 0.4) {
+                self.gameOverView.alpha = 1
+                print("SHOWED")
+            }
         }
     }
 }

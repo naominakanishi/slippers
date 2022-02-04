@@ -1,7 +1,6 @@
 enum GameState {
     case initialScreen
     case playing
-    case pending(Bool)
     case gameOver
 }
 

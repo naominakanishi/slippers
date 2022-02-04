@@ -37,6 +37,7 @@
 		11D6B87127AC961600BD6303 /* ScoreTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D6B87027AC961600BD6303 /* ScoreTracker.swift */; };
 		11D6B87327AC9AB700BD6303 /* GameOverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D6B87227AC9AB700BD6303 /* GameOverView.swift */; };
 		11D6B87527ACA06D00BD6303 /* UIButtonConfiguration+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D6B87427ACA06D00BD6303 /* UIButtonConfiguration+Extensions.swift */; };
+		11D6B87727ACA72700BD6303 /* ScoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D6B87627ACA72700BD6303 /* ScoreView.swift */; };
 		11F6C27327A99CA7000D7687 /* Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F6C27227A99CA7000D7687 /* Point.swift */; };
 		11F6C27527A9A117000D7687 /* PointSpawner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F6C27427A9A117000D7687 /* PointSpawner.swift */; };
 		11F6C27827A9A8E5000D7687 /* DoubleScoreZoneSpawner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F6C27727A9A8E5000D7687 /* DoubleScoreZoneSpawner.swift */; };
@@ -80,6 +81,7 @@
 		11D6B87027AC961600BD6303 /* ScoreTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreTracker.swift; sourceTree = "<group>"; };
 		11D6B87227AC9AB700BD6303 /* GameOverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverView.swift; sourceTree = "<group>"; };
 		11D6B87427ACA06D00BD6303 /* UIButtonConfiguration+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButtonConfiguration+Extensions.swift"; sourceTree = "<group>"; };
+		11D6B87627ACA72700BD6303 /* ScoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreView.swift; sourceTree = "<group>"; };
 		11F6C27227A99CA7000D7687 /* Point.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Point.swift; sourceTree = "<group>"; };
 		11F6C27427A9A117000D7687 /* PointSpawner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointSpawner.swift; sourceTree = "<group>"; };
 		11F6C27727A9A8E5000D7687 /* DoubleScoreZoneSpawner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleScoreZoneSpawner.swift; sourceTree = "<group>"; };
@@ -216,6 +218,7 @@
 			children = (
 				11D6B86B27AC837100BD6303 /* StartScreenView.swift */,
 				11D6B87227AC9AB700BD6303 /* GameOverView.swift */,
+				11D6B87627ACA72700BD6303 /* ScoreView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -335,6 +338,7 @@
 				11329D0327A898F900E0C7D7 /* StarContactHandler.swift in Sources */,
 				11329D0527A8998700E0C7D7 /* PortalContactHandler.swift in Sources */,
 				11F6C28727A9BE5E000D7687 /* Fonts.swift in Sources */,
+				11D6B87727ACA72700BD6303 /* ScoreView.swift in Sources */,
 				11329CFC27A88DE600E0C7D7 /* Colorize.swift in Sources */,
 				11329D0027A890D300E0C7D7 /* PortalManager.swift in Sources */,
 				11D6B87527ACA06D00BD6303 /* UIButtonConfiguration+Extensions.swift in Sources */,

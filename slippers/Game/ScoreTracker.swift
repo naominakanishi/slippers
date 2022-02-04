@@ -22,7 +22,7 @@ final class ScoreTracker: ScoreTrackerProtocol {
     private(set) var points: Int = 0
     private(set) var score: Int = 0
     
-    private var highScore: Int
+    private(set) var highScore: Int
     private var scoreBasis = 10
     private var scoreMultiplier = 1
     
