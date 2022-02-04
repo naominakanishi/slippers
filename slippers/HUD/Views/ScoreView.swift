@@ -7,6 +7,7 @@ final class ScoreView: CodedView, CodedViewLifeCycle {
         let score: String
     }
     
+    
     private lazy var titleLabel: UILabel = {
         let view = UILabel()
         view.font = .amatic(.bold, 36)
@@ -29,6 +30,8 @@ final class ScoreView: CodedView, CodedViewLifeCycle {
     }
     
     func constraintSubviews() {
+        
+             
         titleLabel.layout {
             $0.topAnchor.constraint(equalTo: topAnchor)
             $0.leadingAnchor.constraint(equalTo: leadingAnchor)

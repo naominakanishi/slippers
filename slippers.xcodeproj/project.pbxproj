@@ -31,7 +31,6 @@
 		11737CFA27A33E5F001BCF8E /* GameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11737CF927A33E5F001BCF8E /* GameState.swift */; };
 		11CC1B4D27A462FD00300723 /* CollisionMasks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11CC1B4C27A462FD00300723 /* CollisionMasks.swift */; };
 		11D6B86727AC47A100BD6303 /* Score.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D6B86627AC47A100BD6303 /* Score.swift */; };
-		11D6B86927AC496900BD6303 /* ScoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D6B86827AC496900BD6303 /* ScoreManager.swift */; };
 		11D6B86C27AC837100BD6303 /* StartScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D6B86B27AC837100BD6303 /* StartScreenView.swift */; };
 		11D6B86F27AC839D00BD6303 /* CodedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D6B86E27AC839D00BD6303 /* CodedView.swift */; };
 		11D6B87127AC961600BD6303 /* ScoreTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D6B87027AC961600BD6303 /* ScoreTracker.swift */; };
@@ -75,7 +74,6 @@
 		11737CF927A33E5F001BCF8E /* GameState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameState.swift; sourceTree = "<group>"; };
 		11CC1B4C27A462FD00300723 /* CollisionMasks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollisionMasks.swift; sourceTree = "<group>"; };
 		11D6B86627AC47A100BD6303 /* Score.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Score.swift; sourceTree = "<group>"; };
-		11D6B86827AC496900BD6303 /* ScoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreManager.swift; sourceTree = "<group>"; };
 		11D6B86B27AC837100BD6303 /* StartScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartScreenView.swift; sourceTree = "<group>"; };
 		11D6B86E27AC839D00BD6303 /* CodedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodedView.swift; sourceTree = "<group>"; };
 		11D6B87027AC961600BD6303 /* ScoreTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreTracker.swift; sourceTree = "<group>"; };
@@ -164,7 +162,6 @@
 				11329D0627A8B70A00E0C7D7 /* EntityManager.swift */,
 				1143A7A227A362AC00075EE6 /* StarManager.swift */,
 				11329CFF27A890D300E0C7D7 /* PortalManager.swift */,
-				11D6B86827AC496900BD6303 /* ScoreManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -358,7 +355,6 @@
 				1143A7A327A362AC00075EE6 /* StarManager.swift in Sources */,
 				11D6B87127AC961600BD6303 /* ScoreTracker.swift in Sources */,
 				11737CE127A33A77001BCF8E /* AppDelegate.swift in Sources */,
-				11D6B86927AC496900BD6303 /* ScoreManager.swift in Sources */,
 				11737CE327A33A77001BCF8E /* SceneDelegate.swift in Sources */,
 				1143A79B27A3539800075EE6 /* Player.swift in Sources */,
 				11D6B86C27AC837100BD6303 /* StartScreenView.swift in Sources */,

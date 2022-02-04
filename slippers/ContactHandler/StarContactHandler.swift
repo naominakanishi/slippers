@@ -5,7 +5,6 @@ protocol ContactHandler {
 }
 
 class StarContactHandler: ContactHandler {
-
     
     private let starManager: StarManager
     private let player: Player

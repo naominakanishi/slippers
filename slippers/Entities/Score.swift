@@ -10,12 +10,12 @@ class Score: Entity <SKNode> {
         scoreTitle.font = .depot(size: 24)
         scoreTitle.fontColor = .black
         scoreTitle.verticalAlignmentMode = .center
-        scoreTitle.horizontalAlignmentMode = .center
+        scoreTitle.horizontalAlignmentMode = .left
         score.font = .depot(size: 24)
         scoreTitle.text = "Score"
         score.fontColor = .black
         score.verticalAlignmentMode = .center
-        score.horizontalAlignmentMode = .center
+        score.horizontalAlignmentMode = .left
         score.position.y = -30
         node.addChild(scoreTitle)
         node.addChild(score)

@@ -75,7 +75,7 @@ final class Game {
         scene.addEntity(starManager)
         starManager.node.position.y = scene.frame.height
         camera.addChild(scoreEntity.node)
-        scoreEntity.node.position.x = scene.frame.minX + 60 + scoreEntity.node.frame.width / 2
+        scoreEntity.node.position.x = scene.frame.minX + 20 + scoreEntity.node.frame.width / 2
         scoreEntity.node.position.y = scene.frame.maxY - 50 + scoreEntity.node.frame.height / 2
     }
     

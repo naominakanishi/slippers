@@ -1,10 +1,3 @@
-//
-//  ViewController.swift
-//  slippers
-//
-//  Created by Naomi Nakanishi on 27/01/22.
-//
-
 import UIKit
 import SpriteKit
 
@@ -49,6 +42,8 @@ class GameViewController: UIViewController {
         
     }
     
+    
+    // loads the first screen to be displayed
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         Timer.scheduledTimer(withTimeInterval: 5, repeats: false) { _ in
