@@ -8,6 +8,8 @@ final class GameScene: SKScene, SKPhysicsContactDelegate {
     
     private var canRun = true
     private var lastTime: TimeInterval?
+    
+    var backgroundMusic: SKAudioNode!
         
     init(stateMachine: GameStateMachine, scoreTracker: ScoreTrackerProtocol) {
         self.stateMachine = stateMachine
@@ -26,6 +28,10 @@ final class GameScene: SKScene, SKPhysicsContactDelegate {
     
     override func didMove(to view: SKView) {
         backgroundColor = .white
+        if let musicURL = Bundle.main.url(forResource: "background-music", withExtension: "mp3") {
+            backgroundMusic = SKAudioNode(url: musicURL)
+            addChild(backgroundMusic)
+        }
     }
     
     override func update(_ currentTime: TimeInterval) {
