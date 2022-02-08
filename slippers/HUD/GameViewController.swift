@@ -1,7 +1,19 @@
 import UIKit
 import SpriteKit
+import GoogleMobileAds
 
-class GameViewController: UIViewController {
+class GameViewController: UIViewController, AdServiceDelegate {
+    func showError() {
+        // TODO
+        print("deu erro")
+
+    }
+    
+    func rewardUser() {
+        // TODO
+        print("deu boa")
+    }
+    
     private lazy var gameView: SKView = {
         let view = SKView()
         #if DEBUG
@@ -20,6 +32,9 @@ class GameViewController: UIViewController {
             stateMachine.currentState = .playing
         }))
     private lazy var gameOverView = GameOverView(actions: .init(
+        watchAd: {
+            self.adService.showRewardAd(in: self)
+        },
         startOver: {
             self.scoreTracker.reset()
             self.renderScene()
@@ -27,12 +42,15 @@ class GameViewController: UIViewController {
         }))
     private let scoreTracker = ScoreTracker()
     
+    private let adService = AdService()
     
     private let stateMachine = GameStateMachine()
+   
     
     override func loadView() {
         view = gameView
     }
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,6 +61,9 @@ class GameViewController: UIViewController {
         stateMachine.addRenderer(renderer: self)
         
         renderScene()
+        
+        adService.delegate = self
+        adService.showRewardAd(in: self)
     }
     
     private func renderScene() {
@@ -68,6 +89,7 @@ class GameViewController: UIViewController {
         scene.scaleMode = .resizeFill
         return scene
     }
+    
 }
 
 

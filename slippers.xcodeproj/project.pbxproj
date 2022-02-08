@@ -13,6 +13,7 @@
 		11329D0327A898F900E0C7D7 /* StarContactHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11329D0227A898F900E0C7D7 /* StarContactHandler.swift */; };
 		11329D0527A8998700E0C7D7 /* PortalContactHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11329D0427A8998700E0C7D7 /* PortalContactHandler.swift */; };
 		11329D0727A8B70A00E0C7D7 /* EntityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11329D0627A8B70A00E0C7D7 /* EntityManager.swift */; };
+		113B586327B1D91A00456959 /* AdService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113B586227B1D91A00456959 /* AdService.swift */; };
 		1143A79527A349CC00075EE6 /* Background.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1143A79427A349CC00075EE6 /* Background.swift */; };
 		1143A79727A34A4B00075EE6 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1143A79627A34A4B00075EE6 /* Game.swift */; };
 		1143A79927A34A7400075EE6 /* Entity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1143A79827A34A7400075EE6 /* Entity.swift */; };
@@ -59,6 +60,7 @@
 		11329D0227A898F900E0C7D7 /* StarContactHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarContactHandler.swift; sourceTree = "<group>"; };
 		11329D0427A8998700E0C7D7 /* PortalContactHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortalContactHandler.swift; sourceTree = "<group>"; };
 		11329D0627A8B70A00E0C7D7 /* EntityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityManager.swift; sourceTree = "<group>"; };
+		113B586227B1D91A00456959 /* AdService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdService.swift; sourceTree = "<group>"; };
 		1143A79427A349CC00075EE6 /* Background.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Background.swift; sourceTree = "<group>"; };
 		1143A79627A34A4B00075EE6 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		1143A79827A34A7400075EE6 /* Entity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entity.swift; sourceTree = "<group>"; };
@@ -223,6 +225,7 @@
 				11329CF827A88D7000E0C7D7 /* HUD */,
 				11329CF627A88D4A00E0C7D7 /* Application */,
 				11737CF427A33B84001BCF8E /* Utils */,
+				113B586227B1D91A00456959 /* AdService.swift */,
 			);
 			path = slippers;
 			sourceTree = "<group>";
@@ -437,6 +440,7 @@
 				1143A79927A34A7400075EE6 /* Entity.swift in Sources */,
 				1143A7A327A362AC00075EE6 /* StarManager.swift in Sources */,
 				11D6B87127AC961600BD6303 /* ScoreTracker.swift in Sources */,
+				113B586327B1D91A00456959 /* AdService.swift in Sources */,
 				11C3EDCA27ADD982004059B2 /* GroundContactHandler.swift in Sources */,
 				11737CE127A33A77001BCF8E /* AppDelegate.swift in Sources */,
 				11737CE327A33A77001BCF8E /* SceneDelegate.swift in Sources */,

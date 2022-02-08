@@ -4,7 +4,7 @@ final class GameOverView: CodedView, CodedViewLifeCycle {
     
     struct Actions {
 //        let buyLives: () -> Void
-//        let watchAd: () -> Void
+        let watchAd: () -> Void
         let startOver: () -> Void
     }
     
@@ -56,6 +56,7 @@ final class GameOverView: CodedView, CodedViewLifeCycle {
     private lazy var watchAdButton: UIButton = {
         let view = UIButton()
         view.configuration = .nijiRoundedRectangle(title: "WATCH AD", imageName: "watch-ads-icon")
+        view.addTarget(self, action: #selector(handleWatchAdTap), for: .touchUpInside)
         return view
     }()
     
@@ -149,5 +150,9 @@ final class GameOverView: CodedView, CodedViewLifeCycle {
     @objc
     private func handleStartOverTap() {
         actions.startOver()
+    }
+    
+    @objc func handleWatchAdTap() {
+        actions.watchAd()
     }
 }
