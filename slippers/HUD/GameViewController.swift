@@ -10,8 +10,9 @@ class GameViewController: UIViewController, AdServiceDelegate {
     }
     
     func rewardUser() {
-        // TODO
-        print("deu boa")
+        scoreTracker.revive()
+        self.renderScene()
+        self.stateMachine.currentState = .playing
     }
     
     private lazy var gameView: SKView = {
@@ -31,6 +32,7 @@ class GameViewController: UIViewController, AdServiceDelegate {
         didTapOnStart: { [stateMachine] in
             stateMachine.currentState = .playing
         }))
+    
     private lazy var gameOverView = GameOverView(actions: .init(
         watchAd: {
             self.adService.showRewardAd(in: self)
@@ -40,6 +42,7 @@ class GameViewController: UIViewController, AdServiceDelegate {
             self.renderScene()
             self.stateMachine.currentState = .playing
         }))
+    
     private let scoreTracker = ScoreTracker()
     
     private let adService = AdService()
@@ -63,7 +66,8 @@ class GameViewController: UIViewController, AdServiceDelegate {
         renderScene()
         
         adService.delegate = self
-        adService.showRewardAd(in: self)
+        self.stateMachine.currentState = .playing
+        self.stateMachine.currentState = .initialScreen
     }
     
     private func renderScene() {
@@ -76,20 +80,17 @@ class GameViewController: UIViewController, AdServiceDelegate {
     // loads the first screen to be displayed
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.stateMachine.currentState = .playing
-        Timer.scheduledTimer(withTimeInterval: 0, repeats: false) { _ in
-            self.stateMachine.currentState = .initialScreen
-        }
+
     }
     
     func createScene() -> GameScene {
-        let scene = GameScene(stateMachine: stateMachine,
-                              scoreTracker: scoreTracker)
+        let scene = GameScene(
+            stateMachine: stateMachine,
+            scoreTracker: scoreTracker)
         scene.anchorPoint = .init(x: 0.5, y: 0.5)
         scene.scaleMode = .resizeFill
         return scene
     }
-    
 }
 
 

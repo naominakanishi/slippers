@@ -6,7 +6,7 @@ final class GameScene: SKScene, SKPhysicsContactDelegate {
     private lazy var game = Game(scene: self,
                                  scoreTracker: scoreTracker)
     
-    private var canRun = true
+    private(set) var canRun = true
     private var lastTime: TimeInterval?
     
     var backgroundMusic: SKAudioNode!

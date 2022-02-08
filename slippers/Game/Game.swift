@@ -14,6 +14,23 @@ final class Game {
     private lazy var scoreEntity = Score(currentPoints: scoreTracker,
                                          node: .init())
     
+//    private lazy var instructionMessage: UILabel = {
+//        let view = UILabel()
+//        view.font = .amatic(.bold, 24)
+//        view.textColor = .white
+//        view.textAlignment = .center
+//        view.text = "JUMP THROUGH AS MANY STARS AS YOU CAN"
+//        return view
+//    }()
+//
+//    private var currentMessageIndex = 0
+//
+//    private var messages: [String] = [
+//        "JUMP THROUGH AS MANY STARS AS YOU CAN",
+//        "USE THE COLOR PORTALS TO GET A SCORE BOOST",
+//        "SET NEW RECORDS GOING HIGHER EVERY TIME",
+//    ]
+    
     private lazy var starManager: StarManager = {
         let node = SKNode()
         return StarManager(
@@ -62,6 +79,31 @@ final class Game {
         self.scoreTracker = scoreTracker
     }
     
+//    private func changeMessage() {
+//        currentMessageIndex += 1
+//        if currentMessageIndex >= messages.count { currentMessageIndex = 0 }
+//        instructionMessage.text = messages[currentMessageIndex]
+//
+//    }
+//
+//    private func fadeIn() {
+//        UIView.animate(withDuration: 2) {
+//            self.instructionMessage.alpha = 1
+//        } completion: { _ in
+//            self.fadeOut()
+//        }
+//
+//    }
+//
+//    private func fadeOut() {
+//        UIView.animate(withDuration: 2) {
+//            self.instructionMessage.alpha = 0
+//        } completion: { _ in
+//            self.changeMessage()
+//            self.fadeIn()
+//        }
+//    }
+    
     func setup() {
         scene.camera = camera
         scene.addChild(camera)
@@ -83,6 +125,8 @@ final class Game {
         scoreEntity.node.position.x = scene.frame.minX + 20 + scoreEntity.node.frame.width / 2
         scoreEntity.node.position.y = scene.frame.maxY - 50 + scoreEntity.node.frame.height / 2
     }
+    
+    
     
     func update(deltaTime: TimeInterval) {
         starManager.update(deltaTime: deltaTime)

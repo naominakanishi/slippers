@@ -2,6 +2,7 @@ import Foundation
 protocol ScoreKeeper {
     var points: Int { get }
     var score: Int { get }
+    var canRestart: Bool { get }
 }
 
 protocol ScoreMultiplier {
@@ -21,10 +22,15 @@ typealias ScoreTrackerProtocol = ScoreKeeper &
 final class ScoreTracker: ScoreTrackerProtocol {
     private(set) var points: Int = 0
     private(set) var score: Int = 0
+    var canRestart: Bool {
+        points > 0 && hasScored
+    }
     
     private(set) var highScore: Int
     private var scoreBasis = 10
     private var scoreMultiplier = 1
+    private var hasScored = false
+    
     
     private let highScoreKey = "HIGH_SCORE"
     
@@ -34,6 +40,7 @@ final class ScoreTracker: ScoreTrackerProtocol {
     }
     
     func handleScore() {
+        hasScored = true
         points += scoreBasis * scoreMultiplier
         score += points
         saveHighScoreIfNeeded()
@@ -49,8 +56,13 @@ final class ScoreTracker: ScoreTrackerProtocol {
     }
     
     func reset() {
+        hasScored = false
         score = 0
         points = 0
+    }
+    
+    func revive() {
+        hasScored = false
     }
     
     private func saveHighScoreIfNeeded() {

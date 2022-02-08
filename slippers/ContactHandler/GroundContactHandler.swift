@@ -16,7 +16,7 @@ final class GroundContactHandler: ContactHandler {
     private func handle(_ playerBody: SKPhysicsBody, groundBody: SKPhysicsBody) {
         guard playerBody.categoryBitMask == CollisionMasks.player,
               groundBody.categoryBitMask == CollisionMasks.ground,
-              scoreKeeper.score > 0
+              scoreKeeper.canRestart
         else { return }
         handleContact()
     }
