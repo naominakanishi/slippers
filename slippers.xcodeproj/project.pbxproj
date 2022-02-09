@@ -33,7 +33,7 @@
 		11737CFA27A33E5F001BCF8E /* GameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11737CF927A33E5F001BCF8E /* GameState.swift */; };
 		11B89C8227B1CAB000E6A085 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 11B89C8127B1CAB000E6A085 /* GoogleService-Info.plist */; };
 		11C3EDCA27ADD982004059B2 /* GroundContactHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C3EDC927ADD982004059B2 /* GroundContactHandler.swift */; };
-		11C3EDCC27AEB7C6004059B2 /* 2-background-music.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 11C3EDCB27AEB7C6004059B2 /* 2-background-music.mp3 */; };
+		11C3EDCC27AEB7C6004059B2 /* background-music.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 11C3EDCB27AEB7C6004059B2 /* background-music.mp3 */; };
 		11C3EDCE27AEB924004059B2 /* hitsound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 11C3EDCD27AEB924004059B2 /* hitsound.mp3 */; };
 		11CC1B4D27A462FD00300723 /* CollisionMasks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11CC1B4C27A462FD00300723 /* CollisionMasks.swift */; };
 		11D6B86727AC47A100BD6303 /* Score.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D6B86627AC47A100BD6303 /* Score.swift */; };
@@ -83,7 +83,7 @@
 		11737CF927A33E5F001BCF8E /* GameState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameState.swift; sourceTree = "<group>"; };
 		11B89C8127B1CAB000E6A085 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		11C3EDC927ADD982004059B2 /* GroundContactHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroundContactHandler.swift; sourceTree = "<group>"; };
-		11C3EDCB27AEB7C6004059B2 /* 2-background-music.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "2-background-music.mp3"; sourceTree = "<group>"; };
+		11C3EDCB27AEB7C6004059B2 /* background-music.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "background-music.mp3"; sourceTree = "<group>"; };
 		11C3EDCD27AEB924004059B2 /* hitsound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = hitsound.mp3; sourceTree = "<group>"; };
 		11CC1B4C27A462FD00300723 /* CollisionMasks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollisionMasks.swift; sourceTree = "<group>"; };
 		11D6B86627AC47A100BD6303 /* Score.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Score.swift; sourceTree = "<group>"; };
@@ -198,7 +198,7 @@
 			children = (
 				11737CE927A33A7B001BCF8E /* Assets.xcassets */,
 				11C3EDCD27AEB924004059B2 /* hitsound.mp3 */,
-				11C3EDCB27AEB7C6004059B2 /* 2-background-music.mp3 */,
+				11C3EDCB27AEB7C6004059B2 /* background-music.mp3 */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -375,7 +375,7 @@
 				11737CEA27A33A7B001BCF8E /* Assets.xcassets in Resources */,
 				11F6C27F27A9B5D4000D7687 /* DepotNewCondensed-Regular.otf in Resources */,
 				11C3EDCE27AEB924004059B2 /* hitsound.mp3 in Resources */,
-				11C3EDCC27AEB7C6004059B2 /* 2-background-music.mp3 in Resources */,
+				11C3EDCC27AEB7C6004059B2 /* background-music.mp3 in Resources */,
 				11F6C27C27A9B5C9000D7687 /* AmaticSC-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -1,8 +1,12 @@
 import UIKit
 import SpriteKit
 import GoogleMobileAds
+import AVFoundation
 
 class GameViewController: UIViewController, AdServiceDelegate {
+    
+    var backgroundSong: AVAudioPlayer?
+    
     func showError() {
         // TODO
         print("deu erro")
@@ -27,12 +31,18 @@ class GameViewController: UIViewController, AdServiceDelegate {
     }()
     
     private lazy var startScreenView = StartScreenView(actions: .init(
-        didTapOnAudioSettings: { },
+        didTapOnAudioSettings: {
+            let controller = SoundConfigViewController(soundConfig: self.soundConfig)
+            self.show(controller, sender: self)
+        },
         //changes current state to playing
         didTapOnStart: { [stateMachine] in
             stateMachine.currentState = .playing
+            self.backgroundSong!.play()
+
         },
-        didTapOnRanking: { }))
+        didTapOnRanking: {}
+    ))
     
     private lazy var gameOverView = GameOverView(actions: .init(
         watchAd: {
@@ -42,12 +52,13 @@ class GameViewController: UIViewController, AdServiceDelegate {
             self.scoreTracker.reset()
             self.renderScene()
             self.stateMachine.currentState = .playing
+            self.backgroundSong?.play()
+
         }))
     
     private let scoreTracker = ScoreTracker()
-    
+    private let soundConfig = SoundConfig()
     private let adService = AdService()
-    
     private let stateMachine = GameStateMachine()
    
     
@@ -62,6 +73,14 @@ class GameViewController: UIViewController, AdServiceDelegate {
         addStateView(startScreenView)
         addStateView(gameOverView)
         
+        let path = Bundle.main.path(forResource: "background-music.mp3", ofType:nil)!
+        let url = URL(fileURLWithPath: path)
+
+        do {
+            backgroundSong = try AVAudioPlayer(contentsOf: url)
+        } catch {
+            // couldn't load file :(
+        }
         stateMachine.addRenderer(renderer: self)
         
         renderScene()
@@ -90,7 +109,8 @@ class GameViewController: UIViewController, AdServiceDelegate {
     func createScene() -> GameScene {
         let scene = GameScene(
             stateMachine: stateMachine,
-            scoreTracker: scoreTracker)
+            scoreTracker: scoreTracker,
+            soundConfig: soundConfig)
         scene.anchorPoint = .init(x: 0.5, y: 0.5)
         scene.scaleMode = .resizeFill
         return scene
@@ -116,6 +136,7 @@ extension GameViewController: StateRenderer {
         case .playing:
             break
         case .gameOver:
+            backgroundSong?.stop()
             gameOverView.isHidden = false
             gameOverView.alpha = 0
             gameOverView.configure(using: .init(

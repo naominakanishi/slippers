@@ -52,6 +52,13 @@ final class StartScreenView: CodedView, CodedViewLifeCycle {
         return label
     }()
     
+    private lazy var highestScoreTitle: UILabel = {
+        let label = UILabel()
+        label.text = "Highest Score"
+        configureInfoViewText(title: label)
+        return label
+    }()
+    
     private lazy var highestScoreLabel: UILabel = {
         let label = UILabel()
         label.text = "Highest Score"
@@ -62,7 +69,6 @@ final class StartScreenView: CodedView, CodedViewLifeCycle {
     private lazy var startButton: UIButton = {
         let view = UIButton()
         view.configuration = .nijiCapsule(title: "START GAME", imageName: "start-icon")
-//        view.configuration?.contentInsets = .init(top: 20, leading: 20, bottom: 20, trailing: 20)
         view.configuration?.baseBackgroundColor = .nijiColors.darkGray
         view.configuration?.attributedTitle?.foregroundColor = .white
         view.addTarget(self, action: #selector(handleStartTap), for: .touchUpInside)
@@ -100,6 +106,7 @@ final class StartScreenView: CodedView, CodedViewLifeCycle {
         addSubview(currentLives)
         currentLives.addSubview(currentLivesLabel)
         addSubview(highestScore)
+        highestScore.addSubview(highestScoreTitle)
         highestScore.addSubview(highestScoreLabel)
         
         addSubview(startButton)
@@ -150,13 +157,19 @@ final class StartScreenView: CodedView, CodedViewLifeCycle {
         }
         
         currentLivesLabel.layout {
-            $0.topAnchor.constraint(equalTo: currentLives.topAnchor, constant: 12)
+            $0.topAnchor.constraint(equalTo: currentLives.topAnchor, constant: 20)
             $0.centerXAnchor.constraint(equalTo: currentLives.centerXAnchor)
             $0.widthAnchor.constraint(equalTo: currentLives.widthAnchor)
         }
         
+        highestScoreTitle.layout {
+            $0.topAnchor.constraint(equalTo: highestScore.topAnchor, constant: 20)
+            $0.centerXAnchor.constraint(equalTo: highestScore.centerXAnchor)
+            $0.widthAnchor.constraint(equalTo: highestScore.widthAnchor)
+        }
+        
         highestScoreLabel.layout {
-            $0.topAnchor.constraint(equalTo: highestScore.topAnchor, constant: 12)
+            $0.bottomAnchor.constraint(equalTo: highestScore.bottomAnchor, constant: -20)
             $0.centerXAnchor.constraint(equalTo: highestScore.centerXAnchor)
             $0.widthAnchor.constraint(equalTo: highestScore.widthAnchor)
         }

@@ -13,7 +13,7 @@ final class StarManager: EntityManager<Star> {
         let mod50 = CGFloat(scoreTracker.points.quotientAndRemainder(dividingBy: 50).quotient)
         let min = 0.05
         let scaleFactor = 0.0005
-        return max(0.2 - scaleFactor * mod50, min)
+        return max(0.18 - scaleFactor * mod50, min)
     }
     
     override func makeEntity() -> Star {

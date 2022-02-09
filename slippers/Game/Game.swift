@@ -1,6 +1,7 @@
 import SpriteKit
 
 final class Game {
+    private let soundConfig: SoundConfig
     private let scoreTracker: ScoreTrackerProtocol
     private let scene: GameScene
     private let camera = SKCameraNode()
@@ -42,7 +43,8 @@ final class Game {
             starManager: starManager,
             player: player,
             pointSpawner: point,
-            scoreTracker: scoreTracker),
+            scoreTracker: scoreTracker,
+            soundConfig: soundConfig),
         PortalContactHandler(
             player: player,
             scene: self,
@@ -77,12 +79,13 @@ final class Game {
         "SET NEW RECORDS GOING HIGHER EVERY TIME",
     ]
     
-    init(scene: GameScene, scoreTracker: ScoreTrackerProtocol) {
+    init(scene: GameScene,
+         scoreTracker: ScoreTrackerProtocol,
+         soundConfig: SoundConfig) {
         self.scene = scene
         self.scoreTracker = scoreTracker
+        self.soundConfig = soundConfig
     }
-    
-    
     
     private func changeMessage() {
         currentMessageIndex += 1
@@ -116,17 +119,13 @@ final class Game {
        
         
         instructionLabel.run(.repeatForever(.sequence([
-            .fadeOut(withDuration: 2),
+            .fadeOut(withDuration: 1.3),
             .run {
                 self.changeMessage()
             },
-            .fadeIn(withDuration: 2)
+            .fadeIn(withDuration: 1.3)
         ])))
         
-        let timer = Timer.scheduledTimer(withTimeInterval: 20.0, repeats: true) { timer in
-            self.instructionLabel.removeAllActions()
-            self.instructionLabel.removeFromParent()
-        }
     }
     
     func update(deltaTime: TimeInterval) {
@@ -144,6 +143,8 @@ final class Game {
     func touchDown(at location: CGPoint) {
         if player.physicsBody?.velocity == .zero {
             player.impulse()
+            self.instructionLabel.removeAllActions()
+            self.instructionLabel.removeFromParent()
         }
     }
     

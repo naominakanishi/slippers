@@ -3,17 +3,22 @@ import SpriteKit
 final class GameScene: SKScene, SKPhysicsContactDelegate {
     private let scoreTracker: ScoreTrackerProtocol
     private let stateMachine: GameStateMachine
+    private let soundConfig: SoundConfig
     private lazy var game = Game(scene: self,
-                                 scoreTracker: scoreTracker)
+                                 scoreTracker: scoreTracker,
+                                 soundConfig: soundConfig)
     
     private(set) var canRun = true
     private var lastTime: TimeInterval?
     
     var backgroundMusic: SKAudioNode!
         
-    init(stateMachine: GameStateMachine, scoreTracker: ScoreTrackerProtocol) {
+    init(stateMachine: GameStateMachine,
+         scoreTracker: ScoreTrackerProtocol,
+         soundConfig: SoundConfig) {
         self.stateMachine = stateMachine
         self.scoreTracker = scoreTracker
+        self.soundConfig = soundConfig
         super.init(size: .zero)
         physicsWorld.contactDelegate = self
         isPaused = true
@@ -28,10 +33,7 @@ final class GameScene: SKScene, SKPhysicsContactDelegate {
     
     override func didMove(to view: SKView) {
         backgroundColor = .white
-        if let musicURL = Bundle.main.url(forResource: "background-music", withExtension: "mp3") {
-            backgroundMusic = SKAudioNode(url: musicURL)
-            addChild(backgroundMusic)
-        }
+
     }
     
     override func update(_ currentTime: TimeInterval) {

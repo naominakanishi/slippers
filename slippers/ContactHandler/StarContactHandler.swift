@@ -10,15 +10,21 @@ class StarContactHandler: ContactHandler {
     private let player: Player
     private let pointSpawner: PointSpawner
     private let scoreTracker: Scorer
+    private let soundConfig: SoundConfig
     
     var hitSound: SKAudioNode?
 
     
-    init(starManager: StarManager, player: Player, pointSpawner: PointSpawner, scoreTracker: Scorer) {
+    init(starManager: StarManager,
+         player: Player,
+         pointSpawner: PointSpawner,
+         scoreTracker: Scorer,
+         soundConfig: SoundConfig) {
         self.starManager = starManager
         self.player = player
         self.pointSpawner = pointSpawner
         self.scoreTracker = scoreTracker
+        self.soundConfig = soundConfig
     }
     
     func handle(contact: SKPhysicsContact) {
@@ -27,6 +33,7 @@ class StarContactHandler: ContactHandler {
     }
     
     func playHitsound(node: SKNode) {
+        guard soundConfig.isSoundOn else { return }
         if let musicURL = Bundle.main.url(forResource: "hitsound", withExtension: "mp3") {
             //hitSound?.removeFromParent()
             hitSound = SKAudioNode(url: musicURL)
@@ -36,7 +43,7 @@ class StarContactHandler: ContactHandler {
             node.run(SKAction.sequence([
                 SKAction.wait(forDuration: 0.1),
                 SKAction.run({
-                    self.hitSound?.run(SKAction.play())
+                    self.hitSound?.run(.play())
                 })
             ]))
         }
@@ -55,8 +62,6 @@ class StarContactHandler: ContactHandler {
             self.scoreTracker.handleScore()
             self.pointSpawner.spawn(at: previousPosition)
             self.playHitsound(node: node)
-            
-            
         }
     }
 }
