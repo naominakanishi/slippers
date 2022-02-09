@@ -13,6 +13,7 @@
 		11329D0327A898F900E0C7D7 /* StarContactHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11329D0227A898F900E0C7D7 /* StarContactHandler.swift */; };
 		11329D0527A8998700E0C7D7 /* PortalContactHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11329D0427A8998700E0C7D7 /* PortalContactHandler.swift */; };
 		11329D0727A8B70A00E0C7D7 /* EntityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11329D0627A8B70A00E0C7D7 /* EntityManager.swift */; };
+		1136C10E27B34C7E00267D57 /* SoundConfigView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1136C10D27B34C7E00267D57 /* SoundConfigView.swift */; };
 		113B586327B1D91A00456959 /* AdService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113B586227B1D91A00456959 /* AdService.swift */; };
 		1143A79527A349CC00075EE6 /* Background.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1143A79427A349CC00075EE6 /* Background.swift */; };
 		1143A79727A34A4B00075EE6 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1143A79627A34A4B00075EE6 /* Game.swift */; };
@@ -60,6 +61,7 @@
 		11329D0227A898F900E0C7D7 /* StarContactHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarContactHandler.swift; sourceTree = "<group>"; };
 		11329D0427A8998700E0C7D7 /* PortalContactHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortalContactHandler.swift; sourceTree = "<group>"; };
 		11329D0627A8B70A00E0C7D7 /* EntityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityManager.swift; sourceTree = "<group>"; };
+		1136C10D27B34C7E00267D57 /* SoundConfigView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundConfigView.swift; sourceTree = "<group>"; };
 		113B586227B1D91A00456959 /* AdService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdService.swift; sourceTree = "<group>"; };
 		1143A79427A349CC00075EE6 /* Background.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Background.swift; sourceTree = "<group>"; };
 		1143A79627A34A4B00075EE6 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
@@ -127,6 +129,7 @@
 		11329CF627A88D4A00E0C7D7 /* Application */ = {
 			isa = PBXGroup;
 			children = (
+				113B586227B1D91A00456959 /* AdService.swift */,
 				11737CE027A33A77001BCF8E /* AppDelegate.swift */,
 				11737CE227A33A77001BCF8E /* SceneDelegate.swift */,
 				11737CEB27A33A7B001BCF8E /* LaunchScreen.storyboard */,
@@ -190,6 +193,16 @@
 			path = Managers;
 			sourceTree = "<group>";
 		};
+		1136C10F27B3599F00267D57 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				11737CE927A33A7B001BCF8E /* Assets.xcassets */,
+				11C3EDCD27AEB924004059B2 /* hitsound.mp3 */,
+				11C3EDCB27AEB7C6004059B2 /* 2-background-music.mp3 */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		11737CD427A33A77001BCF8E = {
 			isa = PBXGroup;
 			children = (
@@ -211,21 +224,18 @@
 		11737CDF27A33A77001BCF8E /* slippers */ = {
 			isa = PBXGroup;
 			children = (
-				11B89C8127B1CAB000E6A085 /* GoogleService-Info.plist */,
-				11C3EDCD27AEB924004059B2 /* hitsound.mp3 */,
-				11C3EDCB27AEB7C6004059B2 /* 2-background-music.mp3 */,
-				11737CE927A33A7B001BCF8E /* Assets.xcassets */,
-				11F6C28027A9B805000D7687 /* DesignSystem */,
-				11329D0827A8B70D00E0C7D7 /* Managers */,
+				11329CF627A88D4A00E0C7D7 /* Application */,
 				11329D0127A898E700E0C7D7 /* ContactHandler */,
-				11737CEE27A33A7B001BCF8E /* Info.plist */,
-				11F6C27627A9A8CD000D7687 /* Spawners */,
+				11F6C28027A9B805000D7687 /* DesignSystem */,
 				11329CFA27A88D9600E0C7D7 /* Entities */,
 				11329CF927A88D8500E0C7D7 /* Game */,
 				11329CF827A88D7000E0C7D7 /* HUD */,
-				11329CF627A88D4A00E0C7D7 /* Application */,
+				11329D0827A8B70D00E0C7D7 /* Managers */,
+				11F6C27627A9A8CD000D7687 /* Spawners */,
+				1136C10F27B3599F00267D57 /* Resources */,
 				11737CF427A33B84001BCF8E /* Utils */,
-				113B586227B1D91A00456959 /* AdService.swift */,
+				11737CEE27A33A7B001BCF8E /* Info.plist */,
+				11B89C8127B1CAB000E6A085 /* GoogleService-Info.plist */,
 			);
 			path = slippers;
 			sourceTree = "<group>";
@@ -246,6 +256,7 @@
 				11D6B86B27AC837100BD6303 /* StartScreenView.swift */,
 				11D6B87227AC9AB700BD6303 /* GameOverView.swift */,
 				11D6B87627ACA72700BD6303 /* ScoreView.swift */,
+				1136C10D27B34C7E00267D57 /* SoundConfigView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -436,6 +447,7 @@
 				11F6C27827A9A8E5000D7687 /* DoubleScoreZoneSpawner.swift in Sources */,
 				11737CE527A33A78001BCF8E /* GameViewController.swift in Sources */,
 				11F6C27527A9A117000D7687 /* PointSpawner.swift in Sources */,
+				1136C10E27B34C7E00267D57 /* SoundConfigView.swift in Sources */,
 				11737CFA27A33E5F001BCF8E /* GameState.swift in Sources */,
 				1143A79927A34A7400075EE6 /* Entity.swift in Sources */,
 				1143A7A327A362AC00075EE6 /* StarManager.swift in Sources */,

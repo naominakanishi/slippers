@@ -4,7 +4,7 @@ extension UIButton.Configuration {
     static func nijiCapsule(title: String, imageName: String) -> Self {
         var configuration: Self = .filled()
         configuration.cornerStyle = .capsule
-        configuration.imagePadding = 10
+        configuration.imagePadding = 20
         configuration.baseBackgroundColor = .white
         var text: AttributedString = .init(stringLiteral: title)
         text.font = .amatic(.bold, 28)

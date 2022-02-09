@@ -1,4 +1,5 @@
 import Foundation
+import SpriteKit
 protocol ScoreKeeper {
     var points: Int { get }
     var score: Int { get }

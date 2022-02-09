@@ -31,7 +31,8 @@ class GameViewController: UIViewController, AdServiceDelegate {
         //changes current state to playing
         didTapOnStart: { [stateMachine] in
             stateMachine.currentState = .playing
-        }))
+        },
+        didTapOnRanking: { }))
     
     private lazy var gameOverView = GameOverView(actions: .init(
         watchAd: {
@@ -67,7 +68,10 @@ class GameViewController: UIViewController, AdServiceDelegate {
         
         adService.delegate = self
         self.stateMachine.currentState = .playing
-        self.stateMachine.currentState = .initialScreen
+        Timer.scheduledTimer(withTimeInterval: 0, repeats: false) { _ in
+            
+            self.stateMachine.currentState = .initialScreen
+        }
     }
     
     private func renderScene() {
@@ -103,6 +107,7 @@ extension GameViewController: StateRenderer {
         
         switch state {
         case .initialScreen:
+            startScreenView.configure(highScore: scoreTracker.highScore)
             startScreenView.isHidden = false
             startScreenView.alpha = 0
             UIView.animate(withDuration: 0.4) {

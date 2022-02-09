@@ -13,24 +13,6 @@ final class Game {
     private lazy var doubleScoreMessage = DoubleScoreZoneSpawner(scene: scene)
     private lazy var scoreEntity = Score(currentPoints: scoreTracker,
                                          node: .init())
-    
-//    private lazy var instructionMessage: UILabel = {
-//        let view = UILabel()
-//        view.font = .amatic(.bold, 24)
-//        view.textColor = .white
-//        view.textAlignment = .center
-//        view.text = "JUMP THROUGH AS MANY STARS AS YOU CAN"
-//        return view
-//    }()
-//
-//    private var currentMessageIndex = 0
-//
-//    private var messages: [String] = [
-//        "JUMP THROUGH AS MANY STARS AS YOU CAN",
-//        "USE THE COLOR PORTALS TO GET A SCORE BOOST",
-//        "SET NEW RECORDS GOING HIGHER EVERY TIME",
-//    ]
-    
     private lazy var starManager: StarManager = {
         let node = SKNode()
         return StarManager(
@@ -73,36 +55,41 @@ final class Game {
     ]
     
     var onGameOver: (() -> Void)?
+    private var currentMessageIndex = 0
+    
+    private let label = SKLabelNode(text: "asd")
+    
+    private lazy var instructionLabel: SKLabelNode = {
+        let label = SKLabelNode()
+        label.fontColor = .black
+        label.font = .amatic(style: .bold, size: 28)
+        label.numberOfLines = 0
+        label.verticalAlignmentMode = .center
+        label.horizontalAlignmentMode = .center
+        label.position.y = scene.frame.midY
+        label.zPosition = .infinity
+        return label
+    }()
+    
+    private var messages: [String] = [
+        "JUMP THROUGH AS MANY STARS AS YOU CAN",
+        "USE THE COLOR PORTALS TO GET A SCORE BOOST",
+        "SET NEW RECORDS GOING HIGHER EVERY TIME",
+    ]
     
     init(scene: GameScene, scoreTracker: ScoreTrackerProtocol) {
         self.scene = scene
         self.scoreTracker = scoreTracker
     }
     
-//    private func changeMessage() {
-//        currentMessageIndex += 1
-//        if currentMessageIndex >= messages.count { currentMessageIndex = 0 }
-//        instructionMessage.text = messages[currentMessageIndex]
-//
-//    }
-//
-//    private func fadeIn() {
-//        UIView.animate(withDuration: 2) {
-//            self.instructionMessage.alpha = 1
-//        } completion: { _ in
-//            self.fadeOut()
-//        }
-//
-//    }
-//
-//    private func fadeOut() {
-//        UIView.animate(withDuration: 2) {
-//            self.instructionMessage.alpha = 0
-//        } completion: { _ in
-//            self.changeMessage()
-//            self.fadeIn()
-//        }
-//    }
+    
+    
+    private func changeMessage() {
+        currentMessageIndex += 1
+        if currentMessageIndex >= messages.count { currentMessageIndex = 0 }
+        instructionLabel.text = messages[currentMessageIndex]
+
+    }
     
     func setup() {
         scene.camera = camera
@@ -124,9 +111,23 @@ final class Game {
         camera.addChild(scoreEntity.node)
         scoreEntity.node.position.x = scene.frame.minX + 20 + scoreEntity.node.frame.width / 2
         scoreEntity.node.position.y = scene.frame.maxY - 50 + scoreEntity.node.frame.height / 2
+        
+        scene.addChild(instructionLabel)
+       
+        
+        instructionLabel.run(.repeatForever(.sequence([
+            .fadeOut(withDuration: 2),
+            .run {
+                self.changeMessage()
+            },
+            .fadeIn(withDuration: 2)
+        ])))
+        
+        let timer = Timer.scheduledTimer(withTimeInterval: 20.0, repeats: true) { timer in
+            self.instructionLabel.removeAllActions()
+            self.instructionLabel.removeFromParent()
+        }
     }
-    
-    
     
     func update(deltaTime: TimeInterval) {
         starManager.update(deltaTime: deltaTime)

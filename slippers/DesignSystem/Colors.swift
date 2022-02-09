@@ -8,6 +8,10 @@ enum Colors {
     static let red: UIColor = .init(hex: 0xFC6F6B)
     static let purple: UIColor = .init(hex: 0x9260FB)
     static let orange: UIColor = .init(hex: 0xFF954B)
+    static let darkGray: UIColor = .init(hex: 0x454545)
+    static let lightGray: UIColor = .init(hex: 0xF4F4F4)
+    static let black: UIColor = .init(hex: 0x121212)
+    static let white: UIColor = .init(hex: 0xFEFEFE)
 
     static var allColors: [UIColor] {[
         Colors.green,
