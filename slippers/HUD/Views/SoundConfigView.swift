@@ -4,8 +4,6 @@ final class SoundConfigViewController: UIViewController {
     
     private let soundConfig: SoundConfigService
     
-    private var configView: SoundConfigView? { view as? SoundConfigView }
-    
     init(soundConfig: SoundConfigService) {
         self.soundConfig = soundConfig
         super.init(nibName: nil, bundle: nil)
@@ -137,6 +135,10 @@ final class SoundConfigView: CodedView, CodedViewLifeCycle {
         backgroundColor = .nijiColors.black.withAlphaComponent(0.8)
         soundToggle.isOn = model.isSoundOn
         musicToggle.isOn = model.isMusicOn
+        let gesture = UITapGestureRecognizer(
+            target: self, action: #selector(handleBackButton))
+        gesture.numberOfTapsRequired = 1
+        addGestureRecognizer(gesture)
     }
     
     func configureLabelSettings(label: UILabel) {
