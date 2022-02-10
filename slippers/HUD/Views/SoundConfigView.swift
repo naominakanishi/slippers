@@ -1,36 +1,12 @@
 import UIKit
 
-final class SoundConfig {
-    
-    private let soundFlagKey = "soundEnabled"
-    private let musicFlagKey = "musicEnabled"
-    
-    private(set) var isSoundOn: Bool
-    private(set) var isMusicOn: Bool
-    
-    init() {
-        isSoundOn = UserDefaults.standard.bool(forKey: soundFlagKey)
-        isMusicOn = UserDefaults.standard.bool(forKey: musicFlagKey)
-    }
-    
-    func updateSoundState(_ isOn: Bool) {
-        isSoundOn = isOn
-        UserDefaults.standard.set(isOn, forKey: soundFlagKey)
-    }
-    
-    func updateMusicState(_ isOn: Bool) {
-        isMusicOn = isOn
-        UserDefaults.standard.set(isOn, forKey: musicFlagKey)
-    }
-}
-
 final class SoundConfigViewController: UIViewController {
     
-    private let soundConfig: SoundConfig
+    private let soundConfig: SoundConfigService
     
     private var configView: SoundConfigView? { view as? SoundConfigView }
     
-    init(soundConfig: SoundConfig) {
+    init(soundConfig: SoundConfigService) {
         self.soundConfig = soundConfig
         super.init(nibName: nil, bundle: nil)
     }
@@ -126,8 +102,8 @@ final class SoundConfigView: CodedView, CodedViewLifeCycle {
     
     func constraintSubviews() {
         backButton.layout {
-            $0.topAnchor.constraint(equalTo: topAnchor)
-            $0.leadingAnchor.constraint(equalTo: leadingAnchor)
+            $0.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 20)
+            $0.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20)
         }
         containerView.layout {
             $0.topAnchor.constraint(equalTo: soundToggle.topAnchor, constant: -10)
@@ -186,7 +162,7 @@ final class SoundConfigView: CodedView, CodedViewLifeCycle {
     
     @objc
     private func handleBackButton() {
-       // actions.didTapOnBack
+        actions.didTapOnBack()
     }
 }
 

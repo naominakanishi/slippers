@@ -8,7 +8,7 @@ class GameViewController: UIViewController {
     var backgroundSong: AVAudioPlayer?
     
     private let scoreTracker = ScoreService()
-    private let soundConfig = SoundConfig()
+    private let soundConfig = SoundConfigService()
     private let adService = AdService()
     private let stateMachine = GameStateMachine()
     private let musicService = MusicService()
@@ -81,7 +81,6 @@ class GameViewController: UIViewController {
         adService.delegate = self
         self.stateMachine.currentState = .playing
         Timer.scheduledTimer(withTimeInterval: 0, repeats: false) { _ in
-            
             self.stateMachine.currentState = .initialScreen
         }
     }

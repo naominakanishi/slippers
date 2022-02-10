@@ -3,7 +3,7 @@ import SpriteKit
 final class GameScene: SKScene, SKPhysicsContactDelegate {
     private let scoreTracker: ScoreServiceProtocol
     private let stateMachine: GameStateMachine
-    private let soundConfig: SoundConfig
+    private let soundConfig: SoundConfigService
     private lazy var game = Game(scene: self,
                                  scoreTracker: scoreTracker,
                                  soundConfig: soundConfig)
@@ -15,7 +15,7 @@ final class GameScene: SKScene, SKPhysicsContactDelegate {
         
     init(stateMachine: GameStateMachine,
          scoreTracker: ScoreServiceProtocol,
-         soundConfig: SoundConfig) {
+         soundConfig: SoundConfigService) {
         self.stateMachine = stateMachine
         self.scoreTracker = scoreTracker
         self.soundConfig = soundConfig

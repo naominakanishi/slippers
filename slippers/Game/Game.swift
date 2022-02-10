@@ -1,7 +1,7 @@
 import SpriteKit
 
 final class Game {
-    private let soundConfig: SoundConfig
+    private let soundConfig: SoundConfigService
     private let scoreTracker: ScoreServiceProtocol
     private let scene: GameScene
     private let camera = SKCameraNode()
@@ -82,7 +82,7 @@ final class Game {
     
     init(scene: GameScene,
          scoreTracker: ScoreServiceProtocol,
-         soundConfig: SoundConfig) {
+         soundConfig: SoundConfigService) {
         self.scene = scene
         self.scoreTracker = scoreTracker
         self.soundConfig = soundConfig

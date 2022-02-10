@@ -10,7 +10,7 @@ class StarContactHandler: ContactHandler {
     private let player: Player
     private let pointSpawner: PointSpawner
     private let scoreTracker: Scorer
-    private let soundConfig: SoundConfig
+    private let soundConfig: SoundConfigService
     private let removeInstructions: () -> Void
     
     var hitSound: SKAudioNode?
@@ -19,7 +19,7 @@ class StarContactHandler: ContactHandler {
          player: Player,
          pointSpawner: PointSpawner,
          scoreTracker: Scorer,
-         soundConfig: SoundConfig,
+         soundConfig: SoundConfigService,
          removeInstructions: @escaping () -> Void) {
         self.starManager = starManager
         self.player = player
