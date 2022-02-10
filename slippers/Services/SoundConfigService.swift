@@ -1,5 +1,9 @@
 import Foundation
 
+protocol SoundConfigServiceDelegate: AnyObject {
+    func musicConfigDidChange()
+}
+
 final class SoundConfigService {
     
     private let soundFlagKey = "soundEnabled"
@@ -7,6 +11,8 @@ final class SoundConfigService {
     
     private(set) var isSoundOn: Bool
     private(set) var isMusicOn: Bool
+    
+    weak var delegate: SoundConfigServiceDelegate?
     
     init() {
         isSoundOn = UserDefaults.standard.bool(forKey: soundFlagKey)
@@ -21,5 +27,6 @@ final class SoundConfigService {
     func updateMusicState(_ isOn: Bool) {
         isMusicOn = isOn
         UserDefaults.standard.set(isOn, forKey: musicFlagKey)
+        delegate?.musicConfigDidChange()
     }
 }

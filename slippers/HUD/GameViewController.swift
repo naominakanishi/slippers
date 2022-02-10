@@ -5,13 +5,11 @@ import AVFoundation
 
 class GameViewController: UIViewController {
     
-    var backgroundSong: AVAudioPlayer?
-    
     private let scoreTracker = ScoreService()
     private let soundConfig = SoundConfigService()
     private let adService = AdService()
     private let stateMachine = GameStateMachine()
-    private let musicService = MusicService()
+    private lazy var musicService = MusicService(soundConfig: soundConfig)
     
     // MARK: - Views
     
@@ -36,8 +34,7 @@ class GameViewController: UIViewController {
         //changes current state to playing
         didTapOnStart: { [stateMachine] in
             stateMachine.currentState = .playing
-            self.backgroundSong!.play()
-
+            self.musicService.play()
         },
         didTapOnRanking: {}
     ))
@@ -50,8 +47,7 @@ class GameViewController: UIViewController {
             self.scoreTracker.reset()
             self.renderScene()
             self.stateMachine.currentState = .playing
-            self.backgroundSong?.play()
-
+            self.musicService.play()
         }))
     
     // MARK: - Controller lifecycle
@@ -66,14 +62,8 @@ class GameViewController: UIViewController {
         addStateView(startScreenView)
         addStateView(gameOverView)
         
-        let path = Bundle.main.path(forResource: "background-music.mp3", ofType:nil)!
-        let url = URL(fileURLWithPath: path)
 
-        do {
-            backgroundSong = try AVAudioPlayer(contentsOf: url)
-        } catch {
-            // couldn't load file :(
-        }
+        
         stateMachine.addRenderer(renderer: self)
         
         renderScene()
@@ -138,7 +128,7 @@ extension GameViewController: StateRenderer {
         }
     }
     private func renderGameOver() {
-        backgroundSong?.stop()
+        musicService.stop()
         gameOverView.isHidden = false
         gameOverView.alpha = 0
         gameOverView.configure(using: .init(
