@@ -77,7 +77,7 @@ final class GameOverView: CodedView, CodedViewLifeCycle {
     
     func addSubviews() {
         addSubview(cardView)
-        cardView.addSubview(playerImageView)
+        addSubview(playerImageView)
         cardView.addSubview(scoresStackView)
         scoresStackView.addArrangedSubview(currentScoreView)
         scoresStackView.addArrangedSubview(highScoreView)
@@ -92,7 +92,6 @@ final class GameOverView: CodedView, CodedViewLifeCycle {
             $0.centerXAnchor.constraint(equalTo: centerXAnchor)
             $0.centerYAnchor.constraint(equalTo: centerYAnchor)
             $0.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.8)
-//            $0.heightAnchor.constraint(lessThanOrEqualTo: heightAnchor, multiplier: 0.8)
         }
         
         playerImageView.layout {
@@ -103,7 +102,7 @@ final class GameOverView: CodedView, CodedViewLifeCycle {
         }
         
         scoresStackView.layout {
-            $0.topAnchor.constraint(equalTo: playerImageView.bottomAnchor, constant: 20)
+            $0.topAnchor.constraint(equalTo: cardView.topAnchor, constant: 30)
             $0.widthAnchor.constraint(equalTo: callToActionLabel.widthAnchor)
             $0.centerXAnchor.constraint(equalTo: cardView.centerXAnchor)
         }

@@ -91,7 +91,7 @@ class GameViewController: UIViewController, AdServiceDelegate {
         self.stateMachine.currentState = .playing
         Timer.scheduledTimer(withTimeInterval: 0, repeats: false) { _ in
             
-            self.stateMachine.currentState = .initialScreen
+            self.stateMachine.currentState = .gameOver
         }
     }
     
