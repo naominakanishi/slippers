@@ -40,13 +40,16 @@ final class SoundConfigViewController: UIViewController {
     }
     
     override func loadView() {
-        view = SoundConfigView(actions: .init(
+        view = SoundConfigView(
+        actions: .init(
             didChangeSoundToggle: soundConfig.updateSoundState,
-            didChangeMusicToggle: soundConfig.updateMusicState),
-                               model: .init(
-                                isSoundOn: soundConfig.isSoundOn,
-                                isMusicOn: soundConfig.isMusicOn
-                               ))
+            didChangeMusicToggle: soundConfig.updateMusicState,
+            didTapOnBack: { self.dismiss(animated: true, completion: nil)}
+        ),
+        model: .init(
+            isSoundOn: soundConfig.isSoundOn,
+            isMusicOn: soundConfig.isMusicOn)
+        )
     }
 }
 
@@ -54,12 +57,19 @@ final class SoundConfigView: CodedView, CodedViewLifeCycle {
     struct Actions {
         let didChangeSoundToggle: (Bool) -> Void
         let didChangeMusicToggle: (Bool) -> Void
+        let didTapOnBack: () -> Void
     }
     
     struct Model {
         let isSoundOn: Bool
         let isMusicOn: Bool
     }
+    
+    private lazy var containerView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .blue
+        return view
+    }()
     
     private lazy var soundToggle: UISwitch = {
         let view = UISwitch()
@@ -87,6 +97,15 @@ final class SoundConfigView: CodedView, CodedViewLifeCycle {
         return label
     }()
     
+    private lazy var backButton: UIButton = {
+        let view = UIButton()
+        view.configuration = .nijiText(
+            title: "BACK TO MENU",
+            leadingIcon: .init(systemName: "chevron.left"))
+        backButton.addTarget(self, action: #selector(handleBackButton), for: .touchUpInside)
+        return view
+    }()
+    
     private let model: Model
     private let actions: Actions
     
@@ -97,13 +116,25 @@ final class SoundConfigView: CodedView, CodedViewLifeCycle {
     }
     
     func addSubviews() {
-        addSubview(soundToggle)
-        addSubview(musicToggle)
-        addSubview(soundEffectsLabel)
-        addSubview(musicLabel)
+        addSubview(containerView)
+        addSubview(backButton)
+        containerView.addSubview(soundToggle)
+        containerView.addSubview(musicToggle)
+        containerView.addSubview(soundEffectsLabel)
+        containerView.addSubview(musicLabel)
     }
     
     func constraintSubviews() {
+        backButton.layout {
+            $0.topAnchor.constraint(equalTo: topAnchor)
+            $0.leadingAnchor.constraint(equalTo: leadingAnchor)
+        }
+        containerView.layout {
+            $0.topAnchor.constraint(equalTo: soundToggle.topAnchor, constant: -10)
+            $0.leadingAnchor.constraint(equalTo: soundToggle.leadingAnchor, constant: -10)
+            $0.trailingAnchor.constraint(equalTo: musicLabel.trailingAnchor, constant: 10)
+            $0.bottomAnchor.constraint(equalTo: musicToggle.bottomAnchor, constant: 10)
+        }
 
         soundToggle.layout {
             $0.bottomAnchor.constraint(equalTo: centerYAnchor, constant: -15)
@@ -136,6 +167,7 @@ final class SoundConfigView: CodedView, CodedViewLifeCycle {
         label.font = .amatic(.bold, 28)
         label.textColor = .nijiColors.white
         label.textAlignment = .right
+        backgroundColor = .clear
     }
     
     @objc
@@ -151,4 +183,10 @@ final class SoundConfigView: CodedView, CodedViewLifeCycle {
             break
         }
     }
+    
+    @objc
+    private func handleBackButton() {
+       // actions.didTapOnBack
+    }
 }
+

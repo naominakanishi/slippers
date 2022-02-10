@@ -26,4 +26,18 @@ extension UIButton.Configuration {
         configuration.image = UIImage(named: imageName)
         return configuration
     }
+    
+    static func nijiText(title: String, leadingIcon: UIImage?) -> Self {
+        var configuration: Self = .plain()
+        
+        var text: AttributedString = .init(stringLiteral: title)
+        text.font = .amatic(.bold, 28)
+        text.foregroundColor = .white
+        
+        configuration.attributedTitle = text
+        configuration.image = leadingIcon
+        configuration.imageColorTransformer = .preferredTint
+        configuration.baseForegroundColor = .white
+        return configuration
+    }
 }

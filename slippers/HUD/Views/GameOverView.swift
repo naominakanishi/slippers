@@ -28,12 +28,13 @@ final class GameOverView: CodedView, CodedViewLifeCycle {
     private lazy var playerImageView: UIImageView = {
         let view = UIImageView()
         view.image = .init(named: "player-falling")
+        view.layer.zPosition = 100000
         return view
     }()
     
     private lazy var scoresStackView: UIStackView = {
         let view = UIStackView()
-        view.axis = .horizontal
+        view.axis = .vertical
         view.distribution = .equalCentering
         return view
     }()
@@ -91,6 +92,7 @@ final class GameOverView: CodedView, CodedViewLifeCycle {
             $0.centerXAnchor.constraint(equalTo: centerXAnchor)
             $0.centerYAnchor.constraint(equalTo: centerYAnchor)
             $0.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.8)
+            $0.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.9)
         }
         
         playerImageView.layout {
@@ -107,18 +109,18 @@ final class GameOverView: CodedView, CodedViewLifeCycle {
         }
         
         callToActionLabel.layout {
-            $0.topAnchor.constraint(equalTo: scoresStackView.bottomAnchor, constant: 30)
+            $0.topAnchor.constraint(equalTo: scoresStackView.bottomAnchor, constant: 40)
             $0.centerXAnchor.constraint(equalTo: cardView.centerXAnchor)
         }
         
         buyLivesButton.layout {
-            $0.topAnchor.constraint(equalTo: callToActionLabel.bottomAnchor, constant: 30)
+            $0.topAnchor.constraint(equalTo: callToActionLabel.bottomAnchor, constant: 20)
             $0.centerXAnchor.constraint(equalTo: cardView.centerXAnchor)
             $0.widthAnchor.constraint(equalTo: callToActionLabel.widthAnchor)
         }
         
         watchAdButton.layout {
-            $0.topAnchor.constraint(equalTo: buyLivesButton.bottomAnchor, constant: 30)
+            $0.topAnchor.constraint(equalTo: buyLivesButton.bottomAnchor, constant: 20)
             $0.centerXAnchor.constraint(equalTo: cardView.centerXAnchor)
             $0.widthAnchor.constraint(equalTo: callToActionLabel.widthAnchor)
         }

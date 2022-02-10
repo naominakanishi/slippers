@@ -89,7 +89,6 @@ final class StartScreenView: CodedView, CodedViewLifeCycle {
         return view
     }()
     
-    
     private let actions: Actions
     
     init(actions: Actions) {
@@ -128,13 +127,15 @@ final class StartScreenView: CodedView, CodedViewLifeCycle {
             $0.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.6)
             $0.heightAnchor.constraint(equalTo: $0.widthAnchor, multiplier: 106/322)
         }
-        
+        let islandWidth = island.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.8)
         island.layout {
-            $0.topAnchor.constraint(equalTo: logo.bottomAnchor, constant: 50)
+            $0.topAnchor.constraint(equalTo: logo.bottomAnchor, constant: 30)
             $0.centerXAnchor.constraint(equalTo: centerXAnchor)
-            $0.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.8)
             $0.heightAnchor.constraint(equalTo: $0.widthAnchor, multiplier: 500/754)
+            islandWidth
         }
+        
+        islandWidth.priority = .defaultLow
         
         rectangleSeparator.layout {
             $0.topAnchor.constraint(equalTo: island.centerYAnchor)
@@ -150,7 +151,8 @@ final class StartScreenView: CodedView, CodedViewLifeCycle {
             $0.heightAnchor.constraint(equalTo: $0.widthAnchor, multiplier: 113/271)
         }
         highestScore.layout {
-            $0.topAnchor.constraint(equalTo: currentLives.bottomAnchor, constant: 30)
+            $0.topAnchor.constraint(equalTo: currentLives.bottomAnchor, constant: 16)
+            $0.bottomAnchor.constraint(equalTo: startButton.topAnchor, constant: -30)
             $0.centerXAnchor.constraint(equalTo: centerXAnchor)
             $0.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.65)
             $0.heightAnchor.constraint(equalTo: $0.widthAnchor, multiplier: 113/271)
@@ -178,7 +180,6 @@ final class StartScreenView: CodedView, CodedViewLifeCycle {
         startButton.layout {
             $0.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -40)
             $0.centerXAnchor.constraint(equalTo: centerXAnchor)
-            $0.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.5)
             $0.heightAnchor.constraint(equalToConstant: 60)
         }
         
@@ -187,13 +188,15 @@ final class StartScreenView: CodedView, CodedViewLifeCycle {
             $0.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20)
             $0.trailingAnchor.constraint(equalTo: startButton.leadingAnchor, constant: -20)
             $0.heightAnchor.constraint(equalTo: startButton.heightAnchor)
+            $0.widthAnchor.constraint(equalTo: rankingButton.heightAnchor)
         }
 
         rankingButton.layout {
             $0.centerYAnchor.constraint(equalTo: startButton.centerYAnchor)
             $0.leadingAnchor.constraint(equalTo: startButton.trailingAnchor, constant: 20)
             $0.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20)
-            
+            $0.widthAnchor.constraint(equalTo: rankingButton.heightAnchor)
+
             $0.heightAnchor.constraint(equalTo: startButton.heightAnchor)
         }
     }
@@ -232,7 +235,8 @@ final class StartScreenView: CodedView, CodedViewLifeCycle {
         actions.didTapOnAudioSettings()
     }
     
-    @objc func handleRankingTap() {
+    @objc
+    private func handleRankingTap() {
         actions.didTapOnRanking()
     }
 }

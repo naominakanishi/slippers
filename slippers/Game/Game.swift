@@ -125,7 +125,6 @@ final class Game {
             },
             .fadeIn(withDuration: 1.3)
         ])))
-        
     }
     
     func update(deltaTime: TimeInterval) {

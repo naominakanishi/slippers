@@ -33,6 +33,8 @@ class GameViewController: UIViewController, AdServiceDelegate {
     private lazy var startScreenView = StartScreenView(actions: .init(
         didTapOnAudioSettings: {
             let controller = SoundConfigViewController(soundConfig: self.soundConfig)
+            controller.modalPresentationStyle = .overCurrentContext
+            controller.modalTransitionStyle = .crossDissolve
             self.show(controller, sender: self)
         },
         //changes current state to playing

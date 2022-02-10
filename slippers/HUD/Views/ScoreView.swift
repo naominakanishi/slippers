@@ -18,7 +18,7 @@ final class ScoreView: CodedView, CodedViewLifeCycle {
     
     private lazy var scoreLabel: UILabel = {
         let view = UILabel()
-        view.font = .amatic(.bold, 36)
+        view.font = .depot(36)
         view.textColor = .white
         view.textAlignment = .center
         return view
