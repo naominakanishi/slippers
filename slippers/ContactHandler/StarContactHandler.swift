@@ -11,20 +11,22 @@ class StarContactHandler: ContactHandler {
     private let pointSpawner: PointSpawner
     private let scoreTracker: Scorer
     private let soundConfig: SoundConfig
+    private let removeInstructions: () -> Void
     
     var hitSound: SKAudioNode?
-
     
     init(starManager: StarManager,
          player: Player,
          pointSpawner: PointSpawner,
          scoreTracker: Scorer,
-         soundConfig: SoundConfig) {
+         soundConfig: SoundConfig,
+         removeInstructions: @escaping () -> Void) {
         self.starManager = starManager
         self.player = player
         self.pointSpawner = pointSpawner
         self.scoreTracker = scoreTracker
         self.soundConfig = soundConfig
+        self.removeInstructions = removeInstructions
     }
     
     func handle(contact: SKPhysicsContact) {
@@ -62,6 +64,7 @@ class StarContactHandler: ContactHandler {
             self.scoreTracker.handleScore()
             self.pointSpawner.spawn(at: previousPosition)
             self.playHitsound(node: node)
+            self.removeInstructions()
         }
     }
 }

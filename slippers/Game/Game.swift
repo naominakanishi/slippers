@@ -44,7 +44,8 @@ final class Game {
             player: player,
             pointSpawner: point,
             scoreTracker: scoreTracker,
-            soundConfig: soundConfig),
+            soundConfig: soundConfig,
+            removeInstructions: removeInstructions),
         PortalContactHandler(
             player: player,
             scene: self,
@@ -142,8 +143,6 @@ final class Game {
     func touchDown(at location: CGPoint) {
         if player.physicsBody?.velocity == .zero {
             player.impulse()
-            self.instructionLabel.removeAllActions()
-            self.instructionLabel.removeFromParent()
         }
     }
     
@@ -170,6 +169,11 @@ final class Game {
             onGameOver?()
             return
         }
+    }
+    
+    private func removeInstructions() {
+        instructionLabel.removeAllActions()
+        instructionLabel.removeFromParent()
     }
 }
 
