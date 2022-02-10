@@ -89,6 +89,24 @@ final class StartScreenView: CodedView, CodedViewLifeCycle {
         return view
     }()
     
+    private lazy var buyLivesButton: UIButton = {
+        let view = UIButton()
+        view.configuration = .nijiText(title: "Buy lives", leadingIcon: .init(systemName: "heart"))
+        view.configuration?.baseForegroundColor = .black
+        view.configuration?.attributedTitle?.foregroundColor = .black
+        view.isHidden = true
+        return view
+    }()
+    
+    private lazy var heartsStackView: UIStackView = {
+        let view = UIStackView()
+        view.axis = .horizontal
+        view.addArrangedSubview(UIImageView())
+        view.addArrangedSubview(UIImageView())
+        view.addArrangedSubview(UIImageView())
+        return view
+    }()
+    
     private let actions: Actions
     
     init(actions: Actions) {
@@ -111,6 +129,8 @@ final class StartScreenView: CodedView, CodedViewLifeCycle {
         addSubview(startButton)
         addSubview(audioSettingsButton)
         addSubview(rankingButton)
+        currentLives.addSubview(buyLivesButton)
+        currentLives.addSubview(heartsStackView)
     }
     
     func constraintSubviews() {
@@ -127,15 +147,13 @@ final class StartScreenView: CodedView, CodedViewLifeCycle {
             $0.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.6)
             $0.heightAnchor.constraint(equalTo: $0.widthAnchor, multiplier: 106/322)
         }
-        let islandWidth = island.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.8)
+        
         island.layout {
             $0.topAnchor.constraint(equalTo: logo.bottomAnchor, constant: 30)
             $0.centerXAnchor.constraint(equalTo: centerXAnchor)
             $0.heightAnchor.constraint(equalTo: $0.widthAnchor, multiplier: 500/754)
-            islandWidth
+            island.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.8).withPriority(.defaultLow)
         }
-        
-        islandWidth.priority = .defaultLow
         
         rectangleSeparator.layout {
             $0.topAnchor.constraint(equalTo: island.centerYAnchor)
@@ -176,7 +194,6 @@ final class StartScreenView: CodedView, CodedViewLifeCycle {
             $0.widthAnchor.constraint(equalTo: highestScore.widthAnchor)
         }
         
-        
         startButton.layout {
             $0.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -40)
             $0.centerXAnchor.constraint(equalTo: centerXAnchor)
@@ -196,11 +213,26 @@ final class StartScreenView: CodedView, CodedViewLifeCycle {
             $0.leadingAnchor.constraint(equalTo: startButton.trailingAnchor, constant: 20)
             $0.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20)
             $0.widthAnchor.constraint(equalTo: rankingButton.heightAnchor)
-
             $0.heightAnchor.constraint(equalTo: startButton.heightAnchor)
         }
+        
+        buyLivesButton.layout {
+            $0.bottomAnchor.constraint(equalTo: currentLives.bottomAnchor, constant: -20)
+            $0.centerXAnchor.constraint(equalTo: currentLivesLabel.centerXAnchor)
+        }
+        
+        heartsStackView.layout {
+            $0.bottomAnchor.constraint(equalTo: currentLives.bottomAnchor, constant: -20)
+            $0.centerXAnchor.constraint(equalTo: currentLives.centerXAnchor)
+        }
+        
+        heartsStackView.arrangedSubviews.forEach {
+            $0.layout {
+                $0.widthAnchor.constraint(equalToConstant: 32)
+                $0.heightAnchor.constraint(equalTo: $0.widthAnchor)
+            }
+        }
     }
-    
     
     func setupInfoViews(view: UIView) {
         view.backgroundColor = .nijiColors.lightGray
@@ -209,20 +241,42 @@ final class StartScreenView: CodedView, CodedViewLifeCycle {
         view.layer.cornerRadius = 20
     }
     
-    func configureInfoViewText(title: UILabel) {
-        title.font = .depot(24)
-        title.textAlignment = .center
-        title.textColor = .black
-    }
-    
     func configureAdditionalSettings() {
         backgroundColor = .black
         self.bringSubviewToFront(island)
     }
     
-    
-    func configure(highScore: Int) {
+    func configure(highScore: Int, livesCount: Int) {
         highestScoreLabel.text = String(highScore)
+        
+        if livesCount == 0 {
+            renderBuyLivesButton()
+            return
+        }
+        renderHearts(livesCount: livesCount)
+    }
+    
+    private func renderBuyLivesButton() {
+        buyLivesButton.isHidden = false
+    }
+    
+    private func renderHearts(livesCount: Int) {
+        heartsStackView.arrangedSubviews
+            .compactMap { $0 as? UIImageView }
+            .enumerated()
+            .forEach {
+                if $0 + 1 <= livesCount {
+                    $1.image = UIImage(systemName: "heart.fill")
+                } else {
+                    $1.image = UIImage(systemName: "heart")
+                }
+            }
+    }
+    
+    private func configureInfoViewText(title: UILabel) {
+        title.font = .depot(24)
+        title.textAlignment = .center
+        title.textColor = .black
     }
     
     @objc

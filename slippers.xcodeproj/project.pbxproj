@@ -27,6 +27,7 @@
 		1145B56027B5C20E00E7D800 /* MusicService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1145B55F27B5C20E00E7D800 /* MusicService.swift */; };
 		1145B56227B5C3FF00E7D800 /* SoundConfigService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1145B56127B5C3FF00E7D800 /* SoundConfigService.swift */; };
 		1145B56427B5C7D500E7D800 /* LeaderboardService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1145B56327B5C7D500E7D800 /* LeaderboardService.swift */; };
+		1145B56627B5D3CB00E7D800 /* LivesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1145B56527B5D3CB00E7D800 /* LivesService.swift */; };
 		11737CE127A33A77001BCF8E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11737CE027A33A77001BCF8E /* AppDelegate.swift */; };
 		11737CE327A33A77001BCF8E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11737CE227A33A77001BCF8E /* SceneDelegate.swift */; };
 		11737CE527A33A78001BCF8E /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11737CE427A33A78001BCF8E /* GameViewController.swift */; };
@@ -79,6 +80,7 @@
 		1145B55F27B5C20E00E7D800 /* MusicService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicService.swift; sourceTree = "<group>"; };
 		1145B56127B5C3FF00E7D800 /* SoundConfigService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundConfigService.swift; sourceTree = "<group>"; };
 		1145B56327B5C7D500E7D800 /* LeaderboardService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardService.swift; sourceTree = "<group>"; };
+		1145B56527B5D3CB00E7D800 /* LivesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LivesService.swift; sourceTree = "<group>"; };
 		11737CDD27A33A77001BCF8E /* slippers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = slippers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		11737CE027A33A77001BCF8E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		11737CE227A33A77001BCF8E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -218,6 +220,7 @@
 				11D6B87027AC961600BD6303 /* ScoreService.swift */,
 				1145B56127B5C3FF00E7D800 /* SoundConfigService.swift */,
 				1145B56327B5C7D500E7D800 /* LeaderboardService.swift */,
+				1145B56527B5D3CB00E7D800 /* LivesService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -483,6 +486,7 @@
 				1143A79B27A3539800075EE6 /* Player.swift in Sources */,
 				11D6B86C27AC837100BD6303 /* StartScreenView.swift in Sources */,
 				1143A79727A34A4B00075EE6 /* Game.swift in Sources */,
+				1145B56627B5D3CB00E7D800 /* LivesService.swift in Sources */,
 				11F6C27327A99CA7000D7687 /* Point.swift in Sources */,
 				1143A79D27A35A0000075EE6 /* Ground.swift in Sources */,
 				11CC1B4D27A462FD00300723 /* CollisionMasks.swift in Sources */,

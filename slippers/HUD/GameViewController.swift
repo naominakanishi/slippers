@@ -4,8 +4,9 @@ import GoogleMobileAds
 import AVFoundation
 import GameKit
 
-class GameViewController: UIViewController {
+final class GameViewController: UIViewController {
     
+    private let livesService = LivesService()
     private let soundConfig = SoundConfigService()
     private let adService = AdService()
     private let stateMachine = GameStateMachine()
@@ -128,7 +129,8 @@ extension GameViewController: StateRenderer {
     }
     
     private func renderInitialScreen() {
-        startScreenView.configure(highScore: scoreTracker.highScore)
+        startScreenView.configure(highScore: scoreTracker.highScore,
+                                  livesCount: 0)
         startScreenView.isHidden = false
         startScreenView.alpha = 0
         UIView.animate(withDuration: 0.4) {
