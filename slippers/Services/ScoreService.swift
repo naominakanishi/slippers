@@ -33,10 +33,14 @@ final class ScoreService: ScoreServiceProtocol {
     
     
     private let highScoreKey = "HIGH_SCORE"
+    private let scoreSender: LeaderboardScoreSender
     
-    init() {
+    init(scoreSender: LeaderboardScoreSender) {
         highScore = 0
+        self.scoreSender = scoreSender
         highScore = loadHighscore()
+        guard highScore > 0 else { return }
+        scoreSender.send(score: highScore)
     }
     
     func handleScore() {
@@ -71,14 +75,12 @@ final class ScoreService: ScoreServiceProtocol {
         highScore = score
         DispatchQueue.init(label: highScoreKey,
                            qos: .background).async {
-            
-            UserDefaults.standard.set(
-                self.highScore,
-                forKey: self.highScoreKey)
+            UserDefaults.standard.set(self.highScore, forKey: self.highScoreKey)
+            self.scoreSender.send(score: self.score)
         }
     }
     
-    private func loadHighscore() -> Int{
+    private func loadHighscore() -> Int {
         UserDefaults.standard.integer(forKey: highScoreKey)
     }
 }

@@ -2,14 +2,21 @@ import UIKit
 import SpriteKit
 import GoogleMobileAds
 import AVFoundation
+import GameKit
 
 class GameViewController: UIViewController {
     
-    private let scoreTracker = ScoreService()
     private let soundConfig = SoundConfigService()
     private let adService = AdService()
     private let stateMachine = GameStateMachine()
+    private lazy var scoreTracker = ScoreService(scoreSender: leaderboardService)
     private lazy var musicService = MusicService(soundConfig: soundConfig)
+    private lazy var leaderboardService = LeaderboardService { viewController in
+        self.showDetailViewController(viewController, sender: self)
+    } presentLeaderboardViewController: {
+        $0.gameCenterDelegate = self
+        self.present($0, animated: true, completion: nil)
+    }
     
     // MARK: - Views
     
@@ -36,7 +43,9 @@ class GameViewController: UIViewController {
             stateMachine.currentState = .playing
             self.musicService.play()
         },
-        didTapOnRanking: {}
+        didTapOnRanking: {
+            self.leaderboardService.showLeaderboard()
+        }
     ))
     
     private lazy var gameOverView = GameOverView(actions: .init(
@@ -54,6 +63,7 @@ class GameViewController: UIViewController {
     
     override func loadView() {
         view = gameView
+        leaderboardService.initialize()
     }
 
     override func viewDidLoad() {
@@ -61,8 +71,6 @@ class GameViewController: UIViewController {
         
         addStateView(startScreenView)
         addStateView(gameOverView)
-        
-
         
         stateMachine.addRenderer(renderer: self)
         
@@ -153,5 +161,11 @@ extension GameViewController: AdServiceDelegate {
         scoreTracker.revive()
         self.renderScene()
         self.stateMachine.currentState = .playing
+    }
+}
+
+extension GameViewController: GKGameCenterControllerDelegate {
+    func gameCenterViewControllerDidFinish(_ gameCenterViewController: GKGameCenterViewController) {
+        gameCenterViewController.dismiss(animated: true, completion: nil)
     }
 }
