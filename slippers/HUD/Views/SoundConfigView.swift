@@ -102,7 +102,7 @@ final class SoundConfigView: CodedView, CodedViewLifeCycle {
         view.configuration = .nijiText(
             title: "BACK TO MENU",
             leadingIcon: .init(systemName: "chevron.left"))
-        backButton.addTarget(self, action: #selector(handleBackButton), for: .touchUpInside)
+        view.addTarget(self, action: #selector(handleBackButton), for: .touchUpInside)
         return view
     }()
     

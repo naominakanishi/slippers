@@ -35,7 +35,7 @@ final class GameOverView: CodedView, CodedViewLifeCycle {
     private lazy var scoresStackView: UIStackView = {
         let view = UIStackView()
         view.axis = .vertical
-        view.distribution = .equalCentering
+        view.distribution = .fillProportionally
         return view
     }()
     
@@ -92,7 +92,7 @@ final class GameOverView: CodedView, CodedViewLifeCycle {
             $0.centerXAnchor.constraint(equalTo: centerXAnchor)
             $0.centerYAnchor.constraint(equalTo: centerYAnchor)
             $0.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.8)
-            $0.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.9)
+//            $0.heightAnchor.constraint(lessThanOrEqualTo: heightAnchor, multiplier: 0.8)
         }
         
         playerImageView.layout {
@@ -109,7 +109,7 @@ final class GameOverView: CodedView, CodedViewLifeCycle {
         }
         
         callToActionLabel.layout {
-            $0.topAnchor.constraint(equalTo: scoresStackView.bottomAnchor, constant: 40)
+            $0.topAnchor.constraint(equalTo: scoresStackView.bottomAnchor, constant: 40).withPriority(.defaultLow)
             $0.centerXAnchor.constraint(equalTo: cardView.centerXAnchor)
         }
         
@@ -156,5 +156,12 @@ final class GameOverView: CodedView, CodedViewLifeCycle {
     
     @objc func handleWatchAdTap() {
         actions.watchAd()
+    }
+}
+
+extension NSLayoutConstraint {
+    func withPriority(_ priority: UILayoutPriority) -> Self {
+        self.priority = priority
+        return self
     }
 }
