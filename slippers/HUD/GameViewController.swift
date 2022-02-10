@@ -3,21 +3,17 @@ import SpriteKit
 import GoogleMobileAds
 import AVFoundation
 
-class GameViewController: UIViewController, AdServiceDelegate {
+class GameViewController: UIViewController {
     
     var backgroundSong: AVAudioPlayer?
     
-    func showError() {
-        // TODO
-        print("deu erro")
-
-    }
+    private let scoreTracker = ScoreService()
+    private let soundConfig = SoundConfig()
+    private let adService = AdService()
+    private let stateMachine = GameStateMachine()
+    private let musicService = MusicService()
     
-    func rewardUser() {
-        scoreTracker.revive()
-        self.renderScene()
-        self.stateMachine.currentState = .playing
-    }
+    // MARK: - Views
     
     private lazy var gameView: SKView = {
         let view = SKView()
@@ -58,17 +54,12 @@ class GameViewController: UIViewController, AdServiceDelegate {
 
         }))
     
-    private let scoreTracker = ScoreTracker()
-    private let soundConfig = SoundConfig()
-    private let adService = AdService()
-    private let stateMachine = GameStateMachine()
-   
+    // MARK: - Controller lifecycle
     
     override func loadView() {
         view = gameView
     }
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -91,24 +82,13 @@ class GameViewController: UIViewController, AdServiceDelegate {
         self.stateMachine.currentState = .playing
         Timer.scheduledTimer(withTimeInterval: 0, repeats: false) { _ in
             
-            self.stateMachine.currentState = .gameOver
+            self.stateMachine.currentState = .initialScreen
         }
     }
     
-    private func renderScene() {
-        let scene = createScene()
-        gameView.presentScene(scene)
-        stateMachine.addRenderer(renderer: scene)
-    }
+    // MARK: - Helpers
     
-    
-    // loads the first screen to be displayed
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
-    }
-    
-    func createScene() -> GameScene {
+    private func createScene() -> GameScene {
         let scene = GameScene(
             stateMachine: stateMachine,
             scoreTracker: scoreTracker,
@@ -117,42 +97,14 @@ class GameViewController: UIViewController, AdServiceDelegate {
         scene.scaleMode = .resizeFill
         return scene
     }
-}
-
-
-extension GameViewController: StateRenderer {
-    func render(state: GameState) {
-        [
-            startScreenView,
-            gameOverView
-        ].forEach { $0.isHidden = true }
-        
-        switch state {
-        case .initialScreen:
-            startScreenView.configure(highScore: scoreTracker.highScore)
-            startScreenView.isHidden = false
-            startScreenView.alpha = 0
-            UIView.animate(withDuration: 0.4) {
-                self.startScreenView.alpha = 1
-            }
-        case .playing:
-            break
-        case .gameOver:
-            backgroundSong?.stop()
-            gameOverView.isHidden = false
-            gameOverView.alpha = 0
-            gameOverView.configure(using: .init(
-                currentScore: scoreTracker.score,
-                highScore: scoreTracker.highScore))
-            UIView.animate(withDuration: 0.4) {
-                self.gameOverView.alpha = 1
-            }
-        }
+    
+    private func renderScene() {
+        let scene = createScene()
+        gameView.presentScene(scene)
+        stateMachine.addRenderer(renderer: scene)
     }
-}
-
-extension GameViewController {
-    func addStateView(_ view: UIView) {
+    
+    private func addStateView(_ view: UIView) {
         self.view.addSubview(view)
         view.layout {
             $0.topAnchor.constraint(equalTo: self.view.topAnchor)
@@ -161,5 +113,56 @@ extension GameViewController {
             $0.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
         }
         view.isHidden = true
+    }
+}
+
+
+extension GameViewController: StateRenderer {
+    func render(state: GameState) {
+        clearCurrentState()
+        switch state {
+        case .initialScreen:
+            renderInitialScreen()
+        case .playing:
+            break
+        case .gameOver:
+            renderGameOver()
+        }
+    }
+    
+    private func renderInitialScreen() {
+        startScreenView.configure(highScore: scoreTracker.highScore)
+        startScreenView.isHidden = false
+        startScreenView.alpha = 0
+        UIView.animate(withDuration: 0.4) {
+            self.startScreenView.alpha = 1
+        }
+    }
+    private func renderGameOver() {
+        backgroundSong?.stop()
+        gameOverView.isHidden = false
+        gameOverView.alpha = 0
+        gameOverView.configure(using: .init(
+            currentScore: scoreTracker.score,
+            highScore: scoreTracker.highScore))
+        UIView.animate(withDuration: 0.4) {
+            self.gameOverView.alpha = 1
+        }
+    }
+    private func clearCurrentState() {
+        [startScreenView, gameOverView].forEach { $0.isHidden = true }
+    }
+}
+
+extension GameViewController: AdServiceDelegate {
+    func showError() {
+        // TODO
+        print("deu erro")
+    }
+    
+    func rewardUser() {
+        scoreTracker.revive()
+        self.renderScene()
+        self.stateMachine.currentState = .playing
     }
 }

@@ -24,6 +24,7 @@
 		1143A7A127A3623900075EE6 /* Star.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1143A7A027A3623900075EE6 /* Star.swift */; };
 		1143A7A327A362AC00075EE6 /* StarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1143A7A227A362AC00075EE6 /* StarManager.swift */; };
 		1145B55D27B5ACF400E7D800 /* background-music.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 1145B55C27B5ACF400E7D800 /* background-music.mp3 */; };
+		1145B56027B5C20E00E7D800 /* MusicService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1145B55F27B5C20E00E7D800 /* MusicService.swift */; };
 		11737CE127A33A77001BCF8E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11737CE027A33A77001BCF8E /* AppDelegate.swift */; };
 		11737CE327A33A77001BCF8E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11737CE227A33A77001BCF8E /* SceneDelegate.swift */; };
 		11737CE527A33A78001BCF8E /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11737CE427A33A78001BCF8E /* GameViewController.swift */; };
@@ -40,7 +41,7 @@
 		11D6B86727AC47A100BD6303 /* Score.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D6B86627AC47A100BD6303 /* Score.swift */; };
 		11D6B86C27AC837100BD6303 /* StartScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D6B86B27AC837100BD6303 /* StartScreenView.swift */; };
 		11D6B86F27AC839D00BD6303 /* CodedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D6B86E27AC839D00BD6303 /* CodedView.swift */; };
-		11D6B87127AC961600BD6303 /* ScoreTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D6B87027AC961600BD6303 /* ScoreTracker.swift */; };
+		11D6B87127AC961600BD6303 /* ScoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D6B87027AC961600BD6303 /* ScoreService.swift */; };
 		11D6B87327AC9AB700BD6303 /* GameOverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D6B87227AC9AB700BD6303 /* GameOverView.swift */; };
 		11D6B87527ACA06D00BD6303 /* UIButtonConfiguration+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D6B87427ACA06D00BD6303 /* UIButtonConfiguration+Extensions.swift */; };
 		11D6B87727ACA72700BD6303 /* ScoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D6B87627ACA72700BD6303 /* ScoreView.swift */; };
@@ -73,6 +74,7 @@
 		1143A7A027A3623900075EE6 /* Star.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Star.swift; sourceTree = "<group>"; };
 		1143A7A227A362AC00075EE6 /* StarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarManager.swift; sourceTree = "<group>"; };
 		1145B55C27B5ACF400E7D800 /* background-music.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "background-music.mp3"; sourceTree = "<group>"; };
+		1145B55F27B5C20E00E7D800 /* MusicService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicService.swift; sourceTree = "<group>"; };
 		11737CDD27A33A77001BCF8E /* slippers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = slippers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		11737CE027A33A77001BCF8E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		11737CE227A33A77001BCF8E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -91,7 +93,7 @@
 		11D6B86627AC47A100BD6303 /* Score.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Score.swift; sourceTree = "<group>"; };
 		11D6B86B27AC837100BD6303 /* StartScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartScreenView.swift; sourceTree = "<group>"; };
 		11D6B86E27AC839D00BD6303 /* CodedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodedView.swift; sourceTree = "<group>"; };
-		11D6B87027AC961600BD6303 /* ScoreTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreTracker.swift; sourceTree = "<group>"; };
+		11D6B87027AC961600BD6303 /* ScoreService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreService.swift; sourceTree = "<group>"; };
 		11D6B87227AC9AB700BD6303 /* GameOverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverView.swift; sourceTree = "<group>"; };
 		11D6B87427ACA06D00BD6303 /* UIButtonConfiguration+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButtonConfiguration+Extensions.swift"; sourceTree = "<group>"; };
 		11D6B87627ACA72700BD6303 /* ScoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreView.swift; sourceTree = "<group>"; };
@@ -131,7 +133,6 @@
 		11329CF627A88D4A00E0C7D7 /* Application */ = {
 			isa = PBXGroup;
 			children = (
-				113B586227B1D91A00456959 /* AdService.swift */,
 				11737CE027A33A77001BCF8E /* AppDelegate.swift */,
 				11737CE227A33A77001BCF8E /* SceneDelegate.swift */,
 				11737CEB27A33A7B001BCF8E /* LaunchScreen.storyboard */,
@@ -155,7 +156,6 @@
 			children = (
 				1143A79627A34A4B00075EE6 /* Game.swift */,
 				11329CFB27A88DE600E0C7D7 /* Colorize.swift */,
-				11D6B87027AC961600BD6303 /* ScoreTracker.swift */,
 			);
 			path = Game;
 			sourceTree = "<group>";
@@ -206,6 +206,16 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		1145B55E27B5C1EF00E7D800 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				113B586227B1D91A00456959 /* AdService.swift */,
+				1145B55F27B5C20E00E7D800 /* MusicService.swift */,
+				11D6B87027AC961600BD6303 /* ScoreService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		11737CD427A33A77001BCF8E = {
 			isa = PBXGroup;
 			children = (
@@ -234,6 +244,7 @@
 				11329CF927A88D8500E0C7D7 /* Game */,
 				11329CF827A88D7000E0C7D7 /* HUD */,
 				11329D0827A8B70D00E0C7D7 /* Managers */,
+				1145B55E27B5C1EF00E7D800 /* Services */,
 				11F6C27627A9A8CD000D7687 /* Spawners */,
 				1136C10F27B3599F00267D57 /* Resources */,
 				11737CF427A33B84001BCF8E /* Utils */,
@@ -455,7 +466,8 @@
 				11737CFA27A33E5F001BCF8E /* GameState.swift in Sources */,
 				1143A79927A34A7400075EE6 /* Entity.swift in Sources */,
 				1143A7A327A362AC00075EE6 /* StarManager.swift in Sources */,
-				11D6B87127AC961600BD6303 /* ScoreTracker.swift in Sources */,
+				11D6B87127AC961600BD6303 /* ScoreService.swift in Sources */,
+				1145B56027B5C20E00E7D800 /* MusicService.swift in Sources */,
 				113B586327B1D91A00456959 /* AdService.swift in Sources */,
 				11C3EDCA27ADD982004059B2 /* GroundContactHandler.swift in Sources */,
 				11737CE127A33A77001BCF8E /* AppDelegate.swift in Sources */,

@@ -15,12 +15,11 @@ protocol Scorer {
     func handleScore()
 }
 
-
-typealias ScoreTrackerProtocol = ScoreKeeper &
+typealias ScoreServiceProtocol = ScoreKeeper &
                                  ScoreMultiplier &
                                  Scorer
 
-final class ScoreTracker: ScoreTrackerProtocol {
+final class ScoreService: ScoreServiceProtocol {
     private(set) var points: Int = 0
     private(set) var score: Int = 0
     var canRestart: Bool {
