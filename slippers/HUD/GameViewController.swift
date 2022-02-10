@@ -46,6 +46,9 @@ final class GameViewController: UIViewController {
         },
         didTapOnRanking: {
             self.leaderboardService.showLeaderboard()
+        },
+        didTapOnBuyLives: {
+            self.livesService.purchase()
         }
     ))
     
@@ -60,11 +63,23 @@ final class GameViewController: UIViewController {
             self.musicService.play()
         }))
     
+    // MARK: - Initialization
+    
+    init() {
+        super.init(nibName: nil, bundle: nil)
+        leaderboardService.initialize()
+        livesService.delegate = self
+        
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     // MARK: - Controller lifecycle
     
     override func loadView() {
         view = gameView
-        leaderboardService.initialize()
     }
 
     override func viewDidLoad() {
@@ -130,7 +145,7 @@ extension GameViewController: StateRenderer {
     
     private func renderInitialScreen() {
         startScreenView.configure(highScore: scoreTracker.highScore,
-                                  livesCount: 0)
+                                  livesCount: livesService.livesCount)
         startScreenView.isHidden = false
         startScreenView.alpha = 0
         UIView.animate(withDuration: 0.4) {
@@ -169,5 +184,12 @@ extension GameViewController: AdServiceDelegate {
 extension GameViewController: GKGameCenterControllerDelegate {
     func gameCenterViewControllerDidFinish(_ gameCenterViewController: GKGameCenterViewController) {
         gameCenterViewController.dismiss(animated: true, completion: nil)
+    }
+}
+
+extension GameViewController: LivesServiceDelegate {
+    func didBuyLives() {
+        startScreenView.configure(highScore: scoreTracker.highScore,
+                                  livesCount: livesService.livesCount)
     }
 }

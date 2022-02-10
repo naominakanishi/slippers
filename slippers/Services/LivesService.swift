@@ -1,10 +1,15 @@
 import Foundation
 
+protocol LivesServiceDelegate: AnyObject {
+    func didBuyLives()
+}
+
 final class LivesService {
     // MARK: - Properties
-    
     private let livesCountKey = "lives_count_key"
     private(set) var livesCount = 0
+    
+    weak var delegate: LivesServiceDelegate?
     
     // MARK: - Initialization
     
@@ -14,7 +19,9 @@ final class LivesService {
     
     // MARK: - Public API
     
-    func purchase() {}
+    func purchase() {
+        purchaseSucceed()
+    }
     func consume() {
         persistLivesCount()
     }
@@ -22,7 +29,9 @@ final class LivesService {
     // MARK: - Helpers
     
     private func purchaseSucceed() {
+        livesCount = 3
         persistLivesCount()
+        delegate?.didBuyLives()
     }
     
     // MARK: - Persistance

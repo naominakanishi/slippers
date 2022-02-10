@@ -6,6 +6,7 @@ final class StartScreenView: CodedView, CodedViewLifeCycle {
         let didTapOnAudioSettings: () -> Void
         let didTapOnStart: () -> Void
         let didTapOnRanking: () -> Void
+        let didTapOnBuyLives: () -> Void
     }
     
     private lazy var background: UIImageView = {
@@ -94,6 +95,7 @@ final class StartScreenView: CodedView, CodedViewLifeCycle {
         view.configuration = .nijiText(title: "Buy lives", leadingIcon: .init(systemName: "heart"))
         view.configuration?.baseForegroundColor = .black
         view.configuration?.attributedTitle?.foregroundColor = .black
+        view.addTarget(self, action: #selector(handleBuyLivesTap), for: .touchUpInside)
         view.isHidden = true
         return view
     }()
@@ -249,6 +251,7 @@ final class StartScreenView: CodedView, CodedViewLifeCycle {
     func configure(highScore: Int, livesCount: Int) {
         highestScoreLabel.text = String(highScore)
         
+        [buyLivesButton, heartsStackView].forEach { $0.isHidden = true }
         if livesCount == 0 {
             renderBuyLivesButton()
             return
@@ -261,6 +264,7 @@ final class StartScreenView: CodedView, CodedViewLifeCycle {
     }
     
     private func renderHearts(livesCount: Int) {
+        heartsStackView.isHidden = false
         heartsStackView.arrangedSubviews
             .compactMap { $0 as? UIImageView }
             .enumerated()
@@ -292,5 +296,10 @@ final class StartScreenView: CodedView, CodedViewLifeCycle {
     @objc
     private func handleRankingTap() {
         actions.didTapOnRanking()
+    }
+ 
+    @objc
+    private func handleBuyLivesTap() {
+        actions.didTapOnBuyLives()
     }
 }
