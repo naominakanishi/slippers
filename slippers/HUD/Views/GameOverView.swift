@@ -3,7 +3,7 @@ import UIKit
 final class GameOverView: CodedView, CodedViewLifeCycle {
     
     struct Actions {
-//        let buyLives: () -> Void
+        let livesAction: () -> Void
         let watchAd: () -> Void
         let startOver: () -> Void
     }
@@ -11,6 +11,7 @@ final class GameOverView: CodedView, CodedViewLifeCycle {
     struct Model {
         let currentScore: Int
         let highScore: Int
+        let livesButtonTitle: String
     }
     
     private lazy var currentScoreView = ScoreView()
@@ -50,7 +51,7 @@ final class GameOverView: CodedView, CodedViewLifeCycle {
     
     private lazy var buyLivesButton: UIButton = {
         let view = UIButton()
-        view.configuration = .nijiRoundedRectangle(title: "BUY LIVES", imageName: "heart-icon")
+        view.addTarget(self, action: #selector(handleLivesTap), for: .touchUpInside)
         return view
     }()
     
@@ -146,6 +147,9 @@ final class GameOverView: CodedView, CodedViewLifeCycle {
         currentScoreView.configure(using: .init(
             title: "YOUR SCORE",
             score: .init(model.currentScore)))
+        
+        buyLivesButton.configuration = .nijiRoundedRectangle(title: model.livesButtonTitle,
+                                                             imageName: "heart-icon")
     }
     
     @objc
@@ -155,6 +159,11 @@ final class GameOverView: CodedView, CodedViewLifeCycle {
     
     @objc func handleWatchAdTap() {
         actions.watchAd()
+    }
+    
+    @objc
+    private func handleLivesTap() {
+        actions.livesAction()
     }
 }
 

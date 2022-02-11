@@ -23,6 +23,7 @@ final class LivesService {
         purchaseSucceed()
     }
     func consume() {
+        livesCount -= 1
         persistLivesCount()
     }
     

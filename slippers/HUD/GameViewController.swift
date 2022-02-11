@@ -53,6 +53,9 @@ final class GameViewController: UIViewController {
     ))
     
     private lazy var gameOverView = GameOverView(actions: .init(
+        livesAction: {
+            self.handleLivesAction()
+        },
         watchAd: {
             self.adService.showRewardAd(in: self)
         },
@@ -127,6 +130,22 @@ final class GameViewController: UIViewController {
         }
         view.isHidden = true
     }
+    
+    private func handleLivesAction() {
+        if livesService.livesCount > 0 {
+            livesService.consume()
+            revive()
+        } else {
+            livesService.purchase()
+            renderGameOver()
+        }
+    }
+    
+    private func revive() {
+        scoreTracker.revive()
+        self.renderScene()
+        self.stateMachine.currentState = .playing
+    }
 }
 
 
@@ -158,11 +177,14 @@ extension GameViewController: StateRenderer {
         gameOverView.alpha = 0
         gameOverView.configure(using: .init(
             currentScore: scoreTracker.score,
-            highScore: scoreTracker.highScore))
+            highScore: scoreTracker.highScore,
+            livesButtonTitle: livesService.livesCount == 0 ? "BUY LIVES" : "USE LIFE"
+        ))
         UIView.animate(withDuration: 0.4) {
             self.gameOverView.alpha = 1
         }
     }
+    
     private func clearCurrentState() {
         [startScreenView, gameOverView].forEach { $0.isHidden = true }
     }
@@ -175,9 +197,7 @@ extension GameViewController: AdServiceDelegate {
     }
     
     func rewardUser() {
-        scoreTracker.revive()
-        self.renderScene()
-        self.stateMachine.currentState = .playing
+        revive()
     }
 }
 
