@@ -6,6 +6,7 @@ final class GameOverView: CodedView, CodedViewLifeCycle {
         let livesAction: () -> Void
         let watchAd: () -> Void
         let startOver: () -> Void
+        let didTapOnBack: () -> Void
     }
     
     struct Model {
@@ -68,6 +69,16 @@ final class GameOverView: CodedView, CodedViewLifeCycle {
         return view
     }()
     
+    private lazy var backButton: UIButton = {
+        let view = UIButton()
+        view.configuration = .nijiText(
+            title: "BACK TO MENU",
+            leadingIcon: .init(systemName: "chevron.left"))
+        view.addTarget(self, action: #selector(handleBackButton), for: .touchUpInside)
+        return view
+    }()
+    
+    
     private let actions: Actions
     
     init(actions: Actions) {
@@ -85,9 +96,15 @@ final class GameOverView: CodedView, CodedViewLifeCycle {
         cardView.addSubview(watchAdButton)
         cardView.addSubview(buyLivesButton)
         cardView.addSubview(startOverButton)
+        addSubview(backButton)
     }
     
     func constraintSubviews() {
+        backButton.layout {
+            $0.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 20)
+            $0.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20)
+        }
+    
         cardView.layout {
             $0.centerXAnchor.constraint(equalTo: centerXAnchor)
             $0.centerYAnchor.constraint(equalTo: centerYAnchor)
@@ -163,6 +180,11 @@ final class GameOverView: CodedView, CodedViewLifeCycle {
     @objc
     private func handleLivesTap() {
         actions.livesAction()
+    }
+    
+    @objc
+    private func handleBackButton() {
+        actions.didTapOnBack()
     }
 }
 

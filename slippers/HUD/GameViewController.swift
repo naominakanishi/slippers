@@ -64,6 +64,9 @@ final class GameViewController: UIViewController {
             self.renderScene()
             self.stateMachine.currentState = .playing
             self.musicService.play()
+        },
+        didTapOnBack: {
+            self.stateMachine.currentState = .initialScreen
         }))
     
     // MARK: - Initialization
