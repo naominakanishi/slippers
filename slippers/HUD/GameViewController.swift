@@ -189,7 +189,7 @@ extension GameViewController: StateRenderer {
         gameOverView.configure(using: .init(
             currentScore: scoreTracker.score,
             highScore: scoreTracker.highScore,
-            livesButtonTitle: livesService.livesCount == 0 ? "BUY LIVES" : "USE LIFE"
+            livesButtonTitle: livesService.livesCount == 0 ? "BUY LIVES" : "USE LIFE (\(livesService.livesCount)/3)"
         ))
     }
     
