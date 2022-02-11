@@ -12,12 +12,7 @@ final class GameViewController: UIViewController {
     private let stateMachine = GameStateMachine()
     private lazy var scoreTracker = ScoreService(scoreSender: leaderboardService)
     private lazy var musicService = MusicService(soundConfig: soundConfig)
-    private lazy var leaderboardService = LeaderboardService { viewController in
-        self.showDetailViewController(viewController, sender: self)
-    } presentLeaderboardViewController: {
-        $0.gameCenterDelegate = self
-        self.present($0, animated: true, completion: nil)
-    }
+    private let leaderboardService = LeaderboardService()
     
     // MARK: - Views
     
@@ -75,7 +70,7 @@ final class GameViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
         leaderboardService.initialize()
         livesService.delegate = self
-        
+        leaderboardService.delegate = self
     }
     
     required init?(coder: NSCoder) {
@@ -166,8 +161,7 @@ extension GameViewController: StateRenderer {
     }
     
     private func renderInitialScreen() {
-        startScreenView.configure(highScore: scoreTracker.highScore,
-                                  livesCount: livesService.livesCount)
+        updateStartScreen()
         startScreenView.isHidden = false
         startScreenView.alpha = 0
         UIView.animate(withDuration: 0.4) {
@@ -191,6 +185,11 @@ extension GameViewController: StateRenderer {
             highScore: scoreTracker.highScore,
             livesButtonTitle: livesService.livesCount == 0 ? "BUY LIVES" : "USE LIFE (\(livesService.livesCount)/3)"
         ))
+    }
+    
+    private func updateStartScreen() {
+        startScreenView.configure(highScore: scoreTracker.highScore,
+                                  livesCount: livesService.livesCount)
     }
     
     private func clearCurrentState() {
@@ -220,5 +219,23 @@ extension GameViewController: LivesServiceDelegate {
         startScreenView.configure(highScore: scoreTracker.highScore,
                                   livesCount: livesService.livesCount)
         updateGameOver()
+    }
+}
+
+extension GameViewController: LeaderboardServiceDelegate {
+    func present(authenticationViewController: UIViewController) {
+        showDetailViewController(authenticationViewController, sender: self)
+    }
+    
+    func present(leaderboardViewController: GKGameCenterViewController) {
+        leaderboardViewController.gameCenterDelegate = self
+        present(leaderboardViewController, animated: true, completion: nil)
+    }
+    
+    func didAuthenticate() {
+        leaderboardService.loadBoardHighscore { highScore in
+            self.scoreTracker.syncIfNeeded(with: highScore)
+            self.updateStartScreen()
+        }
     }
 }

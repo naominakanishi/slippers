@@ -69,6 +69,13 @@ final class ScoreService: ScoreServiceProtocol {
         hasScored = false
     }
     
+    func syncIfNeeded(with otherScore: Int) {
+        guard otherScore > highScore
+        else { return }
+        highScore = otherScore
+        saveHighScoreIfNeeded()
+    }
+    
     private func saveHighScoreIfNeeded() {
         guard score > highScore
         else { return }
@@ -76,7 +83,7 @@ final class ScoreService: ScoreServiceProtocol {
         DispatchQueue.init(label: highScoreKey,
                            qos: .background).async {
             UserDefaults.standard.set(self.highScore, forKey: self.highScoreKey)
-            self.scoreSender.send(score: self.score)
+            self.scoreSender.send(score: self.highScore)
         }
     }
     
