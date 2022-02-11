@@ -28,6 +28,8 @@
 		1145B56227B5C3FF00E7D800 /* SoundConfigService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1145B56127B5C3FF00E7D800 /* SoundConfigService.swift */; };
 		1145B56427B5C7D500E7D800 /* LeaderboardService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1145B56327B5C7D500E7D800 /* LeaderboardService.swift */; };
 		1145B56627B5D3CB00E7D800 /* LivesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1145B56527B5D3CB00E7D800 /* LivesService.swift */; };
+		1145B56827B5E53C00E7D800 /* StoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1145B56727B5E53C00E7D800 /* StoreService.swift */; };
+		1145B56A27B5E68C00E7D800 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1145B56927B5E68C00E7D800 /* StoreKit.framework */; };
 		11737CE127A33A77001BCF8E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11737CE027A33A77001BCF8E /* AppDelegate.swift */; };
 		11737CE327A33A77001BCF8E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11737CE227A33A77001BCF8E /* SceneDelegate.swift */; };
 		11737CE527A33A78001BCF8E /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11737CE427A33A78001BCF8E /* GameViewController.swift */; };
@@ -81,6 +83,8 @@
 		1145B56127B5C3FF00E7D800 /* SoundConfigService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundConfigService.swift; sourceTree = "<group>"; };
 		1145B56327B5C7D500E7D800 /* LeaderboardService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardService.swift; sourceTree = "<group>"; };
 		1145B56527B5D3CB00E7D800 /* LivesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LivesService.swift; sourceTree = "<group>"; };
+		1145B56727B5E53C00E7D800 /* StoreService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreService.swift; sourceTree = "<group>"; };
+		1145B56927B5E68C00E7D800 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		11737CDD27A33A77001BCF8E /* slippers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = slippers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		11737CE027A33A77001BCF8E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		11737CE227A33A77001BCF8E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -122,6 +126,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B357A7268C9A0FE0F797DD50 /* Pods_slippers.framework in Frameworks */,
+				1145B56A27B5E68C00E7D800 /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -131,6 +136,7 @@
 		04D74A3106456B831BF91664 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1145B56927B5E68C00E7D800 /* StoreKit.framework */,
 				C6496F320E40695F0E2BECFB /* Pods_slippers.framework */,
 			);
 			name = Frameworks;
@@ -221,6 +227,7 @@
 				1145B56127B5C3FF00E7D800 /* SoundConfigService.swift */,
 				1145B56327B5C7D500E7D800 /* LeaderboardService.swift */,
 				1145B56527B5D3CB00E7D800 /* LivesService.swift */,
+				1145B56727B5E53C00E7D800 /* StoreService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -480,6 +487,7 @@
 				1145B56027B5C20E00E7D800 /* MusicService.swift in Sources */,
 				113B586327B1D91A00456959 /* AdService.swift in Sources */,
 				11C3EDCA27ADD982004059B2 /* GroundContactHandler.swift in Sources */,
+				1145B56827B5E53C00E7D800 /* StoreService.swift in Sources */,
 				1145B56427B5C7D500E7D800 /* LeaderboardService.swift in Sources */,
 				11737CE127A33A77001BCF8E /* AppDelegate.swift in Sources */,
 				11737CE327A33A77001BCF8E /* SceneDelegate.swift in Sources */,

@@ -92,7 +92,7 @@ final class StartScreenView: CodedView, CodedViewLifeCycle {
     
     private lazy var buyLivesButton: UIButton = {
         let view = UIButton()
-        view.configuration = .nijiText(title: "Buy lives", leadingIcon: .init(systemName: "heart"))
+        view.configuration = .nijiText(title: "Buy lives", leadingIcon: UIImage(named: "heart-icon"))
         view.configuration?.baseForegroundColor = .black
         view.configuration?.attributedTitle?.foregroundColor = .black
         view.addTarget(self, action: #selector(handleBuyLivesTap), for: .touchUpInside)
@@ -103,9 +103,9 @@ final class StartScreenView: CodedView, CodedViewLifeCycle {
     private lazy var heartsStackView: UIStackView = {
         let view = UIStackView()
         view.axis = .horizontal
-        view.addArrangedSubview(UIImageView())
-        view.addArrangedSubview(UIImageView())
-        view.addArrangedSubview(UIImageView())
+        view.addArrangedSubview(UIImageView(image: UIImage(named: "heart-icon")))
+        view.addArrangedSubview(UIImageView(image: UIImage(named: "heart-icon")))
+        view.addArrangedSubview(UIImageView(image: UIImage(named: "heart-icon")))
         return view
     }()
     
@@ -266,13 +266,12 @@ final class StartScreenView: CodedView, CodedViewLifeCycle {
     private func renderHearts(livesCount: Int) {
         heartsStackView.isHidden = false
         heartsStackView.arrangedSubviews
-            .compactMap { $0 as? UIImageView }
             .enumerated()
             .forEach {
                 if $0 + 1 <= livesCount {
-                    $1.image = UIImage(systemName: "heart.fill")
+                    $1.alpha = 1
                 } else {
-                    $1.image = UIImage(systemName: "heart")
+                    $1.alpha = 0.3
                 }
             }
     }

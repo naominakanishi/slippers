@@ -29,7 +29,6 @@ final class GameOverView: CodedView, CodedViewLifeCycle {
     private lazy var playerImageView: UIImageView = {
         let view = UIImageView()
         view.image = .init(named: "player-falling")
-        view.layer.zPosition = 100000
         return view
     }()
     

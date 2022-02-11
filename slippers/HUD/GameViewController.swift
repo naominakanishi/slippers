@@ -6,6 +6,7 @@ import GameKit
 
 final class GameViewController: UIViewController {
     
+    private let storeService = StoreService()
     private let livesService = LivesService()
     private let soundConfig = SoundConfigService()
     private let adService = AdService()
@@ -143,8 +144,8 @@ final class GameViewController: UIViewController {
     
     private func revive() {
         scoreTracker.revive()
-        self.renderScene()
-        self.stateMachine.currentState = .playing
+        renderScene()
+        stateMachine.currentState = .playing
     }
 }
 
@@ -171,6 +172,7 @@ extension GameViewController: StateRenderer {
             self.startScreenView.alpha = 1
         }
     }
+    
     private func renderGameOver() {
         musicService.stop()
         gameOverView.isHidden = false
