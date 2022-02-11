@@ -6,7 +6,6 @@ import GameKit
 
 final class GameViewController: UIViewController {
     
-    private let storeService = StoreService()
     private let livesService = LivesService()
     private let soundConfig = SoundConfigService()
     private let adService = AdService()
@@ -138,7 +137,7 @@ final class GameViewController: UIViewController {
             revive()
         } else {
             livesService.purchase()
-            renderGameOver()
+            updateGameOver()
         }
     }
     
@@ -177,14 +176,18 @@ extension GameViewController: StateRenderer {
         musicService.stop()
         gameOverView.isHidden = false
         gameOverView.alpha = 0
+        updateGameOver()
+        UIView.animate(withDuration: 0.4) {
+            self.gameOverView.alpha = 1
+        }
+    }
+    
+    private func updateGameOver() {
         gameOverView.configure(using: .init(
             currentScore: scoreTracker.score,
             highScore: scoreTracker.highScore,
             livesButtonTitle: livesService.livesCount == 0 ? "BUY LIVES" : "USE LIFE"
         ))
-        UIView.animate(withDuration: 0.4) {
-            self.gameOverView.alpha = 1
-        }
     }
     
     private func clearCurrentState() {
@@ -213,5 +216,6 @@ extension GameViewController: LivesServiceDelegate {
     func didBuyLives() {
         startScreenView.configure(highScore: scoreTracker.highScore,
                                   livesCount: livesService.livesCount)
+        updateGameOver()
     }
 }

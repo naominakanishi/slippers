@@ -6,6 +6,9 @@ protocol LivesServiceDelegate: AnyObject {
 
 final class LivesService {
     // MARK: - Properties
+    private lazy var storeService = StoreService {
+        self.purchaseSucceed()
+    }
     private let livesCountKey = "lives_count_key"
     private(set) var livesCount = 0
     
@@ -20,8 +23,9 @@ final class LivesService {
     // MARK: - Public API
     
     func purchase() {
-        purchaseSucceed()
+        storeService.buyLifePack()
     }
+    
     func consume() {
         livesCount -= 1
         persistLivesCount()
