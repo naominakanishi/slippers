@@ -59,8 +59,7 @@ final class GameOverView: CodedView, CodedViewLifeCycle {
         let view = UIButton()
         view.configuration = .nijiRoundedRectangle(title: "WATCH AD", imageName: "watch-ads-icon")
         view.addTarget(self, action: #selector(handleWatchAdTap), for: .touchUpInside)
-        view.isHidden = true
-        view.isUserInteractionEnabled = false
+    //    view.isUserInteractionEnabled = false
         return view
     }()
     
