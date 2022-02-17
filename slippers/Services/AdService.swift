@@ -12,11 +12,11 @@ final class AdService {
     weak var delegate: AdServiceDelegate?
     
     func showRewardAd(in viewController: UIViewController) {
-        #if DEBUG
-        let adID = "ca-app-pub-3940256099942544/1712485313"
-        #else
+//        #if DEBUG
+//        let adID = "ca-app-pub-3940256099942544/1712485313"
+//        #else
         let adID = "ca-app-pub-6389028471739991/8186145034"
-        #endif
+//        #endif
 
         let request = GADRequest()
         GADRewardedAd.load(withAdUnitID: adID, request: request) { ad, error in

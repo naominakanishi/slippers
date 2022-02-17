@@ -59,6 +59,8 @@ final class GameOverView: CodedView, CodedViewLifeCycle {
         let view = UIButton()
         view.configuration = .nijiRoundedRectangle(title: "WATCH AD", imageName: "watch-ads-icon")
         view.addTarget(self, action: #selector(handleWatchAdTap), for: .touchUpInside)
+        view.isHidden = true
+        view.isUserInteractionEnabled = false
         return view
     }()
     
@@ -90,8 +92,8 @@ final class GameOverView: CodedView, CodedViewLifeCycle {
         addSubview(cardView)
         addSubview(playerImageView)
         cardView.addSubview(scoresStackView)
-        scoresStackView.addArrangedSubview(currentScoreView)
         scoresStackView.addArrangedSubview(highScoreView)
+        scoresStackView.addArrangedSubview(currentScoreView)
         cardView.addSubview(callToActionLabel)
         cardView.addSubview(watchAdButton)
         cardView.addSubview(buyLivesButton)

@@ -4,6 +4,11 @@ import GoogleMobileAds
 import AVFoundation
 import GameKit
 
+protocol Loadable {
+    func showLoading()
+    func hideLoading()
+}
+
 final class GameViewController: UIViewController {
     
     private let livesService = LivesService()
@@ -27,6 +32,15 @@ final class GameViewController: UIViewController {
         return view
     }()
     
+    private lazy var loadingView: UIActivityIndicatorView = {
+        let view = UIActivityIndicatorView()
+        view.isHidden = true
+        view.backgroundColor = .nijiColors.black.withAlphaComponent(0.8)
+        view.style = .whiteLarge
+        
+        return view
+    }()
+    
     private lazy var startScreenView = StartScreenView(actions: .init(
         didTapOnAudioSettings: {
             let controller = SoundConfigViewController(soundConfig: self.soundConfig)
@@ -43,6 +57,7 @@ final class GameViewController: UIViewController {
             self.leaderboardService.showLeaderboard()
         },
         didTapOnBuyLives: {
+            self.showLoading()
             self.livesService.purchase()
         }
     ))
@@ -52,6 +67,7 @@ final class GameViewController: UIViewController {
             self.handleLivesAction()
         },
         watchAd: {
+            self.showLoading()
             self.adService.showRewardAd(in: self)
         },
         startOver: {
@@ -85,6 +101,8 @@ final class GameViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.addSubview(loadingView)
+        constraintSubviews()
         
         addStateView(startScreenView)
         addStateView(gameOverView)
@@ -98,6 +116,7 @@ final class GameViewController: UIViewController {
         Timer.scheduledTimer(withTimeInterval: 0, repeats: false) { _ in
             self.stateMachine.currentState = .initialScreen
         }
+        view.bringSubviewToFront(loadingView)
     }
     
     // MARK: - Helpers
@@ -131,9 +150,11 @@ final class GameViewController: UIViewController {
     
     private func handleLivesAction() {
         if livesService.livesCount > 0 {
+            hideLoading()
             livesService.consume()
             revive()
         } else {
+            showLoading()
             livesService.purchase()
             updateGameOver()
         }
@@ -143,6 +164,16 @@ final class GameViewController: UIViewController {
         scoreTracker.revive()
         renderScene()
         stateMachine.currentState = .playing
+    }
+    
+    func constraintSubviews() {
+        loadingView.layout {
+            $0.topAnchor.constraint(equalTo: view.topAnchor)
+            $0.leadingAnchor.constraint(equalTo: view.leadingAnchor)
+            $0.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+            $0.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+
+        }
     }
 }
 
@@ -199,11 +230,11 @@ extension GameViewController: StateRenderer {
 
 extension GameViewController: AdServiceDelegate {
     func showError() {
-        // TODO
-        print("deu erro")
+        hideLoading()
     }
     
     func rewardUser() {
+        hideLoading()
         revive()
     }
 }
@@ -215,9 +246,14 @@ extension GameViewController: GKGameCenterControllerDelegate {
 }
 
 extension GameViewController: LivesServiceDelegate {
+    func didTransactionFail() {
+        hideLoading()
+    }
+    
     func didBuyLives() {
         startScreenView.configure(highScore: scoreTracker.highScore,
                                   livesCount: livesService.livesCount)
+        hideLoading()
         updateGameOver()
     }
 }
@@ -238,4 +274,18 @@ extension GameViewController: LeaderboardServiceDelegate {
             self.updateStartScreen()
         }
     }
+}
+
+extension GameViewController: Loadable {
+    func showLoading() {
+        loadingView.isHidden = false
+        loadingView.startAnimating()
+    }
+    
+    func hideLoading() {
+        loadingView.isHidden = true
+        loadingView.stopAnimating()
+    }
+    
+    
 }

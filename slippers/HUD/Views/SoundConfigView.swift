@@ -1,4 +1,5 @@
 import UIKit
+import AVFoundation
 
 final class SoundConfigViewController: UIViewController {
     
@@ -41,7 +42,9 @@ final class SoundConfigView: CodedView, CodedViewLifeCycle {
     
     private lazy var containerView: UIView = {
         let view = UIView()
-        view.backgroundColor = .blue
+        view.backgroundColor = .init(hex: 0x0F0F0F).withAlphaComponent(0.5)
+        view.layer.borderWidth = 1
+        view.layer.borderColor = UIColor.white.cgColor
         return view
     }()
     
@@ -80,6 +83,29 @@ final class SoundConfigView: CodedView, CodedViewLifeCycle {
         return view
     }()
     
+    private lazy var titleView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .init(hex: 0x454545)
+        view.layer.borderColor = UIColor.white.cgColor
+        view.layer.borderWidth = 1
+        return view
+    }()
+    
+    private lazy var titleLabel: UILabel = {
+        let view = UILabel()
+        view.text = "AUDIO SETTINGS"
+        view.font = .amatic(.bold, 28)
+        view.textColor = .white
+        return view
+    }()
+    
+    private lazy var titleIconImageView: UIImageView = {
+        let view = UIImageView()
+        view.image = UIImage(named: "audio-settings-icon")?.withRenderingMode(.alwaysTemplate)
+        view.tintColor = .white
+        return view
+    }()
+    
     private let model: Model
     private let actions: Actions
     
@@ -92,10 +118,13 @@ final class SoundConfigView: CodedView, CodedViewLifeCycle {
     func addSubviews() {
         addSubview(containerView)
         addSubview(backButton)
+        addSubview(titleView)
         containerView.addSubview(soundToggle)
         containerView.addSubview(musicToggle)
         containerView.addSubview(soundEffectsLabel)
         containerView.addSubview(musicLabel)
+        titleView.addSubview(titleLabel)
+        titleView.addSubview(titleIconImageView)
     }
     
     func constraintSubviews() {
@@ -103,15 +132,35 @@ final class SoundConfigView: CodedView, CodedViewLifeCycle {
             $0.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 20)
             $0.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20)
         }
+    
         containerView.layout {
-            $0.topAnchor.constraint(equalTo: soundToggle.topAnchor, constant: -10)
-            $0.leadingAnchor.constraint(equalTo: soundToggle.leadingAnchor, constant: -10)
-            $0.trailingAnchor.constraint(equalTo: musicLabel.trailingAnchor, constant: 10)
-            $0.bottomAnchor.constraint(equalTo: musicToggle.bottomAnchor, constant: 10)
+            $0.widthAnchor.constraint(equalTo: $0.heightAnchor, multiplier: 362/200)
+            $0.centerXAnchor.constraint(equalTo: centerXAnchor)
+            $0.centerYAnchor.constraint(equalTo: centerYAnchor)
         }
 
+        titleView.layout {
+            $0.centerXAnchor.constraint(equalTo: containerView.centerXAnchor)
+            $0.centerYAnchor.constraint(equalTo: containerView.topAnchor)
+        }
+        
+        titleLabel.layout {
+            $0.topAnchor.constraint(equalTo: titleView.topAnchor, constant: 8)
+            $0.bottomAnchor.constraint(equalTo: titleView.bottomAnchor, constant: -8)
+            $0.trailingAnchor.constraint(equalTo: titleView.trailingAnchor, constant: -24)
+        }
+        
+        titleIconImageView.layout {
+            $0.leadingAnchor.constraint(equalTo: titleView.leadingAnchor,
+                                        constant: 24)
+            $0.trailingAnchor.constraint(equalTo: titleLabel.leadingAnchor, constant: -12)
+            $0.heightAnchor.constraint(equalToConstant: 24)
+            $0.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor)
+            $0.widthAnchor.constraint(equalTo: $0.heightAnchor, multiplier: 1)
+        }
+        
         soundToggle.layout {
-            $0.bottomAnchor.constraint(equalTo: centerYAnchor, constant: -15)
+            $0.topAnchor.constraint(equalTo: titleView.bottomAnchor, constant: 32)
             $0.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 70)
         }
         
@@ -121,8 +170,9 @@ final class SoundConfigView: CodedView, CodedViewLifeCycle {
         }
         
         musicToggle.layout {
-            $0.topAnchor.constraint(equalTo: centerYAnchor, constant: 15)
+            $0.topAnchor.constraint(equalTo: soundToggle.bottomAnchor, constant: 32)
             $0.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 70)
+            $0.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -32)
         }
         
         musicLabel.layout {
@@ -139,6 +189,8 @@ final class SoundConfigView: CodedView, CodedViewLifeCycle {
             target: self, action: #selector(handleBackButton))
         gesture.numberOfTapsRequired = 1
         addGestureRecognizer(gesture)
+        titleView.layer.cornerRadius = 24
+        containerView.layer.cornerRadius = 16
     }
     
     func configureLabelSettings(label: UILabel) {

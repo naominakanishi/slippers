@@ -15,6 +15,7 @@ final class MusicService {
         
         backgroundSong = audioPlayer
         self.soundConfig.delegate = self
+        backgroundSong?.numberOfLoops = -1
     }
     
     func play() {

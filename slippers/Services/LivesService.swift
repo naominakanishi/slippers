@@ -2,12 +2,15 @@ import Foundation
 
 protocol LivesServiceDelegate: AnyObject {
     func didBuyLives()
+    func didTransactionFail()
 }
 
 final class LivesService {
     // MARK: - Properties
     private lazy var storeService = StoreService {
         self.purchaseSucceed()
+    } transactionFailed: {
+        self.delegate?.didTransactionFail()
     }
     private let livesCountKey = "lives_count_key"
     private(set) var livesCount = 0
@@ -18,6 +21,8 @@ final class LivesService {
     
     init() {
         loadLivesFromUserDefaults()
+        _ = storeService
+        
     }
     
     // MARK: - Public API
