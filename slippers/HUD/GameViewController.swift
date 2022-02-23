@@ -15,19 +15,20 @@ final class GameViewController: UIViewController {
     private let soundConfig = SoundConfigService()
     private let adService = AdService()
     private let stateMachine = GameStateMachine()
+    private let leaderboardService = LeaderboardService()
+    private let adPermissionService = AdPermissionService()
     private lazy var scoreTracker = ScoreService(scoreSender: leaderboardService)
     private lazy var musicService = MusicService(soundConfig: soundConfig)
-    private let leaderboardService = LeaderboardService()
     
     // MARK: - Views
     
     private lazy var gameView: SKView = {
         let view = SKView()
-        #if DEBUG
-        view.showsFPS = true
-        view.showsNodeCount = true
-        view.showsPhysics = true
-        #endif
+//        #if DEBUG
+//        view.showsFPS = true
+//        view.showsNodeCount = true
+//        view.showsPhysics = true
+//        #endif
         view.ignoresSiblingOrder = false
         return view
     }()
@@ -117,6 +118,11 @@ final class GameViewController: UIViewController {
             self.stateMachine.currentState = .initialScreen
         }
         view.bringSubviewToFront(loadingView)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        adPermissionService.request {}
     }
     
     // MARK: - Helpers
@@ -231,6 +237,12 @@ extension GameViewController: StateRenderer {
 extension GameViewController: AdServiceDelegate {
     func showError() {
         hideLoading()
+        let alertController = UIAlertController(title: "Ops!", message: "No ads to show now :(", preferredStyle: .alert)
+        alertController.addAction(.init(title: "OK", style: .default, handler: { _ in
+            alertController.dismiss(animated: true, completion: nil)
+        }))
+        present(alertController, animated: true, completion: nil)
+        
     }
     
     func rewardUser() {

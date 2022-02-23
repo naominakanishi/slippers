@@ -27,7 +27,7 @@ final class Game {
     private lazy var portalManager: PortalManager = {
         let node = SKNode()
         return PortalManager(
-            scene: scene,
+            scoreTracker: scoreTracker, scene: scene,
             player: player,
             node: node,
             spawnCount: 10  )

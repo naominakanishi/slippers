@@ -15,6 +15,7 @@
 		11329D0727A8B70A00E0C7D7 /* EntityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11329D0627A8B70A00E0C7D7 /* EntityManager.swift */; };
 		1136C10E27B34C7E00267D57 /* SoundConfigView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1136C10D27B34C7E00267D57 /* SoundConfigView.swift */; };
 		113B586327B1D91A00456959 /* AdService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113B586227B1D91A00456959 /* AdService.swift */; };
+		113BC3E427C009B900126A70 /* ADPermissionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113BC3E327C009B900126A70 /* ADPermissionService.swift */; };
 		1143A79527A349CC00075EE6 /* Background.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1143A79427A349CC00075EE6 /* Background.swift */; };
 		1143A79727A34A4B00075EE6 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1143A79627A34A4B00075EE6 /* Game.swift */; };
 		1143A79927A34A7400075EE6 /* Entity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1143A79827A34A7400075EE6 /* Entity.swift */; };
@@ -70,6 +71,7 @@
 		11329D0627A8B70A00E0C7D7 /* EntityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityManager.swift; sourceTree = "<group>"; };
 		1136C10D27B34C7E00267D57 /* SoundConfigView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundConfigView.swift; sourceTree = "<group>"; };
 		113B586227B1D91A00456959 /* AdService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdService.swift; sourceTree = "<group>"; };
+		113BC3E327C009B900126A70 /* ADPermissionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADPermissionService.swift; sourceTree = "<group>"; };
 		1143A79427A349CC00075EE6 /* Background.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Background.swift; sourceTree = "<group>"; };
 		1143A79627A34A4B00075EE6 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		1143A79827A34A7400075EE6 /* Entity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entity.swift; sourceTree = "<group>"; };
@@ -228,6 +230,7 @@
 				1145B56327B5C7D500E7D800 /* LeaderboardService.swift */,
 				1145B56527B5D3CB00E7D800 /* LivesService.swift */,
 				1145B56727B5E53C00E7D800 /* StoreService.swift */,
+				113BC3E327C009B900126A70 /* ADPermissionService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -475,6 +478,7 @@
 				1143A79527A349CC00075EE6 /* Background.swift in Sources */,
 				11329D0727A8B70A00E0C7D7 /* EntityManager.swift in Sources */,
 				11737CF627A33B97001BCF8E /* Autolayout+Extensions.swift in Sources */,
+				113BC3E427C009B900126A70 /* ADPermissionService.swift in Sources */,
 				11F6C27827A9A8E5000D7687 /* DoubleScoreZoneSpawner.swift in Sources */,
 				11737CE527A33A78001BCF8E /* GameViewController.swift in Sources */,
 				11F6C27527A9A117000D7687 /* PointSpawner.swift in Sources */,
@@ -641,13 +645,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_TEAM = UL74FQ825B;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = slippers/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Niji Jump";
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "Allow a custom ad experience";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
@@ -661,7 +667,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -672,13 +678,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_TEAM = UL74FQ825B;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = slippers/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Niji Jump";
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "Allow a custom ad experience";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
@@ -692,7 +700,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

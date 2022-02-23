@@ -25,6 +25,7 @@ final class LeaderboardService {
         let controller = GKGameCenterViewController(leaderboardID: leaderboardId,
                                    playerScope: .global,
                                    timeScope: .allTime)
+        
         delegate?.present(leaderboardViewController: controller)
     }
     
